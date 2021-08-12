@@ -4,6 +4,8 @@
  cd video-chat-frontend 
 
  npm i 
+ 
+ 
  npm start
 
 # backend
