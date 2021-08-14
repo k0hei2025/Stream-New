@@ -1,4 +1,5 @@
 import React from 'react';
+
 //import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
 import ConversationButton from './ConversationButton';
 import { switchForScreenSharingStream, hangUp } from '../../../utils/webRTC/webRTCHandler';
@@ -28,6 +29,7 @@ const styles = {
     position: 'absolute',
     bottom: '22%',
     left: '20%'
+
   },
   icon: {
     width: '25px',
@@ -70,6 +72,7 @@ const ConversationButtons = (props) => {
   return (
     <div style={styles.buttonContainer}>
       <ConversationButton onClickHandler={handleMicButtonPressed}>
+
         {localMicrophoneEnabled ? <MicIcon/> : <MicOff/>}
       </ConversationButton>
       {!groupCall && <ConversationButton onClickHandler={handleHangUpButtonPressed}>
@@ -123,6 +126,7 @@ const ConversationButtons = (props) => {
         <PanToolIcon/>
         <AirplayIcon/>
         <FolderOpenIcon/> */}
+
 
 
     </div>
