@@ -28,8 +28,11 @@ const Sigin = ({ user_info_fun, response }) => {
       password: "",
     });
   };
+  // const { sigin_info } = response;
+
   return (
     <>
+      {/* <h1>{sigin_info}</h1> */}
       <div className="form-container sign-in-container">
         <form>
           <h1>Sign in</h1>
@@ -61,7 +64,7 @@ const Sigin = ({ user_info_fun, response }) => {
 
 // recive
 const recive = (state) => {
-  console.log("This is State ", state);
+  console.log("This is SIGNINState ", state.signin.sigin_info.registered);
   return {
     response: state.signin,
   };

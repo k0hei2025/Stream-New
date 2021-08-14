@@ -6,7 +6,8 @@ import Dashboard from "./Dashboard/Dashboard";
 import LoginPage from "./LoginPage/LoginPage";
 import Signup from "./screens/auth/Signup";
 import Home from "./Components/home";
-import NewCall from './Components/NewCall';
+import NewCall from "./Components/NewCall";
+import Auth from "./screens/auth/Auth";
 
 function App() {
   useEffect(() => {
@@ -23,16 +24,16 @@ function App() {
         </Route> */}
       {/* </Switch> */}
 
-      <Route path="/auth" component={Signup} exact={true} strict></Route>
-      <Route
+      <Route path="/auth" component={Auth} exact={true} strict></Route>
+      {/* <Route
         path="/dashboard"
         component={Dashboard}
         exact={true}
         strict
       ></Route>
-      {/* <Route path="/" component={LoginPage} exact={true} strict></Route> */}
+      <Route path="/join" component={LoginPage} exact={true} strict></Route>
       <Route path="/" component={Home} exact={true} strict></Route>
-      <Route path="/newcall" component={NewCall} exact={true} strict></Route>
+      <Route path="/newcall" component={NewCall} exact={true} strict></Route> */}
     </Router>
   );
 }

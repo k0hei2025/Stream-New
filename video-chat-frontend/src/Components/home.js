@@ -22,7 +22,9 @@ const Home = () =>
         </div>
             
         <div className="buttons">
+        <Link to="/newcall">
           <Button variant="contained" color="rgb(59, 187, 247)">Join a Meeting</Button>
+          </Link>
           <Link to="/newcall">
             <Button variant="contained" color="rgb(59, 187, 247)">Create a Meeting</Button>
           </Link>
