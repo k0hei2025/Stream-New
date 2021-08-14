@@ -22,14 +22,14 @@ const Signup = ({ user_info_fun, response }) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setUsersConfirmPassword("Enter Same Password as above");
     } else if (password.length < 8 || confirmPassword < 8) {
       setErrPassword("Enter atleast 8 charecter");
     } else {
-      user_info_fun({ email, password });
+      await user_info_fun({ email, password });
       setValues({
         email: "",
         password: "",

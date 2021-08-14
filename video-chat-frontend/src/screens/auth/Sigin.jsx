@@ -29,6 +29,7 @@ const Sigin = ({ user_info_fun, response }) => {
     });
   };
   // const { sigin_info } = response;
+  // const { sigin_info } = response;
 
   return (
     <>
@@ -36,7 +37,7 @@ const Sigin = ({ user_info_fun, response }) => {
       <div className="form-container sign-in-container">
         <form>
           <h1>Sign in</h1>
-
+          {/* <h1>{sigin_info}</h1> */}
           <input
             type="emil"
             placeholder="Email"
@@ -51,7 +52,6 @@ const Sigin = ({ user_info_fun, response }) => {
             onChange={handleChange("password")}
             required
           />
-          <p style={{ color: "red" }}>{password}</p>
           <Router>
             <NavLink to="">Forgot your password?</NavLink>
           </Router>
