@@ -64,7 +64,7 @@ const Sigin = ({ user_info_fun, response }) => {
 
 // recive
 const recive = (state) => {
-  console.log("This is SIGNINState ", state.signin.sigin_info.registered);
+  console.log("This is SIGNINState ", state.signin);
   return {
     response: state.signin,
   };
