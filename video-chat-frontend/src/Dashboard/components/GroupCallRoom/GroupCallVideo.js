@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import screenfull from 'screenfull';
 
 const styles = {
   videoContainer: {
@@ -9,9 +10,13 @@ const styles = {
     width: '100%',
     height: '100%'
   }
+
 };
 
 const GroupCallVideo = ({ stream }) => {
+
+
+
   const videoRef = useRef();
 
   useEffect(() => {
@@ -22,9 +27,18 @@ const GroupCallVideo = ({ stream }) => {
     };
   }, [stream]);
 
+ const fullScreenHandler=()=>{
+let vid = document.querySelector('video');
+    console.log('click')
+     if (screenfull.isEnabled){
+       screenfull.toggle(vid)
+     }
+   
+}
+
   return (
     <div style={styles.videoContainer}>
-      <video ref={videoRef} autoPlay style={styles.videoElement} />
+      <video ref={videoRef} autoPlay style={styles.videoElement} onClick={fullScreenHandler} />
     </div>
   );
 };

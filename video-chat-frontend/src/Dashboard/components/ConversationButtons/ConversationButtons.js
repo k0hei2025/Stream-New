@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
 import ConversationButton from './ConversationButton';
@@ -39,6 +39,10 @@ const styles = {
 };
 
 const ConversationButtons = (props) => {
+
+  const [ record , setRecord ] = useState(true);
+  const [mediaState , setMediaState] = useState({});
+  const [fullScreen , setFullScreen] = useState(false)
   const {
     localStream,
     localCameraEnabled,
@@ -48,6 +52,65 @@ const ConversationButtons = (props) => {
     screenSharingActive,
     groupCall
   } = props;
+
+
+  const fullScreenHandler=()=>{
+    setFullScreen(!fullScreen)
+    console.log(fullScreen)
+
+  
+  }
+
+  const recordHandler=()=>{
+  
+    setRecord(!record);
+    console.log(record);
+
+    
+
+    let parts = [];
+    let mediaRecord;
+    navigator.mediaDevices.getUserMedia({
+      audio: true,video: true
+    }).then((stream)=>{
+
+      localStream.srcObject = stream;
+      
+
+         mediaRecord =  new MediaRecorder(stream);
+     if (record){
+       
+     mediaRecord.start(1000);
+     setMediaState(mediaRecord)
+     console.log(mediaRecord);
+     mediaRecord.ondataavailable =(e)=>{
+       parts.push(e.data);
+     }
+
+    }
+
+        if (!record){
+      mediaState.stop();
+      const blob  = new Blob(parts, {
+        type:"video/webm"
+      })
+      const url = URL.createObjectURL(blob);
+      console.log(url);
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = url;
+      a.download = "test.webm";
+      a.click();
+    }
+
+      })
+      
+  
+
+
+
+  }
 
   const handleMicButtonPressed = () => {
     const micEnabled = localMicrophoneEnabled;
@@ -68,6 +131,31 @@ const ConversationButtons = (props) => {
   const handleHangUpButtonPressed = () => {
     hangUp();
   };
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div style={styles.buttonContainer}>
@@ -93,11 +181,11 @@ const ConversationButtons = (props) => {
          <ShareIcon/>
         
       </ConversationButton>
-       <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+       <ConversationButton onClickHandler={recordHandler}  >
 
        <AlbumIcon/>  
       </ConversationButton>
-       <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+       <ConversationButton onClickHandler={fullScreenHandler}>
         <FullscreenIcon/>
       </ConversationButton>
       

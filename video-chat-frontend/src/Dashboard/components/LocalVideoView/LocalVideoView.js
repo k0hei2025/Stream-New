@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import screenfull from 'screenfull';
 
 const styles = {
   videoContainer: {
@@ -14,6 +15,16 @@ const styles = {
     height: '100%'
   }
 };
+const fullScreenHandler=()=>{
+let vid = document.querySelector('video');
+    console.log('click')
+     if (screenfull.isEnabled){
+       screenfull.toggle(vid)
+     }
+   
+}
+   
+
 
 const LocalVideoView = props => {
   const { localStream } = props;
@@ -29,12 +40,13 @@ const LocalVideoView = props => {
       };
     }
   }, [localStream]);
-
+  
   return (
     <div style={styles.videoContainer} className='background_secondary_color'>
-      <video style={styles.videoElement} ref={localVideoRef} autoPlay muted />
+      <video style={styles.videoElement} onClick={fullScreenHandler} ref={localVideoRef} autoPlay muted />
     </div>
   );
+
 };
 
 export default LocalVideoView;
