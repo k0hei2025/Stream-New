@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGN_IN } from "../types/SigninTypes";
+import { SIGN_IN, SIGN_IN_ERROR } from "../types/SigninTypes";
 
 const signinAction = (user_details) => {
   console.log("this is main kfb", user_details);
@@ -15,13 +15,14 @@ const signinAction = (user_details) => {
       dispatch({
         type: SIGN_IN,
         sigin_info: data,
+        error: "",
       });
-      window.localStorage.setItem(
-        "userCredentials",
-        JSON.stringify(getState().signin.sigin_info),
-      );
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: SIGN_IN_ERROR,
+        sigin_info: {},
+        error: err.message,
+      });
     }
   };
 };

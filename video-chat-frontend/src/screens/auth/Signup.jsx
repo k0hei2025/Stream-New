@@ -14,7 +14,7 @@ const Signup = ({ user_info_fun, response }) => {
 
   useEffect(() => {
     user_info_fun();
-  });
+  },[]);
 
   const { email, password, confirmPassword } = values;
 

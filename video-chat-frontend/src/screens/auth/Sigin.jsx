@@ -11,7 +11,7 @@ const Sigin = ({ user_info_fun, response }) => {
 
   useEffect(() => {
     user_info_fun();
-  });
+  }, []);
 
   const { email, password } = values;
 
@@ -30,12 +30,15 @@ const Sigin = ({ user_info_fun, response }) => {
     }
   };
 
+  // let err = JSON.stringify(response.error)
+
   return (
     <>
       {/* <h1>{sigin_info}</h1> */}
       <div className="form-container sign-in-container">
-        <form>
+        <form onSubmit={onSubmit}>
           <h1>Sign in</h1>
+          <h1 style={{ color: "red" }}>{JSON.stringify(response.error)}</h1>
           {/* <h1>{sigin_info}</h1> */}
           <input
             type="emil"
@@ -54,7 +57,7 @@ const Sigin = ({ user_info_fun, response }) => {
           <Router>
             <NavLink to="">Forgot your password?</NavLink>
           </Router>
-          <button onClick={onSubmit}>Sign In</button>
+          <button>Sign In</button>
         </form>
       </div>
     </>
