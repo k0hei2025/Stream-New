@@ -8,6 +8,7 @@ import LoginPage from "./LoginPage/LoginPage";
 import Home from "./Components/home";
 import NewCall from "./Components/NewCall";
 import Auth from "./screens/auth/Auth";
+import Board from "./screens/whiteboard/Board";
 
 function App() {
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
       {/* </Switch> */}
 
       <Route path="/auth" component={Auth} exact={true} strict></Route>
-      {/* <Route path="/board" component={Container} exact={true} strict></Route> */}
+      <Route path="/board" component={Board} exact={true} strict></Route>
 
       <Route
         path="/dashboard"

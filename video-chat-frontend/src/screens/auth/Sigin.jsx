@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, useHistory } from "react-router-dom";
 import signinAction from "../../store/actions/signinActions";
 
 const Sigin = ({ user_info_fun, response }) => {
@@ -19,17 +19,16 @@ const Sigin = ({ user_info_fun, response }) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
+  const history = useHistory();
+
   const onSubmit = (event) => {
     event.preventDefault();
 
     user_info_fun(values);
-    setValues({
-      email: "",
-      password: "",
-    });
+    if (JSON.stringify(response.sigin_info.registered) === "true") {
+      history.push("/newcall");
+    }
   };
-  // const { sigin_info } = response;
-  // const { sigin_info } = response;
 
   return (
     <>

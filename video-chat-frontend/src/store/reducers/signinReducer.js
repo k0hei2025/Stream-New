@@ -1,7 +1,9 @@
 import { SIGN_IN } from "../types/SigninTypes";
 
 const initialState = {
-  sigin_info: {},
+  sigin_info: window.localStorage.getItem("userCredentials")
+    ? JSON.parse(window.localStorage.getItem("user_details") || "{}")
+    : {},
 };
 
 export const signinReducer = (state = initialState, action) => {

@@ -3,6 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { useState } from "react";
+import scheduleAction from "../../store/actions/scheduleActions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   popup: {
@@ -13,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ScheduleCall() {
+function ScheduleCall({ schedule_info_fun, response }) {
   const [values, setValues] = useState({
     date: "",
     time: "",
@@ -27,6 +29,17 @@ function ScheduleCall() {
   };
 
   const classes = useStyles();
+
+  const onSubmit = async (event) => {
+    await event.preventDefault();
+
+    await schedule_info_fun(values);
+    await setValues({
+      date: "",
+      time: "",
+      description: "",
+    });
+  };
 
   return (
     <div className="scall">
@@ -59,7 +72,9 @@ function ScheduleCall() {
 
         <div className="csh">
           <Button variant="contained">Copy</Button>
-          <Button variant="contained">Schedule</Button>
+          <Button variant="contained" onClick={onSubmit}>
+            Schedule
+          </Button>
           <Button variant="contained">Share</Button>
         </div>
       </form>
@@ -68,4 +83,19 @@ function ScheduleCall() {
   );
 }
 
-export default ScheduleCall;
+const recive = (state) => {
+  console.log("This is SCHEDULE RESPONSE ", state.schedule_res);
+  return {
+    response: state.schedule_res,
+  };
+};
+// dispatch
+const send = (dispatch) => {
+  return {
+    schedule_info_fun: (obj) => {
+      dispatch(scheduleAction(obj));
+    },
+  };
+};
+
+export default connect(recive, send)(ScheduleCall);
