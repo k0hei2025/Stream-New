@@ -6,7 +6,6 @@ import { signinReducer } from "./reducers/signinReducer";
 
 import scheduleReducer from "./reducers/scheduleReducer";
 
-
 export default combineReducers({
   dashboard: dashboardReducer,
   call: callReducer,
@@ -14,5 +13,5 @@ export default combineReducers({
   signin: signinReducer,
 
   schedule: scheduleReducer,
-
+ 
 });

@@ -5,7 +5,7 @@ function Homepage({lightBg, headline, desc1, desc2, desc3, img, alt, imgStart,he
     return (
         <>
             <div className='home_section'>
-                <div className="container">
+                <div className="containerr">
                     <div className="row imgpos" style={{ display: 'flex', flexDirection: imgStart === 'start' ? 'row-reverse' : 'row' }}>
                         <div className="col">
                             <div className="h-wrapper">

@@ -27,8 +27,8 @@ function Navbar()
 
     return (
         <>
-            <div className="navbar">
-                <div className="navbar-container container">
+            <div className="navbarr">
+                <div className="navbar-container containerr">
                     <Link to="/" className="navbar-logo" onClick={closeMobileMenu} >
                         <IoVideocam className="navbar-icon" />
                         STREAM
@@ -38,12 +38,12 @@ function Navbar()
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className="nav-item">
-                            <Link to="/" className='nav-links' onClick={closeMobileMenu}>
+                            <Link to="/auth" className='nav-links' onClick={closeMobileMenu}>
                                 SIGN IN
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className='nav-links' onClick={closeMobileMenu}>
+                            <Link to="/auth" className='nav-links' onClick={closeMobileMenu}>
                                 SIGN UP
                             </Link>
                         </li>

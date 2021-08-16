@@ -4,12 +4,14 @@ import ConversationButtons from '../ConversationButtons/ConversationButtons';
 import './GroupCallRoom.css';
 import GroupCallVideo from './GroupCallVideo';
 
+ 
 import RemoteVideoView from '../RemoteVideoView/RemoteVideoView';
 import { callStates } from '../../../store/actions/callActions';
 
 const GroupCallRoom = (props) => {
 
   const {remoteStream , callState} = props
+
 
 
   const { groupCallStreams } = props;
@@ -21,6 +23,7 @@ const GroupCallRoom = (props) => {
           groupCallStreams.map(stream => {
             return <GroupCallVideo key={stream.id} stream={stream} />;
 
+
          
           })
         }
@@ -28,6 +31,7 @@ const GroupCallRoom = (props) => {
          {remoteStream && callState === callStates.CALL_IN_PROGRESS && <RemoteVideoView remoteStream={remoteStream} />}
       </div>
       <ConversationButtons {...props} groupCall />
+
 
 
 

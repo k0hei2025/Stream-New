@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 
 //import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
@@ -24,11 +25,13 @@ import PanToolIcon from '@material-ui/icons/PanTool';
 import AirplayIcon from '@material-ui/icons/Airplay';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 
+
 const styles = {
   buttonContainer: {
     display: 'flex',
     position: 'absolute',
     bottom: '22%',
+
 
     left: '20%'
 
@@ -49,6 +52,7 @@ const ConversationButtons = (props) => {
   const [mediaState , setMediaState] = useState({});
   const [fullScreen , setFullScreen] = useState(false)
 
+
   const {
     localStream,
     localCameraEnabled,
@@ -58,7 +62,6 @@ const ConversationButtons = (props) => {
     screenSharingActive,
     groupCall
   } = props;
-
 
   const fullScreenHandler=()=>{
     setFullScreen(!fullScreen)
@@ -141,7 +144,6 @@ const ConversationButtons = (props) => {
 
 
   
-  
 
 
 
@@ -220,6 +222,7 @@ const ConversationButtons = (props) => {
         <PanToolIcon/>
         <AirplayIcon/>
         <FolderOpenIcon/> */}
+
 
 
 

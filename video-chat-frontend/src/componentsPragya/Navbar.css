@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Abril+Fatface&family=Days+One&display=swap");
 
-.navbar {
+.navbarr {
   background: #fff;
   height: 80px;
   display: flex;
@@ -18,7 +18,7 @@
   height: 80px;
 }
 
-.container {
+.containerr {
   z-index: 1;
   width: 100%;
   max-width: 1300px;

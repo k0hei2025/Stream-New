@@ -16,7 +16,7 @@ const Auth = ({ user_info_fun, response }) => {
   };
 
   return (
-    <>
+    <div className="body">
       <div className={`container ${ghostSignup} `} id="container">
         {/* SignUp Starts from */}
 
@@ -51,7 +51,7 @@ const Auth = ({ user_info_fun, response }) => {
         </div>
         {/* Overlay ends here */}
       </div>
-    </>
+    </div>
   );
 };
 

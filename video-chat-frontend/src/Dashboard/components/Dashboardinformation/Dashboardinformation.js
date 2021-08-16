@@ -11,6 +11,7 @@ const DashboardInformation = ({ username }) => {
       <span className='dashboard_info_text_description'>
         You can start a call calling directy to a person from the list or
         you can create or join group call.
+
       </span>
     </div>
   );

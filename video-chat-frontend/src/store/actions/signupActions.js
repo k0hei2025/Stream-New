@@ -1,5 +1,8 @@
 import axios from "axios";
-import { SIGN_UP } from "../types/SignupTypes";
+
+
+import { SIGN_UP, SIGN_UP_ERROR } from "../types/SignupTypes";
+ 
 
 const signupAction = (user_details) => {
   console.log("this is main kfb", user_details);
@@ -15,9 +18,16 @@ const signupAction = (user_details) => {
       dispatch({
         type: SIGN_UP,
         user_info: data,
+
+        error: "",
       });
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: SIGN_UP_ERROR,
+        user_info: {},
+        error: err.message,
+      });
+ 
     }
   };
 };

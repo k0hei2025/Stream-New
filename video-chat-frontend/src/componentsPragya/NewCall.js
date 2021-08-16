@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useState} from 'react';
 import { IoVideocamSharp } from 'react-icons/io5';
 import { RiVideoAddFill } from 'react-icons/ri';
 import { BiCalendarEvent } from 'react-icons/bi';
@@ -11,31 +11,36 @@ import './Newcall.css';
 
 function NewCall()
 {
-   /* var times;
 
-    useEffect(()=>
-{
-    DisplayCurrentTime();
-    });
+    const [time , setTime] = useState([])
+
+
+//     useEffect(()=>
+// {
+//     DisplayCurrentTime();
+//     },[]);
     
 
-function DisplayCurrentTime()
-{
-    var date = new Date();
-    var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
-    var am_pm = date.getHours() >= 12 ? "PM" : "AM";
-    hours = hours < 10 ? "0" + hours : hours;
-    var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    var time = [hours, minutes, seconds, am_pm];
-     times = [];
-    for (let i = 0; i < time.length; i++)
-    {
-        Array.prototype.push.apply(times, time[i].split(""));
-        }
-        console.log(times);
+// function DisplayCurrentTime()
+// {
+//     var date = new Date();
+//     var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+//     var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+//     hours = hours < 10 ? "0" + hours : hours;
+//     var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+//     var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+//     var time = [hours, minutes, seconds, am_pm];
+//     let times = [];
+//     for (let i = 0; i < time.length; i++)
+//     {
+//         Array.prototype.push.apply(times, time[i].split(""));
+//         console.log(  ` in the loop ${times} `);
+//          setTime(times)
+//         }
+//         console.log(times);
 
-};*/
+// }
+
 
     return (
         <div className="new-call">
@@ -56,13 +61,13 @@ function DisplayCurrentTime()
             </div>
             <div className=" new-call diff ">
                 <div className="call-options">
-                    <Link to="/" className="callLinks">
+                    <Link to="/join" className="callLinks">
                         <figure>
                             <IoVideocamSharp className="call-icons" />
                             <figcaption>Host</figcaption>
                         </figure>
                     </Link>
-                    <Link to="/" className="callLinks">
+                    <Link to="/join" className="callLinks">
                         <figure>
                             <RiVideoAddFill className="call-icons" />
                             <figcaption>Join</figcaption>

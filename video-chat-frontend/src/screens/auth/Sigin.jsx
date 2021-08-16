@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+
+
+import { BrowserRouter as Router, NavLink, useHistory } from "react-router-dom";
+ 
 import signinAction from "../../store/actions/signinActions";
 
 const Sigin = ({ user_info_fun, response }) => {
@@ -11,7 +14,10 @@ const Sigin = ({ user_info_fun, response }) => {
 
   useEffect(() => {
     user_info_fun();
-  });
+
+
+  }, []);
+ 
 
   const { email, password } = values;
 
@@ -19,24 +25,37 @@ const Sigin = ({ user_info_fun, response }) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const onSubmit = (event) => {
+
+  const history = useHistory();
+  // let data = JSON.stringify(response.sigin_info.registered);
+
+  const onSubmit = async (event) => {
     event.preventDefault();
 
     user_info_fun(values);
-    setValues({
-      email: "",
-      password: "",
-    });
+
+    // if (data === true) {
+    return await history.push("/newcall");
+    // }
   };
-  // const { sigin_info } = response;
-  // const { sigin_info } = response;
+
+  // let err = JSON.stringify(response.error)
+ 
 
   return (
     <>
       {/* <h1>{sigin_info}</h1> */}
       <div className="form-container sign-in-container">
-        <form>
+
+        <form onSubmit={onSubmit}>
           <h1>Sign in</h1>
+          <h1>{JSON.stringify(response.sigin_info.registered)}</h1>
+          {JSON.stringify(response.error) ===
+            "Request failed with status code 400" ||
+          JSON.stringify(response.sigin_info) === "{}"
+            ? ""
+            : "request fail"}
+ 
           {/* <h1>{sigin_info}</h1> */}
           <input
             type="emil"
@@ -55,7 +74,9 @@ const Sigin = ({ user_info_fun, response }) => {
           <Router>
             <NavLink to="">Forgot your password?</NavLink>
           </Router>
-          <button onClick={onSubmit}>Sign In</button>
+
+          <button>Sign In</button>
+ 
         </form>
       </div>
     </>

@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import screenfull from 'screenfull';
 
 
+
 const styles = {
   videoContainer: {
     width: '300px',
@@ -21,6 +22,7 @@ const GroupCallVideo = ({ stream }) => {
 
 
 
+
   const videoRef = useRef();
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const GroupCallVideo = ({ stream }) => {
       remoteGroupCallVideo.play();
     };
   }, [stream]);
+
 
 
  const fullScreenHandler=()=>{
@@ -45,11 +48,14 @@ let vid = document.querySelector('video');
     <div style={styles.videoContainer}>
       <video ref={videoRef} autoPlay style={styles.videoElement} onClick={fullScreenHandler} />
 
+
     </div>
   );
 };
 
 export default GroupCallVideo;
+
+
 
 
 

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 
+
+
+import { useHistory } from "react-router";
+ 
 import { connect } from "react-redux";
 import signupAction from "../../store/actions/signupActions";
 
@@ -14,7 +18,9 @@ const Signup = ({ user_info_fun, response }) => {
 
   useEffect(() => {
     user_info_fun();
-  });
+
+  }, []);
+ 
 
   const { email, password, confirmPassword } = values;
 
@@ -38,6 +44,15 @@ const Signup = ({ user_info_fun, response }) => {
       alert("submitted");
     }
   };
+
+
+  const history = useHistory();
+
+  // user_info_fun(values);
+  // if (JSON.stringify(response) === "true") {
+  //   history.push("/newcall");
+  // }
+
 
   return (
     <>
@@ -79,7 +94,9 @@ const Signup = ({ user_info_fun, response }) => {
 
 // recive
 const recive = (state) => {
-  console.log("This is SIGNUPState ", state);
+
+  console.log("This is SIGNUPState ", state.signup);
+ 
   return {
     response: state.signup,
   };

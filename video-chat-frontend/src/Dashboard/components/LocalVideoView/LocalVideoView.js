@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
+
 import screenfull from 'screenfull';
+
 
 
 const styles = {
@@ -17,6 +19,7 @@ const styles = {
     height: '100%'
   }
 };
+
  
 const fullScreenHandler=()=>{
 let vid = document.querySelector('video');
@@ -29,7 +32,7 @@ let vid = document.querySelector('video');
    
 
 
- 
+
 
 const LocalVideoView = props => {
   const { localStream } = props;
@@ -45,6 +48,7 @@ const LocalVideoView = props => {
       };
     }
   }, [localStream]);
+
 
   
   return (
