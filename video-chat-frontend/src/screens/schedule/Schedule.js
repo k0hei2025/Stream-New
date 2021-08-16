@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import scheduleAction from "../../store/actions/scheduleActions";
 import { connect } from "react-redux";
 
@@ -16,11 +16,18 @@ const useStyles = makeStyles({
 });
 
 function ScheduleCall({ schedule_info_fun, response }) {
+  const [copy, setCopy] = useState();
+
   const [values, setValues] = useState({
     date: "",
     time: "",
     description: "",
   });
+  const [pageURL, setPageURL] = useState(0);
+
+  useEffect(() => {
+    setPageURL(window.location.href);
+  }, []);
 
   const { date, time, description } = values;
 
@@ -41,10 +48,31 @@ function ScheduleCall({ schedule_info_fun, response }) {
     });
   };
 
+  useEffect(() => {
+    schedule_info_fun();
+  }, []);
+
+  // share
+
+  const copy_details = (e) => {
+    e.preventDefault();
+    if (values==={}) {
+      
+    }
+    setCopy({
+      title: description,
+      time: time,
+      date: date,
+      url: pageURL,
+    });
+  };
+
   return (
     <div className="scall">
       <form className={classes.popup}>
+      <h1>{}</h1>
         <TextField
+          required
           variant="outlined"
           fullWidth={true}
           color="white"
@@ -53,6 +81,7 @@ function ScheduleCall({ schedule_info_fun, response }) {
           onChange={handleChange("date")}
         />
         <TextField
+          required={true}
           variant="outlined"
           fullWidth={true}
           color="white"
@@ -61,6 +90,7 @@ function ScheduleCall({ schedule_info_fun, response }) {
           onChange={handleChange("time")}
         />
         <TextField
+          required={true}
           variant="outlined"
           fullWidth={true}
           color="white"
@@ -71,14 +101,16 @@ function ScheduleCall({ schedule_info_fun, response }) {
         />
 
         <div className="csh">
-          <Button variant="contained">Copy</Button>
+          <Button variant="contained" onClick={copy_details}>
+            Copy
+          </Button>
           <Button variant="contained" onClick={onSubmit}>
             Schedule
           </Button>
           <Button variant="contained">Share</Button>
         </div>
       </form>
-      <p>{JSON.stringify(values)}</p>
+      <p>{JSON.stringify(copy)}</p>
     </div>
   );
 }

@@ -20,14 +20,16 @@ const Sigin = ({ user_info_fun, response }) => {
   };
 
   const history = useHistory();
+  // let data = JSON.stringify(response.sigin_info.registered);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
     user_info_fun(values);
-    if (JSON.stringify(response.sigin_info.registered) === "true") {
-      history.push("/newcall");
-    }
+
+    // if (data === true) {
+    return await history.push("/newcall");
+    // }
   };
 
   // let err = JSON.stringify(response.error)
@@ -38,7 +40,12 @@ const Sigin = ({ user_info_fun, response }) => {
       <div className="form-container sign-in-container">
         <form onSubmit={onSubmit}>
           <h1>Sign in</h1>
-          <h1 style={{ color: "red" }}>{JSON.stringify(response.error)}</h1>
+          <h1>{JSON.stringify(response.sigin_info.registered)}</h1>
+          {JSON.stringify(response.error) ===
+            "Request failed with status code 400" ||
+          JSON.stringify(response.sigin_info) === "{}"
+            ? ""
+            : "request fail"}
           {/* <h1>{sigin_info}</h1> */}
           <input
             type="emil"
