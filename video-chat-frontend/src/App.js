@@ -43,7 +43,7 @@ function App() {
       <Route path="/newcall" component={Newcall} exact={true} strict></Route>
     </Router>
   );
-}
+}k
 
  export default App;
 
