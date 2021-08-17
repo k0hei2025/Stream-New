@@ -37,7 +37,7 @@ function Homepage({lightBg, headline, desc1, desc2, desc3, img, alt, imgStart,he
                             </figure>
                             <figure id="img-cap">
                                 <img src={img4} id="imag" alt="alt" />
-                                <figcaption>{cap4}</figcaption>
+                                <figcaption>{cap4}</figcaption> 
                             </figure>
                             <figure id="img-cap">
                                 <img src={img5} id="imag" alt="alt" />
