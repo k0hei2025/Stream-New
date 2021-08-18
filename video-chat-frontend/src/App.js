@@ -1,5 +1,3 @@
-
-
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import './App.css';
 // import Navbar from './componentsPragya/Navbar';
@@ -13,16 +11,17 @@
 //     import Auth from "./screens/auth/Auth";
 // import './App.css';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './componentsPragya/Navbar';
-import Home from './componentsPragya/pages/HomePage/Home';
-import Newcall from './componentsPragya/pages/Newcall';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import Navbar from "./componentsPragya/Navbar";
+import Home from "./componentsPragya/pages/HomePage/Home";
+import Newcall from "./componentsPragya/pages/Newcall";
 import { connectWithWebSocket } from "./utils/wssConnection/wssConnection";
-  import { useEffect } from "react";
-    import Dashboard from "./Dashboard/Dashboard";
- import LoginPage from "./LoginPage/LoginPage";
- import Auth from "./screens/auth/Auth";
+import { useEffect } from "react";
+import Dashboard from "./Dashboard/Dashboard";
+import LoginPage from "./LoginPage/LoginPage";
+import Auth from "./screens/auth/Auth";
+import Schedule from "./screens/schedule/Schedule";
 
 // =======
 // import "./App.css";
@@ -44,39 +43,34 @@ function App() {
   }, []);
   return (
     <Router>
-
-         <Navbar />
-     {/* <Route path="/auth" component={Auth} exact={true} strict></Route> 
+      <Navbar />
+      {/* <Route path="/auth" component={Auth} exact={true} strict></Route> 
        <Route path="/board" component={Container} exact={true} strict></Route> */}
 
-    
       {/* <Route path="/auth" component={Auth} exact={true} strict></Route>
       <Route path="/board" component={Board} exact={true} strict></Route> */}
 
+      <Route path="/schedule" component={Schedule} exact={true} strict></Route>
 
       <Route
         path="/dashboard"
         component={Dashboard}
         exact={true}
         strict
-      ></Route> 
+      ></Route>
 
-       <Route path="/join" component={LoginPage}  ></Route>  
+      <Route path="/join" component={LoginPage}></Route>
       <Route path="/" component={Home} exact={true} strict></Route>
       <Route path="/newcall" component={Newcall} exact={true} strict></Route>
- <Route path="/auth" component={Auth} exact={true} strict></Route> 
-      
+      <Route path="/auth" component={Auth} exact={true} strict></Route>
     </Router>
   );
 }
 
-
- export default App;
-
+export default App;
 
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import './App.css';
 // import Navbar from './componentsPragya/Navbar';
 // import Home from './componentsPragya/pages/HomePage/Home';
 // import Newcall from './componentsPragya/pages/Newcall';
-

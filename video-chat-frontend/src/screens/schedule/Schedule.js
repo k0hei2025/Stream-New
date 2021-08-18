@@ -2,13 +2,10 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-<<<<<<< HEAD
-import { useState } from "react";
-=======
 import { useState, useEffect } from "react";
 import scheduleAction from "../../store/actions/scheduleActions";
 import { connect } from "react-redux";
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
+import axios from "axios";
 
 const useStyles = makeStyles({
   popup: {
@@ -19,26 +16,19 @@ const useStyles = makeStyles({
   },
 });
 
-<<<<<<< HEAD
-function ScheduleCall() {
-=======
 function ScheduleCall({ schedule_info_fun, response }) {
-  const [copy, setCopy] = useState();
+  // const [copy, setCopy] = useState();
 
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
   const [values, setValues] = useState({
     date: "",
     time: "",
     description: "",
   });
-<<<<<<< HEAD
-=======
   const [pageURL, setPageURL] = useState(0);
 
   useEffect(() => {
     setPageURL(window.location.href);
   }, []);
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
 
   const { date, time, description } = values;
 
@@ -47,50 +37,38 @@ function ScheduleCall({ schedule_info_fun, response }) {
   };
 
   const classes = useStyles();
-
-<<<<<<< HEAD
-  return (
-    <div className="scall">
-      <form className={classes.popup}>
-        <TextField
-=======
+  const checker = () => {
+    if (values === {}) {
+      return "Empty value will not consider";
+    } else {
+      setValues({
+        date: "",
+        time: "",
+        description: "",
+      });
+    }
+  };
   const onSubmit = async (event) => {
     await event.preventDefault();
 
     await schedule_info_fun(values);
-    await setValues({
-      date: "",
-      time: "",
-      description: "",
-    });
+    await checker();
   };
 
   useEffect(() => {
     schedule_info_fun();
+    
+    
   }, []);
 
   // share
 
-  const copy_details = (e) => {
-    e.preventDefault();
-    if (values==={}) {
-      
-    }
-    setCopy({
-      title: description,
-      time: time,
-      date: date,
-      url: pageURL,
-    });
-  };
-
   return (
     <div className="scall">
       <form className={classes.popup}>
-      <h1>{}</h1>
+        <h1>{}</h1>
         <TextField
           required
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
           variant="outlined"
           fullWidth={true}
           color="white"
@@ -99,10 +77,7 @@ function ScheduleCall({ schedule_info_fun, response }) {
           onChange={handleChange("date")}
         />
         <TextField
-<<<<<<< HEAD
-=======
           required={true}
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
           variant="outlined"
           fullWidth={true}
           color="white"
@@ -111,10 +86,7 @@ function ScheduleCall({ schedule_info_fun, response }) {
           onChange={handleChange("time")}
         />
         <TextField
-<<<<<<< HEAD
-=======
           required={true}
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
           variant="outlined"
           fullWidth={true}
           color="white"
@@ -125,32 +97,20 @@ function ScheduleCall({ schedule_info_fun, response }) {
         />
 
         <div className="csh">
-<<<<<<< HEAD
-          <Button variant="contained">Copy</Button>
-          <Button variant="contained">Schedule</Button>
-          <Button variant="contained">Share</Button>
-        </div>
-      </form>
-      <p>{JSON.stringify(values)}</p>
-=======
-          <Button variant="contained" onClick={copy_details}>
+          {/* <Button variant="contained" onClick={copy_details}>
             Copy
-          </Button>
+          </Button> */}
           <Button variant="contained" onClick={onSubmit}>
             Schedule
           </Button>
-          <Button variant="contained">Share</Button>
+          {/* <Button variant="contained">Share</Button> */}
         </div>
       </form>
-      <p>{JSON.stringify(copy)}</p>
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c
+      <p>{JSON.stringify(values)}</p>
     </div>
   );
 }
 
-<<<<<<< HEAD
-export default ScheduleCall;
-=======
 const recive = (state) => {
   console.log("This is SCHEDULE RESPONSE ", state.schedule_res);
   return {
@@ -167,4 +127,3 @@ const send = (dispatch) => {
 };
 
 export default connect(recive, send)(ScheduleCall);
->>>>>>> 461da3d289ae86b45333c75c4d485f274f0f3c2c

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-
 import { BrowserRouter as Router, NavLink, useHistory } from "react-router-dom";
- 
+
 import signinAction from "../../store/actions/signinActions";
 
 const Sigin = ({ user_info_fun, response }) => {
+  const [err, setErr] = useState();
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -14,10 +14,7 @@ const Sigin = ({ user_info_fun, response }) => {
 
   useEffect(() => {
     user_info_fun();
-
-
   }, []);
- 
 
   const { email, password } = values;
 
@@ -25,37 +22,42 @@ const Sigin = ({ user_info_fun, response }) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-
   const history = useHistory();
   // let data = JSON.stringify(response.sigin_info.registered);
+
+  const redirect = () => {
+    console.log(
+      "This is REDIRECT",
+      JSON.parse(window.localStorage.getItem("userCredentials")).email,
+    );
+    if (
+      response.sigin_info._id !== "" &&
+      response.sigin_info.email ===
+        JSON.parse(window.localStorage.getItem("userCredentials")).email
+    ) {
+      history.push("/newcall");
+    } else {
+      setErr("Either Email or password is wrong");
+    }
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    user_info_fun(values);
-
-    // if (data === true) {
-    return await history.push("/newcall");
-    // }
+    await user_info_fun(values);
+    await redirect();
   };
 
   // let err = JSON.stringify(response.error)
- 
 
   return (
     <>
       {/* <h1>{sigin_info}</h1> */}
       <div className="form-container sign-in-container">
-
         <form onSubmit={onSubmit}>
           <h1>Sign in</h1>
-          <h1>{JSON.stringify(response.sigin_info.registered)}</h1>
-          {JSON.stringify(response.error) ===
-            "Request failed with status code 400" ||
-          JSON.stringify(response.sigin_info) === "{}"
-            ? ""
-            : "request fail"}
- 
+          <p>{err} </p>
+
           {/* <h1>{sigin_info}</h1> */}
           <input
             type="emil"
@@ -76,7 +78,6 @@ const Sigin = ({ user_info_fun, response }) => {
           </Router>
 
           <button>Sign In</button>
- 
         </form>
       </div>
     </>

@@ -1,15 +1,13 @@
 import axios from "axios";
 
-
 import { SIGN_UP, SIGN_UP_ERROR } from "../types/SignupTypes";
- 
 
 const signupAction = (user_details) => {
   console.log("this is main kfb", user_details);
   return async (dispatch) => {
     try {
       const res = await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBEPyDFaklwGS8C3zUVG1I_8-6WtJk6rFM",
+        "http://localhost:5000/api/users/signup",
         user_details,
       );
 
@@ -27,7 +25,6 @@ const signupAction = (user_details) => {
         user_info: {},
         error: err.message,
       });
- 
     }
   };
 };
