@@ -29,18 +29,29 @@ import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 const styles = {
   buttonContainer: {
     display: 'flex',
-    position: 'absolute',
-    bottom: '-15%',
-    borderRadius:"50%",
-    left: '20%'
+    flexWrap: 'wrap',
+    width: '54%',
+    
+    justifyContent: "center",
+    padding: '20px 2px ',
+    alignItem:'center',
+    position: 'absolute', 
+    bottom: '-40%',
+    borderRadius: "15px",
+    backgroundColor: 'rgb(196, 192, 192)',
+    marginTop:"25px",
+    left: '25%'
 
 
 
   },
   icon: {
+    backgroundColor: '#fff',
     width: '25px',
     height: '25px',
-    fill: '#e6e5e8'
+    fontSize:'35px',
+    borderRadius: '50%',
+    fill: '#0548ff'
   }
 };
 
@@ -161,55 +172,55 @@ const ConversationButtons = (props) => {
 
 
 
-
+ 
 
 
   return (
     <div style={styles.buttonContainer}>
       <ConversationButton onClickHandler={handleMicButtonPressed}>
 
-        {localMicrophoneEnabled ? <MicIcon/> : <MicOff/>}
+        {localMicrophoneEnabled ? <MicIcon style={styles.icon} /> : <MicOff style={styles.icon}/>}
       </ConversationButton>
       {!groupCall && <ConversationButton onClickHandler={handleHangUpButtonPressed}>
-        <CallEnd/>
+        <CallEnd style={styles.icon}/>
       </ConversationButton>}
 
 
 
       <ConversationButton onClickHandler={handleCameraButtonPressed}>
-        {localCameraEnabled ? <VideocamIcon/> : <VideocamOffIcon/> }
+        {localCameraEnabled ? <VideocamIcon style={styles.icon}/> : <VideocamOffIcon style={styles.icon}/> }
       </ConversationButton>
        <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-        {screenSharingActive ?  <StopScreenShareIcon/> : <ScreenShareIcon/>}
+        {screenSharingActive ?  <StopScreenShareIcon style={styles.icon}/> : <ScreenShareIcon style={styles.icon}/>}
         
       </ConversationButton>
       
        <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-         <ShareIcon/>
+         <ShareIcon style={styles.icon} />
         
       </ConversationButton>
        <ConversationButton onClickHandler={recordHandler}  >
 
-       <AlbumIcon/>  
+       <AlbumIcon style={styles.icon}/>  
       </ConversationButton>
        <ConversationButton onClickHandler={fullScreenHandler}>
-        <FullscreenIcon/>
+        <FullscreenIcon style={styles.icon}/>
       </ConversationButton>
       
        <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-         <ChatIcon/>
+         <ChatIcon style={styles.icon}/>
       </ConversationButton>
        <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-  <PanToolIcon/>
+  <PanToolIcon style={styles.icon}/>
       </ConversationButton>
 
 
   <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-  <FolderOpenIcon/>
+  <FolderOpenIcon style={styles.icon}/>
       </ConversationButton>
 
         <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-  <AirplayIcon/>
+  <AirplayIcon style={styles.icon}/>
       </ConversationButton>
 
 

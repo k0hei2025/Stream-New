@@ -11,8 +11,7 @@
   bottom: -15%;
   background-color: #282c34;
   color: #0548ff;
-  z-index: 4;
-  margin-left: 10px;
+  margin-left: 100px;
 }
 
 .group_call_button:hover {

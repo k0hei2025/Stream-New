@@ -21,7 +21,7 @@ const DirectCall = (props) => {
     setDirectCallMessage, 
     message
   } = props;
-
+ 
   return (
     <>
       <LocalVideoView localStream={localStream} />

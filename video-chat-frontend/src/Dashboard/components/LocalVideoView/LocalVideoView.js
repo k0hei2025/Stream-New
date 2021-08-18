@@ -9,15 +9,15 @@ const styles = {
   videoContainer: {
     width: '100%',
     height: '100%',
-    justifyContent: "center",
-    alignContent: "center",
-    texAlign: "center",
-    margin:"5px"
+    justifyContent: "stretch",
+    margin: "0px",
+    borderRadius:"10px"
   },
   videoElement: {
     width: '100%',
     height: '100%',
     borderRadius: '8px',
+    justifyContent: "stretch",
   }
 };
 
@@ -49,7 +49,7 @@ const LocalVideoView = props => {
       };
     }
   }, [localStream]);
-
+ 
 
   
   return (

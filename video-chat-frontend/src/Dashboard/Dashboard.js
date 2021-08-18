@@ -33,23 +33,24 @@ const Dashboard = ({ username, callState }) => {
           </div>
         </div>
         <div className="video">
-          <div className='dashboard_content_container'>
-              <DirectCall />
-              <GroupCall /> 
-              {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
-          
           <div className='dashboard_rooms_container '>
               <GroupCallRoomsList />
           </div>
+
+          <div className='dashboard_content_container'>
+              <DirectCall />
+              <GroupCall />  
+              {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
+          </div>          
+          
           <div className='dashboard_active_users_list'>
             <ActiveUsersList />
             </div>
-          </div>
           
         </div>
       </div>
       <div className="chat-application">
-        <div className="chatter">
+        <div className="chatter"> 
           <button className="chat-button">Chat</button>
           </div>
       </div>

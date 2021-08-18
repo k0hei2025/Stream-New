@@ -2,21 +2,24 @@ import React from 'react';
 
 const styles = {
   button: {
-    width: '50px',
-    height: '50px',
-    borderRadius: '40px',
+    width: '90px',
+    height: '90px',
+    borderRadius: '50%',
+    cursor:'pointer',
     border: '2px solid #e6e5e8',
     textDecoration: 'none',
-    backgroundColor: '#282C34',
+    backgroundColor: '#fff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: '10px',
+    marginLeft: '35px',
+    marginRight: '35px',
+    marginBottom:'3px',
     boxShadow: 'none',
-    borderImage: 'none',
+    borderImage: 'none', 
     borderStyle: 'none',
     borderWidth: '0px',
-    outline: 'none'
+    outline: 'none' 
   }
 };
 
