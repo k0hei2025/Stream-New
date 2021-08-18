@@ -30,9 +30,8 @@ const styles = {
   buttonContainer: {
     display: 'flex',
     position: 'absolute',
-    bottom: '22%',
-
-
+    bottom: '-20%',
+    borderRadius:"50%",
     left: '20%'
 
 

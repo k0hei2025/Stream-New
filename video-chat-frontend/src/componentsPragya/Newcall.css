@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap");
+
 .new-call {
   background-color: #f8f6f6;
   min-width: 100%;
@@ -14,6 +16,14 @@
   margin-left: 100px;
 }
 
+.line {
+  position: absolute;
+  width: 100%;
+  background-color: #f8f6f6;
+  outline-style: none;
+  border-top: #f8f6f6;
+  top: 50%;
+}
 .colon {
   color: #dad1d1;
   font-size: 100px;
@@ -49,6 +59,7 @@
   flex-grow: 1;
   background-color: rgb(59, 57, 57);
   margin: 2px;
+  font-family: "Roboto", sans-serif;
   font-size: 120px;
   border-radius: 5px;
 }
@@ -59,6 +70,7 @@
   text-align: center;
   justify-content: center;
   align-content: center;
+  font-family: "Roboto", sans-serif;
   background-color: rgb(59, 57, 57);
   border-radius: 5px;
   font-size: 50px;
@@ -86,7 +98,7 @@
   align-content: center;
   padding-left: 100px;
   padding-right: 100px;
-  padding-top: 90px;
+  padding-top: 30px;
 }
 .callLinks {
   text-decoration: none;
@@ -97,28 +109,32 @@
   width: 50%;
 }
 
-figure {
+.fig-icon {
   background-color: #fff;
-  border-radius: 20px;
-  width: 100px;
-  height: 100px;
+  border-radius: 33px;
+  width: 130px;
+  height: 130px;
   margin: 10px;
   text-align: center;
+  box-shadow: 0px 1px 2px 0px #050505;
   justify-content: center;
   align-items: center;
   align-content: center;
 }
 .call-icons {
   color: #0548ff;
-  font-size: 70px;
+  font-size: 90px;
   padding: 10px;
 }
 
-figcaption {
-  font-size: 15px;
+.fig-cap {
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 #sch {
+  margin-left: -100px;
   text-decoration: none;
   background-color: #0548ff;
   box-shadow: none;
@@ -128,19 +144,66 @@ figcaption {
 
 .call-list {
   position: absolute;
-  top: 150px;
-  right: 180px;
+  top: 110px;
+  right: 100px;
   margin-bottom: 50px;
   background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   float: right;
   width: 35%;
-  height: 75vh;
+  font-family: "Roboto", sans-serif;
+  height: 620px;
   border-radius: 100px 0px 0px 100px;
   text-align: center;
-  padding: 10px;
+  padding: 30px;
+  box-shadow: 0px 1px 2px 0px rgba(138, 138, 138, 0.88);
 }
 
 #sc-head {
   font-size: 20px;
   color: #111316;
+  font-family: "Roboto", sans-serif;
+}
+.due-meet {
+  width: 441px;
+  height: 136px;
+  box-shadow: 0px 1px 2px 0px #000000;
+  background-color: #ffffff;
+  text-align: justify;
+  justify-content: space-between;
+  border-radius: 22px;
+  color: #000000;
+  text-decoration: solid;
+  font-weight: 100;
+  font-family: "Roboto", sans-serif;
+  margin-top: 15px;
+  padding: 10px;
+}
+.descr {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: "Roboto", sans-serif;
+  margin-top: 20px;
+}
+.start-button {
+  display: block;
+  margin-left: 300px;
+  margin-top: -70px;
+}
+
+.func-icons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  align-content: flex-end;
+  position: relative;
+  bottom: -40px;
+  right: 10px;
+  color: #111316;
+  margin: 10px;
 }

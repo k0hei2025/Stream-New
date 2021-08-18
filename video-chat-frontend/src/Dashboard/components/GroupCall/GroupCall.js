@@ -16,7 +16,7 @@ const GroupCall = (props) => {
   const leaveRoom = () => {
     webRTCGroupCallHandler.leaveGroupCall();
   };
-
+ 
   return (
     <>
       {!groupCallActive && localStream && callState !== callStates.CALL_IN_PROGRESS &&

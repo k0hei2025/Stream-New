@@ -7,20 +7,21 @@ import screenfull from 'screenfull';
 
 const styles = {
   videoContainer: {
-    width: '150px',
-    height: '150px',
-    borderRadius: '8px',
-    position: 'absolute',
-    top: '5%',
-    right: '23%'
+    width: '100%',
+    height: '100%',
+    justifyContent: "center",
+    alignContent: "center",
+    texAlign: "center",
+    margin:"5px"
   },
   videoElement: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    borderRadius: '8px',
   }
 };
 
- 
+  
 const fullScreenHandler=()=>{
 let vid = document.querySelector('video');
     console.log('click')
@@ -52,7 +53,7 @@ const LocalVideoView = props => {
 
   
   return (
-    <div style={styles.videoContainer} className='background_secondary_color'>
+    <div style={styles.videoContainer} >
       <video style={styles.videoElement} onClick={fullScreenHandler} ref={localVideoRef} autoPlay muted />
     </div>
   );

@@ -18,7 +18,7 @@ const DirectCall = (props) => {
     callingDialogVisible,
     callRejected,
     hideCallRejectedDialog,
-    setDirectCallMessage,
+    setDirectCallMessage, 
     message
   } = props;
 

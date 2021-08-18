@@ -23,6 +23,7 @@ import { connectWithWebSocket } from "./utils/wssConnection/wssConnection";
     import Dashboard from "./Dashboard/Dashboard";
  import LoginPage from "./LoginPage/LoginPage";
  import Auth from "./screens/auth/Auth";
+import React, { useState } from 'react';
 
 // =======
 // import "./App.css";
@@ -42,10 +43,12 @@ function App() {
   useEffect(() => {
     connectWithWebSocket();
   }, []);
+  const [show, setShow] = useState(true);
   return (
     <Router>
+      
 
-         <Navbar />
+      <Navbar open={show}/>
      {/* <Route path="/auth" component={Auth} exact={true} strict></Route> 
        <Route path="/board" component={Container} exact={true} strict></Route> */}
 
@@ -53,8 +56,7 @@ function App() {
       {/* <Route path="/auth" component={Auth} exact={true} strict></Route>
       <Route path="/board" component={Board} exact={true} strict></Route> */}
 
-
-      <Route
+<Route
         path="/dashboard"
         component={Dashboard}
         exact={true}
@@ -62,11 +64,14 @@ function App() {
       ></Route> 
 
        <Route path="/join" component={LoginPage}  ></Route>  
+       <div>
       <Route path="/" component={Home} exact={true} strict></Route>
       <Route path="/newcall" component={Newcall} exact={true} strict></Route>
- <Route path="/auth" component={Auth} exact={true} strict></Route> 
-      
+        <Route path="/auth" component={Auth} exact={true} strict></Route>
+        </div>
+              
     </Router>
+    
   );
 }
 

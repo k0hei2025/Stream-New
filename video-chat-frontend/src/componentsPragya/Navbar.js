@@ -9,6 +9,7 @@ function Navbar()
 {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
+    const [show, setShow] = useState(true);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -27,7 +28,7 @@ function Navbar()
 
     return (
         <>
-            <div className="navbarr">
+            <div className="navbarr" show={show}>
                 <div className="navbar-container containerr">
                     <Link to="/" className="navbar-logo" onClick={closeMobileMenu} >
                         <IoVideocam className="navbar-icon" />

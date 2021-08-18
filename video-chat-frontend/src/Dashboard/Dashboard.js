@@ -10,6 +10,9 @@ import { callStates } from '../store/actions/callActions';
 import GroupCallRoomsList from './components/GroupCallRoomsList/GroupCallRoomsList';
 import GroupCall from './components/GroupCall/GroupCall';
 import './Dashboard.css';
+import { IoVideocam } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+import { FiCopy, FiShare } from 'react-icons/fi';
 
 const Dashboard = ({ username, callState }) => {
   useEffect(() => {
@@ -19,26 +22,39 @@ const Dashboard = ({ username, callState }) => {
 
   return (
     <div className='dashboard_container background_main_color'>
-      <div className='dashboard_left_section'>
-        <div className='dashboard_content_container'>
-          <DirectCall />
-          <GroupCall />
-          {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
+      <div className='dashboard_left_section '>
+        <div className="meet-name">
+          <Link to="/" className=" stream-logo"><IoVideocam className="navbar-icon" />STREAM</Link>
+          <div className="meet-desc" placeholder="Meeting Subject/Title">
+            <div className="copy-share">
+              <button className="copy-share-button"><FiCopy /></button>
+              <button className="copy-share-button"><FiShare /></button>
+            </div>
+          </div>
         </div>
-        <div className='dashboard_rooms_container background_secondary_color'>
-          <GroupCallRoomsList />
+        <div className="video">
+          <div className='dashboard_content_container'>
+              <DirectCall />
+              <GroupCall /> 
+              {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
+          
+          <div className='dashboard_rooms_container '>
+              <GroupCallRoomsList />
+          </div>
+          <div className='dashboard_active_users_list'>
+            <ActiveUsersList />
+            </div>
+          </div>
+          
         </div>
       </div>
-      <div className='dashboard_right_section background_secondary_color'>
-        <div className='dashboard_active_users_list'>
-          <ActiveUsersList />
-        </div>
-        <div className='dashboard_logo_container'>
-          <img className='dashboard_logo_image' src={logo} alt='logo' />
-        </div>
+      <div className="chat-application">
+        <div className="chatter">
+          <button className="chat-button">icon</button>
+          </div>
       </div>
-   
     </div>
+    
   );
 };
 
