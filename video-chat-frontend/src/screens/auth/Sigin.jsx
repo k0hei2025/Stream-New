@@ -31,9 +31,9 @@ const Sigin = ({ user_info_fun, response }) => {
       JSON.parse(window.localStorage.getItem("userCredentials")).email,
     );
     if (
-      response.sigin_info._id !== "" &&
-      response.sigin_info.email ===
-        JSON.parse(window.localStorage.getItem("userCredentials")).email
+      response.sigin_info._id !== "" //&&
+      // response.sigin_info.email ===
+      //   JSON.parse(window.localStorage.getItem("userCredentials")).email
     ) {
       history.push("/newcall");
     } else {
