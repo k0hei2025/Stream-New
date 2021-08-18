@@ -50,7 +50,7 @@ const Dashboard = ({ username, callState }) => {
       </div>
       <div className="chat-application">
         <div className="chatter">
-          <button className="chat-button">icon</button>
+          <button className="chat-button">Chat</button>
           </div>
       </div>
     </div>

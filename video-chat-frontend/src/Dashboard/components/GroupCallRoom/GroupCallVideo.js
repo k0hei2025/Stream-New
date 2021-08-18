@@ -6,11 +6,14 @@ import screenfull from 'screenfull';
 
 const styles = {
   videoContainer: {
-    width: '300px',
-    height: '300px'
+    width: '100px',
+    height: '100px',
+    borderRadius: '8px',
+    marginTop: '0px'
   },
   videoElement: {
     width: '100%',
+    borderRadius: '8px',
     height: '100%'
   }
 

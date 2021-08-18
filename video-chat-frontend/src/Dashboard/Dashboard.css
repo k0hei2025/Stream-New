@@ -85,8 +85,6 @@
   align-items: center;
   z-index: 4;
   color: black;
-  font-family: Roboto, sans serif;
-  font-weight: 400;
 }
 
 .dashboard_rooms_container {
@@ -101,10 +99,12 @@
 }
 
 .dashboard_active_users_list {
-  height: 80%;
+  width: 200px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  font-family: Roboto, sans serif;
+  font-weight: 400;
   float: right;
 }
 

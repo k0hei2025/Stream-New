@@ -1,10 +1,15 @@
 .active_user_list_container {
-  width: 100%;
-  height: 100%;
+  width: 200px;
+  height: 200px;
   display: flex;
   float: right;
   flex-direction: column;
   position: absolute;
+  top: 100px;
+  left: 200px;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .active_user_list_item {
@@ -20,18 +25,23 @@
 }
 
 .active_user_list_image_container {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   margin: 10px;
-  display: flexbox;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .active_user_list_text {
   font-size: 24px;
+  text-align: center;
 }
 
 .active_user_list_image {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  position: relative;
+  top: 20px;
 }
