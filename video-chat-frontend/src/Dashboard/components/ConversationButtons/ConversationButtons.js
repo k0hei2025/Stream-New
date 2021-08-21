@@ -24,35 +24,32 @@ import ChatIcon from '@material-ui/icons/Chat';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import AirplayIcon from '@material-ui/icons/Airplay';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import { CgMoreVertical } from 'react-icons/cg';
+import { MdPeople } from 'react-icons/md';
+import { ImMoveUp } from 'react-icons/im';
+
+import './convoBtn.css';
+
 
 
 const styles = {
   buttonContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
-    width: '54%',
-    
+    width: '948px',
+    height:'130px',    
     justifyContent: "center",
-    padding: '20px 2px ',
     alignItem:'center',
-    position: 'absolute', 
-    bottom: '-40%',
-    borderRadius: "15px",
-    backgroundColor: 'rgb(196, 192, 192)',
-    marginTop:"25px",
-    left: '25%'
-
-
+    borderRadius: "20px",
+    backgroundColor: '#f5f5f5',
 
   },
   icon: {
     backgroundColor: '#fff',
-    width: '25px',
-    height: '25px',
     fontSize:'35px',
-    borderRadius: '50%',
     fill: '#0548ff'
-  }
+  },
+
+  
 };
 
 const ConversationButtons = (props) => {
@@ -61,7 +58,7 @@ const ConversationButtons = (props) => {
   const [ record , setRecord ] = useState(true);
   const [mediaState , setMediaState] = useState({});
   const [fullScreen , setFullScreen] = useState(false)
-
+  const [show, setShow] = useState(false);
 
   const {
     localStream,
@@ -153,21 +150,10 @@ const ConversationButtons = (props) => {
   };
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const otherButtons = () =>
+  {
+    setShow(!show);
+  }
 
 
 
@@ -194,8 +180,27 @@ const ConversationButtons = (props) => {
         {screenSharingActive ?  <StopScreenShareIcon style={styles.icon}/> : <ScreenShareIcon style={styles.icon}/>}
         
       </ConversationButton>
-      
-       <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+      <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+        <ImMoveUp style={styles.icon} />        
+      </ConversationButton>
+
+      <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+        <MdPeople style={styles.icon} />        
+      </ConversationButton>
+
+      <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+        <CgMoreVertical style={styles.icon} onClick={otherButtons}/>
+      </ConversationButton>
+      <div class="btn-group">
+        <button onClickHandler={() => { handleScreenSharingButtonPressed(); otherButtons(); }} >Share     {<ShareIcon style={{ fontSize: "15px", float:"right" }} />}</button>
+        <button onClickHandler={() => { recordHandler(); otherButtons(); } }>Record     {<AlbumIcon style={{ fontSize: "15px", float:"right" }} />}</button>
+        <button onClickHandler={() => { handleScreenSharingButtonPressed(); otherButtons(); }}>Raise Hand {<PanToolIcon style={{fontSize:"15px", float:"right"}} /> }</button>
+        <button onClickHandler={() => { fullScreenHandler(); otherButtons(); }}>Full Screen {<FullscreenIcon style={{fontSize:"15px", float:"right"}} />}</button>
+        <button onClickHandler={() => { handleScreenSharingButtonPressed(); otherButtons(); }}>White Board  {<AirplayIcon style={{fontSize:"15px", float:"right"}} />}</button>
+      </div>
+
+
+       {/* <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
          <ShareIcon style={styles.icon} />
         
       </ConversationButton>
@@ -221,7 +226,7 @@ const ConversationButtons = (props) => {
 
         <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
   <AirplayIcon style={styles.icon}/>
-      </ConversationButton>
+      </ConversationButton> */}
 
 
 

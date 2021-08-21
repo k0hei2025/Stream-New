@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import logo from '../resources/logo.png';
+import React, { useEffect, useState } from 'react';
 import ActiveUsersList from './components/ActiveUsersList/ActiveUsersList';
 import * as webRTCHandler from '../utils/webRTC/webRTCHandler';
 import * as webRTCGroupHandler from '../utils/webRTC/webRTCGroupCallHandler';
@@ -11,18 +10,29 @@ import GroupCallRoomsList from './components/GroupCallRoomsList/GroupCallRoomsLi
 import GroupCall from './components/GroupCall/GroupCall';
 import './Dashboard.css';
 import { IoVideocam } from 'react-icons/io5';
+import { BsChatDotsFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { FiCopy, FiShare } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
+import { MdDelete } from 'react-icons/md';
+import { MdSave } from 'react-icons/md';
+import { MdSend } from 'react-icons/md';
+import { FiLink2 } from 'react-icons/fi';
+
 
 const Dashboard = ({ username, callState }) => {
-  useEffect(() => {
+  useEffect(() => { 
     webRTCHandler.getLocalStream();
     webRTCGroupHandler.connectWithMyPeer();
   }, []);
 
+  const [button, setButton] = useState(true);
+  const showButton = () => setButton(!button);
+ 
+
   return (
     <div className='dashboard_container background_main_color'>
-      <div className='dashboard_left_section '>
+      <div className={button ? 'dashboard_left_section flexy' : 'dashboard_left_section flexya'}>
         <div className="meet-name">
           <Link to="/" className=" stream-logo"><IoVideocam className="navbar-icon" />STREAM</Link>
           <div className="meet-desc" placeholder="Meeting Subject/Title">
@@ -31,11 +41,9 @@ const Dashboard = ({ username, callState }) => {
               <button className="copy-share-button"><FiShare /></button>
             </div>
           </div>
+          <div className="chat-button" onClick={showButton}><BsChatDotsFill /></div>
         </div>
         <div className="video">
-          <div className='dashboard_rooms_container '>
-              <GroupCallRoomsList />
-          </div>
 
           <div className='dashboard_content_container'>
               <DirectCall />
@@ -43,16 +51,29 @@ const Dashboard = ({ username, callState }) => {
               {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
           </div>          
           
+          <div className='dashboard_rooms_container '>
+              <GroupCallRoomsList />
+          </div>
+          
           <div className='dashboard_active_users_list'>
             <ActiveUsersList />
             </div>
           
         </div>
       </div>
-      <div className="chat-application">
-        <div className="chatter"> 
-          <button className="chat-button">Chat</button>
+      <div className={button ? 'no-chatter ' : 'chatter'}>
+        <div id="chat-options" >Chat<div className="c-icons">
+          <MdSave />
+          <MdDelete />
+          <IoClose onClick={showButton}/>
           </div>
+        </div>
+        <div className="chat-msg">
+        <div className="c-icons leftpos"><FiLink2 /> </div>
+        <input type="text" name="texting"></input>
+        <div className="c-icons rightpos"><MdSend /> </div>
+        </div>
+        
       </div>
     </div>
     

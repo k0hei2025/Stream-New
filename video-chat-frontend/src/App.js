@@ -48,7 +48,7 @@ function App() {
     <Router>
       
 
-      <Navbar open={show}/>
+      {/*<Navbar open={show}/>*/}
      {/* <Route path="/auth" component={Auth} exact={true} strict></Route> 
        <Route path="/board" component={Container} exact={true} strict></Route> */}
 

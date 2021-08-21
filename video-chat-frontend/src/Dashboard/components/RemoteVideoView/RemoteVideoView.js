@@ -2,17 +2,22 @@ import React, { useRef, useEffect } from 'react';
 
 const styles = {
   videoContainer: {
-    width: '200%',
-    height: '100%',
-    justifyContent: "stretch",
+    display: 'block',
+    marginRight: 'auto',
+    marginLeft:'auto',
+    width: '650px',
+    height: '484px',
+    justifyContent: "center",
+    alignContent: "center",
+    alignItem:"center",
     margin: "0px",
-    borderRadius:"10px"
+    padding: "0px",
+    borderRadius:"20px"
   },
   videoElement: {
-    width: '100%',
+    width: '650px',
     height: '100%',
-    borderRadius: "10px",
-    justifyContent: "stretch",
+    borderRadius: '20px',
 
   }
 };

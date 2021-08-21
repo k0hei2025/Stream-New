@@ -4,6 +4,8 @@ import GroupCallButton from '../GroupCallButton/GroupCallButton';
 import { callStates, setLocalCameraEnabled, setLocalMicrophoneEnabled } from '../../../store/actions/callActions';
 import * as webRTCGroupCallHandler from '../../../utils/webRTC/webRTCGroupCallHandler';
 import GroupCallRoom from '../GroupCallRoom/GroupCallRoom';
+import { IoCreateSharp } from 'react-icons/io5';
+import { IoRemoveOutline } from 'react-icons/io5';
 
 const GroupCall = (props) => {
   // eslint-disable-next-line
@@ -20,10 +22,10 @@ const GroupCall = (props) => {
   return (
     <>
       {!groupCallActive && localStream && callState !== callStates.CALL_IN_PROGRESS &&
-        <GroupCallButton onClickHandler={createRoom} label='Create room' />}
+        <GroupCallButton onClickHandler={createRoom} label={<IoCreateSharp />} />}
       {groupCallActive && <GroupCallRoom {...props} />}
 
-      {groupCallActive && <GroupCallButton onClickHandler={leaveRoom} label='Leave room' />}
+      {groupCallActive && <GroupCallButton onClickHandler={leaveRoom} label={<IoRemoveOutline style={{color: "rgb(250, 20, 20)"}} />} />}
     </>
   );
 };

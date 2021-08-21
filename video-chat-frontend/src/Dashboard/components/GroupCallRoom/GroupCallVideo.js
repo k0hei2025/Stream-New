@@ -8,13 +8,13 @@ const styles = {
   videoContainer: {
     width: '100px',
     height: '100px',
-    borderRadius: '8px',
-    marginTop: '0px'
-  },
+    borderRadius: '15px',
+    margin: '5px'
+  }, 
   videoElement: {
     width: '100%',
-    borderRadius: '8px',
-    height: '100%'
+    borderRadius: '15px',
+    height: '100%',
   }
  
 

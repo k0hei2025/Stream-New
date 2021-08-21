@@ -7,17 +7,18 @@ import screenfull from 'screenfull';
 
 const styles = {
   videoContainer: {
-    width: '100%',
-    height: '100%',
-    justifyContent: "stretch",
-    margin: "0px",
-    borderRadius:"10px"
+    width: '650px',
+    height: '484px',
+    justifyContent: "center",
+    alignContent: "center",
+    alignItem:"center",
+    padding: "0px",
+    borderRadius:"20px"
   },
   videoElement: {
-    width: '100%',
+    width: '650px',
     height: '100%',
-    borderRadius: '8px',
-    justifyContent: "stretch",
+    borderRadius: '20px'
   }
 };
 

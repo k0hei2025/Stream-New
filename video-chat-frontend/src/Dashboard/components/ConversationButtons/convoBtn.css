@@ -1,0 +1,26 @@
+.btn-group button {
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 2px;
+  word-wrap: none;
+  cursor: pointer;
+  display: block;
+  border: none;
+  color: #0548ff;
+  width: 150px;
+  text-align: left;
+  font-size: 15px;
+  justify-content: space-around;
+}
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 5px;
+}
+.btn-group button:hover {
+  background-color: #f5f5f5;
+}
+.btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
