@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 
 import { BrowserRouter as Router, NavLink, useHistory } from "react-router-dom";
- 
+
 import signinAction from "../../store/actions/signinActions";
 
 const Sigin = ({ user_info_fun, response }) => {
@@ -17,7 +17,11 @@ const Sigin = ({ user_info_fun, response }) => {
 
 
   }, []);
- 
+
+
+  const emailRef = useState();
+  const passRef = useState();
+
 
   const { email, password } = values;
 
@@ -40,7 +44,45 @@ const Sigin = ({ user_info_fun, response }) => {
   };
 
   // let err = JSON.stringify(response.error)
- 
+
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const password = passRef.current.value;
+
+    console.log(email, password);
+
+    if (password.length > 8) {
+      console.log('password is valid');
+      const data = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBEPyDFaklwGS8C3zUVG1I_8-6WtJk6rFM`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }),
+        headers: {
+          'Content- Type': 'application/json'
+        }
+      })
+
+      const resData = await data.json();
+      console.log(resData);
+
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -50,17 +92,12 @@ const Sigin = ({ user_info_fun, response }) => {
         <form onSubmit={onSubmit}>
           <h1>Sign in</h1>
           <h1>{JSON.stringify(response.sigin_info.registered)}</h1>
-          {JSON.stringify(response.error) ===
-            "Request failed with status code 400" ||
-          JSON.stringify(response.sigin_info) === "{}"
-            ? ""
-            : "request fail"}
- 
-          {/* <h1>{sigin_info}</h1> */}
+
           <input
             type="emil"
             placeholder="Email"
             value={email}
+            ref={emailRef}
             onChange={handleChange("email")}
             required
           />
@@ -68,15 +105,18 @@ const Sigin = ({ user_info_fun, response }) => {
             type="password"
             placeholder="Password"
             value={password}
+            ref={passRef}
             onChange={handleChange("password")}
             required
           />
+
+
           <Router>
             <NavLink to="">Forgot your password?</NavLink>
           </Router>
 
-          <button>Sign In</button>
- 
+          <input type='submit' onClick={submitHandler} />
+
         </form>
       </div>
     </>
@@ -84,19 +124,6 @@ const Sigin = ({ user_info_fun, response }) => {
 };
 
 // recive
-const recive = (state) => {
-  console.log("This is SIGNINState ", state.signin);
-  return {
-    response: state.signin,
-  };
-};
-// dispatch
-const send = (dispatch) => {
-  return {
-    user_info_fun: (obj) => {
-      dispatch(signinAction(obj));
-    },
-  };
-};
 
-export default connect(recive, send)(Sigin);
+
+export default Sigin;
