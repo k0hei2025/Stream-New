@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import faker from "faker"
 import screenfull from 'screenfull'
 
-import {IconButton, Badge, Input, Button} from '@material-ui/core'
+import { IconButton, Badge, Input, Button } from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import VideocamOffIcon from '@material-ui/icons/VideocamOff'
 import MicIcon from '@material-ui/icons/Mic'
@@ -12,8 +12,8 @@ import ScreenShareIcon from '@material-ui/icons/ScreenShare'
 import StopScreenShareIcon from '@material-ui/icons/StopScreenShare'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import ChatIcon from '@material-ui/icons/Chat'
-import {FaRecordVinyl} from 'react-icons/fa'
-import {BiFullscreen} from  'react-icons/bi'
+import { FaRecordVinyl } from 'react-icons/fa'
+import { BiFullscreen } from 'react-icons/bi'
 
 import { message } from 'antd'
 import 'antd/dist/antd.css'
@@ -57,10 +57,10 @@ class Video extends Component {
 			askForUsername: true,
 			username: faker.internet.userName(),
 			recordings: false,
-			mediaState : "",
-			 theStream : null,
-                                             theRecorder : null,
-                                          recordedChunks : []
+			mediaState: "",
+			theStream: null,
+			theRecorder: null,
+			recordedChunks: []
 
 		}
 		connections = {}
@@ -69,7 +69,7 @@ class Video extends Component {
 	}
 
 	getPermissions = async () => {
-		try{
+		try {
 			await navigator.mediaDevices.getUserMedia({ video: true })
 				.then(() => this.videoAvailable = true)
 				.catch(() => this.videoAvailable = false)
@@ -90,10 +90,10 @@ class Video extends Component {
 						window.localStream = stream
 						this.localVideoref.current.srcObject = stream
 					})
-					.then((stream) => {})
+					.then((stream) => { })
 					.catch((e) => console.log(e))
 			}
-		} catch(e) { console.log(e) }
+		} catch (e) { console.log(e) }
 	}
 
 	getMedia = () => {
@@ -110,20 +110,20 @@ class Video extends Component {
 		if ((this.state.video && this.videoAvailable) || (this.state.audio && this.audioAvailable)) {
 			navigator.mediaDevices.getUserMedia({ video: this.state.video, audio: this.state.audio })
 				.then(this.getUserMediaSuccess)
-				.then((stream) => {})
+				.then((stream) => { })
 				.catch((e) => console.log(e))
 		} else {
 			try {
 				let tracks = this.localVideoref.current.srcObject.getTracks()
 				tracks.forEach(track => track.stop())
-			} catch (e) {}
+			} catch (e) { }
 		}
 	}
 
 	getUserMediaSuccess = (stream) => {
 		try {
 			window.localStream.getTracks().forEach(track => track.stop())
-		} catch(e) { console.log(e) }
+		} catch (e) { console.log(e) }
 
 		window.localStream = stream
 		this.localVideoref.current.srcObject = stream
@@ -150,7 +150,7 @@ class Video extends Component {
 				try {
 					let tracks = this.localVideoref.current.srcObject.getTracks()
 					tracks.forEach(track => track.stop())
-				} catch(e) { console.log(e) }
+				} catch (e) { console.log(e) }
 
 				let blackSilence = (...args) => new MediaStream([this.black(...args), this.silence()])
 				window.localStream = blackSilence()
@@ -172,83 +172,84 @@ class Video extends Component {
 	}
 
 
-	 fullScreenHandler=()=>{
-let vid = document.querySelector('video');
-    console.log('click')
-     if (screenfull.isEnabled){
-       screenfull.toggle(vid)
-     }
-   
-}
+	fullScreenHandler = () => {
+		let vid = document.querySelector('video');
+		console.log('click')
+		if (screenfull.isEnabled) {
+			screenfull.toggle(vid)
+		}
+
+	}
 
 	getDislayMedia = () => {
 		if (this.state.screen) {
 			if (navigator.mediaDevices.getDisplayMedia) {
 				navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
 					.then(this.getDislayMediaSuccess)
-					.then((stream) => {})
+					.then((stream) => { })
 					.catch((e) => console.log(e))
 			}
 		}
 	}
 
-              
-	 recordHandler = ()=>{
-               
-		this.setState({ recordings : !this.state.recordings })
-	 console.log(this.state.recordings)
-	 
 
-	     let parts = [];
-    let mediaRecord;
-    navigator.mediaDevices.getUserMedia({
-    "video": {width : {max : 320} } ,"audio" : true })
-    
-    .then((stream)=>{
+	recordHandler = () => {
 
-	 
-      document.getElementById("my-video").srcObject = stream;
+		this.setState({ recordings: !this.state.recordings })
+		console.log(this.state.recordings)
 
-      
- 
 
-         mediaRecord =  new MediaRecorder(stream);
-     if (this.state.recordings){
-       
-     mediaRecord.start(1000);
-     this.setState({ mediaState : mediaRecord})
-     console.log(mediaRecord);
-     mediaRecord.ondataavailable =(e)=>{
-       parts.push(e.data);
-     }
+		let parts = [];
+		let mediaRecord;
+		navigator.mediaDevices.getUserMedia({
+			"video": { width: { max: 320 } }, "audio": true
+		})
 
-    }
+			.then((stream) => {
 
-        if (!this.state.recordings){
-      this.state.mediaState.stop();
-      const blob  = new Blob(parts, {
-        type:"video/webm"
-      })
-      const url = URL.createObjectURL(blob);
-      console.log(url);
-      const a = document.createElement("a");
-      document.body.appendChild(a);
-      a.style = "display: none";
-      a.href = url;
-      a.download = "test.webm";
-      a.click();
-    }
 
-})
-      
-	 }
-	
+				document.getElementById("my-video").srcObject = stream;
+
+
+
+
+				mediaRecord = new MediaRecorder(stream);
+				if (this.state.recordings) {
+
+					mediaRecord.start(1000);
+					this.setState({ mediaState: mediaRecord })
+					console.log(mediaRecord);
+					mediaRecord.ondataavailable = (e) => {
+						parts.push(e.data);
+					}
+
+				}
+
+				if (!this.state.recordings) {
+					this.state.mediaState.stop();
+					const blob = new Blob(parts, {
+						type: "video/webm"
+					})
+					const url = URL.createObjectURL(blob);
+					console.log(url);
+					const a = document.createElement("a");
+					document.body.appendChild(a);
+					a.style = "display: none";
+					a.href = url;
+					a.download = "test.webm";
+					a.click();
+				}
+
+			})
+
+	}
+
 
 
 	getDislayMediaSuccess = (stream) => {
 		try {
 			window.localStream.getTracks().forEach(track => track.stop())
-		} catch(e) { console.log(e) }
+		} catch (e) { console.log(e) }
 
 		window.localStream = stream
 		this.localVideoref.current.srcObject = stream
@@ -274,7 +275,7 @@ let vid = document.querySelector('video');
 				try {
 					let tracks = this.localVideoref.current.srcObject.getTracks()
 					tracks.forEach(track => track.stop())
-				} catch(e) { console.log(e) }
+				} catch (e) { console.log(e) }
 
 				let blackSilence = (...args) => new MediaStream([this.black(...args), this.silence()])
 				window.localStream = blackSilence()
@@ -317,7 +318,7 @@ let vid = document.querySelector('video');
 
 		let height = String(100 / elms) + "%"
 		let width = ""
-		if(elms === 0 || elms === 1) {
+		if (elms === 0 || elms === 1) {
 			width = "100%"
 			height = "100%"
 		} else if (elms === 2) {
@@ -338,7 +339,7 @@ let vid = document.querySelector('video');
 			videos[a].style.setProperty("height", height)
 		}
 
-		return {minWidth, minHeight, width, height}
+		return { minWidth, minHeight, width, height }
 	}
 
 	connectToSocketServer = () => {
@@ -386,9 +387,11 @@ let vid = document.querySelector('video');
 
 							let video = document.createElement('video')
 
-							let css = {minWidth: cssMesure.minWidth, minHeight: cssMesure.minHeight, maxHeight: "100%", margin: "10px",
-								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill"}
-							for(let i in css) video.style[i] = css[i]
+							let css = {
+								minWidth: cssMesure.minWidth, minHeight: cssMesure.minHeight, maxHeight: "100%", margin: "10px",
+								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill"
+							}
+							for (let i in css) video.style[i] = css[i]
 
 							video.style.setProperty("width", cssMesure.width)
 							video.style.setProperty("height", cssMesure.height)
@@ -414,11 +417,11 @@ let vid = document.querySelector('video');
 				if (id === socketId) {
 					for (let id2 in connections) {
 						if (id2 === socketId) continue
-						
+
 						try {
 							connections[id2].addStream(window.localStream)
-						} catch(e) {}
-			
+						} catch (e) { }
+
 						connections[id2].createOffer().then((description) => {
 							connections[id2].setLocalDescription(description)
 								.then(() => {
@@ -455,7 +458,7 @@ let vid = document.querySelector('video');
 		try {
 			let tracks = this.localVideoref.current.srcObject.getTracks()
 			tracks.forEach(track => track.stop())
-		} catch (e) {}
+		} catch (e) { }
 		window.location.href = "/"
 	}
 
@@ -515,10 +518,12 @@ let vid = document.querySelector('video');
 	}
 
 	render() {
-		if(this.isChrome() === false){
+		if (this.isChrome() === false) {
 			return (
-				<div style={{background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
-						textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"}}>
+				<div style={{
+					background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
+					textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"
+				}}>
 					<h1>Sorry, this works only with Google Chrome</h1>
 				</div>
 			)
@@ -527,8 +532,10 @@ let vid = document.querySelector('video');
 			<div>
 				{this.state.askForUsername === true ?
 					<div>
-						<div style={{background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
-								textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"}}>
+						<div style={{
+							background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
+							textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"
+						}}>
 							<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Set your username</p>
 							<Input placeholder="Username" value={this.state.username} onChange={e => this.handleUsername(e)} />
 							<Button variant="contained" color="primary" onClick={this.connect} style={{ margin: "20px" }}>Connect</Button>
@@ -536,7 +543,8 @@ let vid = document.querySelector('video');
 
 						<div style={{ justifyContent: "center", textAlign: "center", paddingTop: "40px" }}>
 							<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
-								borderStyle: "solid",borderColor: "#bdbdbd",objectFit: "fill",width: "60%",height: "30%"}}></video>
+								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", width: "60%", height: "30%"
+							}}></video>
 						</div>
 					</div>
 					:
@@ -565,15 +573,15 @@ let vid = document.querySelector('video');
 									<ChatIcon />
 								</IconButton>
 							</Badge>
-							
+
 							<IconButton style={{ color: "#424242" }} onClick={this.recordHandler} >
-								<FaRecordVinyl/>
+								<FaRecordVinyl />
 							</IconButton>
 
-	<IconButton style={{ color: "#424242" }} onClick={this.recordHandler} >
-							<BiFullscreen onClick={this.fullScreenHandler}/>						</IconButton>
+							<IconButton style={{ color: "#424242" }} onClick={this.recordHandler} >
+								<BiFullscreen onClick={this.fullScreenHandler} />						</IconButton>
 
-							
+
 						</div>
 
 						<Modal show={this.state.showModal} onHide={this.closeChat} style={{ zIndex: "999999" }}>
@@ -582,7 +590,7 @@ let vid = document.querySelector('video');
 							</Modal.Header>
 							<Modal.Body style={{ overflow: "auto", overflowY: "auto", height: "400px", textAlign: "left" }} >
 								{this.state.messages.length > 0 ? this.state.messages.map((item, index) => (
-									<div key={index} style={{textAlign: "left"}}>
+									<div key={index} style={{ textAlign: "left" }}>
 										<p style={{ wordBreak: "break-all" }}><b>{item.sender}</b>: {item.data}</p>
 									</div>
 								)) : <p>No message yet</p>}
@@ -596,15 +604,17 @@ let vid = document.querySelector('video');
 						<div className="container">
 							<div style={{ paddingTop: "20px" }}>
 								<Input value={window.location.href} disable="true"></Input>
-								<Button style={{backgroundColor: "#3f51b5",color: "whitesmoke",marginLeft: "20px",
-									marginTop: "10px",width: "120px",fontSize: "10px"
+								<Button style={{
+									backgroundColor: "#3f51b5", color: "whitesmoke", marginLeft: "20px",
+									marginTop: "10px", width: "120px", fontSize: "10px"
 								}} onClick={this.copyUrl}>Copy invite link</Button>
 							</div>
 
 							<Row id="main" className="flex-container" style={{ margin: 0, padding: 0 }}>
 								<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{
-									borderStyle: "solid",borderColor: "#bdbdbd",margin: "10px",objectFit: "fill",
-									width: "100%",height: "100%"}}></video>
+									borderStyle: "solid", borderColor: "#bdbdbd", margin: "10px", objectFit: "fill",
+									width: "100%", height: "100%"
+								}}></video>
 							</Row>
 						</div>
 					</div>
