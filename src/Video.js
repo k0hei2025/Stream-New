@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 import faker from "faker"
+import screenfull from 'screenfull'
 
 import {IconButton, Badge, Input, Button} from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam'
@@ -11,6 +12,8 @@ import ScreenShareIcon from '@material-ui/icons/ScreenShare'
 import StopScreenShareIcon from '@material-ui/icons/StopScreenShare'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import ChatIcon from '@material-ui/icons/Chat'
+import {FaRecordVinyl} from 'react-icons/fa'
+import {BiFullscreen} from  'react-icons/bi'
 
 import { message } from 'antd'
 import 'antd/dist/antd.css'
@@ -53,6 +56,12 @@ class Video extends Component {
 			newmessages: 0,
 			askForUsername: true,
 			username: faker.internet.userName(),
+			recordings: false,
+			mediaState : "",
+			 theStream : null,
+                                             theRecorder : null,
+                                          recordedChunks : []
+
 		}
 		connections = {}
 
@@ -162,6 +171,16 @@ class Video extends Component {
 		})
 	}
 
+
+	 fullScreenHandler=()=>{
+let vid = document.querySelector('video');
+    console.log('click')
+     if (screenfull.isEnabled){
+       screenfull.toggle(vid)
+     }
+   
+}
+
 	getDislayMedia = () => {
 		if (this.state.screen) {
 			if (navigator.mediaDevices.getDisplayMedia) {
@@ -172,6 +191,59 @@ class Video extends Component {
 			}
 		}
 	}
+
+              
+	 recordHandler = ()=>{
+               
+		this.setState({ recordings : !this.state.recordings })
+	 console.log(this.state.recordings)
+	 
+
+	     let parts = [];
+    let mediaRecord;
+    navigator.mediaDevices.getUserMedia({
+    "video": {width : {max : 320} } ,"audio" : true })
+    
+    .then((stream)=>{
+
+	 
+      document.getElementById("my-video").srcObject = stream;
+
+      
+ 
+
+         mediaRecord =  new MediaRecorder(stream);
+     if (this.state.recordings){
+       
+     mediaRecord.start(1000);
+     this.setState({ mediaState : mediaRecord})
+     console.log(mediaRecord);
+     mediaRecord.ondataavailable =(e)=>{
+       parts.push(e.data);
+     }
+
+    }
+
+        if (!this.state.recordings){
+      this.state.mediaState.stop();
+      const blob  = new Blob(parts, {
+        type:"video/webm"
+      })
+      const url = URL.createObjectURL(blob);
+      console.log(url);
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = url;
+      a.download = "test.webm";
+      a.click();
+    }
+
+})
+      
+	 }
+	
+
 
 	getDislayMediaSuccess = (stream) => {
 		try {
@@ -493,6 +565,15 @@ class Video extends Component {
 									<ChatIcon />
 								</IconButton>
 							</Badge>
+							
+							<IconButton style={{ color: "#424242" }} onClick={this.recordHandler} >
+								<FaRecordVinyl/>
+							</IconButton>
+
+	<IconButton style={{ color: "#424242" }} onClick={this.recordHandler} >
+							<BiFullscreen onClick={this.fullScreenHandler}/>						</IconButton>
+
+							
 						</div>
 
 						<Modal show={this.state.showModal} onHide={this.closeChat} style={{ zIndex: "999999" }}>
@@ -521,7 +602,7 @@ class Video extends Component {
 							</div>
 
 							<Row id="main" className="flex-container" style={{ margin: 0, padding: 0 }}>
-								<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
+								<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{
 									borderStyle: "solid",borderColor: "#bdbdbd",margin: "10px",objectFit: "fill",
 									width: "100%",height: "100%"}}></video>
 							</Row>
