@@ -2,16 +2,14 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {IoVideocam} from 'react-icons/io5'
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Button }  from './Button';
+import { Button } from './Button';
 import "./Navbar.css";
-import Auth from './Auth';
-import Signup from '../Authentication/signup';
 
 function Navbar()
 {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-    const [openPopup, setOpenPopup] = useState(false);
+    const [show, setShow] = useState(true);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -30,7 +28,7 @@ function Navbar()
 
     return (
         <>
-            <div className="navbarr" >
+            <div className="navbarr" show={show}>
                 <div className="navbar-container containerr">
                     <Link to="/" className="navbar-logo" onClick={closeMobileMenu} >
                         <IoVideocam className="navbar-icon" />
@@ -41,22 +39,22 @@ function Navbar()
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className="nav-item">
-                            <div  className='nav-links' style={{textDecoration:"none"}} onClick={()=>{closeMobileMenu(); setOpenPopup(true)}}>
+                            <Link to="/auth" className='nav-links' onClick={closeMobileMenu}>
                                 SIGN IN
-                            </div> 
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <div className='nav-links' style={{textDecoration:"none"}} onClick={()=>{closeMobileMenu(); setOpenPopup(true)}}>
+                            <Link to="/auth" className='nav-links' onClick={closeMobileMenu}>
                                 SIGN UP
-                            </div>
+                            </Link>
                         </li>
                         <li className="nav-btn">
                             {button ? (
-                            <Link to="/join" style={{textDecoration:"none"}} className='btn-link' >
+                            <Link to="/newcall" className='btn-link' >
                                 <Button buttonStyle='btn--outline' buttonColor='blue'>JOIN</Button>
                             </Link>
                             ) : (
-                                <Link to="/join"  className='btn-link' onClick={closeMobileMenu}>
+                                <Link to="/newcall"  className='btn-link' onClick={closeMobileMenu}>
                                 <Button buttonStyle='btn--outline' buttonSize='btn--mobile'>JOIN</Button>
                             </Link>
                             )}
@@ -64,11 +62,6 @@ function Navbar()
                     </ul>
                 </div>
             </div>
-            <Auth
-          openPopup = {openPopup}
-                setOpenPopup={setOpenPopup}>
-                <Signup />
-        </Auth>
             
         </>
     )

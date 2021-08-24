@@ -15,7 +15,7 @@ export default function Popup(props)
                 <CloseIcon fontSize="large" />
                 </Button>
 
-            </DialogTitle> 
+            </DialogTitle>
             <DialogContent>
                 {children}
             </DialogContent>

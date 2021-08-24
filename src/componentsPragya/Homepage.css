@@ -2,8 +2,12 @@
 
 .home_section {
   color: #fff;
-  padding: 160px 0px 0px 80px;
+  padding: 160px 0;
   background-color: #f8f6f6;
+  min-width: 100%;
+}
+
+.containerr {
   min-width: 100%;
 }
 .imgpos {
@@ -42,7 +46,7 @@
   font-weight: 400;
   font-style: normal;
   font-family: "Abril Fatface", serif;
-  color: #004362;
+  color: #0548ff;
 }
 .headingy {
   margin-bottom: 24px;
@@ -51,16 +55,16 @@
   font-weight: 400;
   font-style: normal;
   font-family: "Abril Fatface", serif;
-  color: #004362;
+  color: #0548ff;
 }
 
 .diffBg {
   color: #fff;
-  background-color: #004362;
+  background-color: #0548ff;
   align-items: center;
   text-align: center;
-  margin: -100px 0px 0px 0px;
   margin-top: -100px;
+  padding: 0;
   min-width: 100%;
 }
 
@@ -127,10 +131,10 @@ figcaption {
   }
   .diffBg {
     color: #fff;
-    background-color: #004362;
+    background-color: #0548ff;
     align-items: center;
     text-align: center;
-    margin-top: -100px;
+    margin-top: 30px;
     padding: 0;
     min-width: 100%;
   }
@@ -140,20 +144,7 @@ figcaption {
   .home__hero-text-wrapper {
     padding-bottom: 65px;
   }
-  .h-wrapper {
-    max-width: 100%;
-    padding-top: 0;
-    padding-bottom: 60px;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-  }
-  .home_section {
-    color: #fff;
-    padding: 160px 10px;
-    background-color: #f8f6f6;
-    min-width: 100%;
-  }
+
   .col {
     max-width: 100%;
     flex-basis: 100%;

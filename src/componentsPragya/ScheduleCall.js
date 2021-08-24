@@ -25,10 +25,7 @@ function ScheduleCall() {
   const classes = useStyles();
   const [callScheduledCalls, setCallScheduledCalls] = useState(false);
 
-  const copier = () =>
-  {
-    
-  }
+
 
   const submitHandler = async (event) => {
 
@@ -78,16 +75,15 @@ function ScheduleCall() {
 
 
         <div className="csh">
-          <Button variant="contained" onClick={copier}>Copy</Button>
+          <Button variant="contained">Copy</Button>
           <Button variant="contained" onClick={submitHandler}>Schedule</Button>
           <Button variant="contained">Share</Button>
         </div>
       </form>
-      {/* <ScheduledCalls
+      <ScheduledCalls
         callScheduledCalls={callScheduledCalls}
         setCallScheduledCalls={setCallScheduledCalls}>
-        
-      </ScheduledCalls> */}
+      </ScheduledCalls>
     </div>
   );
 }

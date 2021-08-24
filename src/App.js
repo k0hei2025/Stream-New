@@ -36,10 +36,11 @@ function App() {
 
 
 
-      
+      {err ? <Navbar /> : console.error(err)}
 
       <Route path="/" component={Homes} exact={true} strict></Route>
       <Route path="/newcall" component={Newcall} exact={true} strict></Route>
+      <Route path="/auth" component={Authentication} exact={true} strict></Route>
 
       <Route path="/join" exact={true} component={Home} ></Route>
 
