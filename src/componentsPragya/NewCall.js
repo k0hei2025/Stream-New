@@ -54,7 +54,8 @@ const [openPopup, setOpenPopup] = useState(false);
                     <h1 className="colon">:</h1>
                     <div className="hr-min"><hr class="line" />{time[2]}</div>
                     <div className="hr-min"><hr class="line" />{time[3]}</div>
-                    </div>
+                </div>
+                
                 <div className="sec_am-pm">
                     <div className="sec">{time[4]}</div>
                     <div className="sec">{time[5]}</div>
@@ -93,13 +94,13 @@ const [openPopup, setOpenPopup] = useState(false);
             </div>
             <Popup
           openPopup = {openPopup}
-          setOpenPopup={setOpenPopup}>
+          setOpenPopup={setOpenPopup}> 
 
           <ScheduleCall />
         </Popup>
             <div className="call-list">
                     <h1 id="sc-head">Up-coming Meetings</h1>
-                    <ScheduledCalls />
+                    {/* <ScheduledCalls /> */}
                   
                 </div>
         </div>

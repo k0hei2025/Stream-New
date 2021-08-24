@@ -78,7 +78,7 @@ function ScheduledCalls(props) {
 
 
 
-    return (
+    /* return (
 
         packet.map((i) => {
             <div id={i.id}>
@@ -89,7 +89,7 @@ function ScheduledCalls(props) {
         })
 
     )
-
+ */
 
 
 

@@ -116,6 +116,8 @@ body {
   width: 98%;
   height: 100px;
   padding-top: 15px;
+  padding-left: 50px;
+  text-align: center;
   justify-content: center;
   align-items: center;
   align-content: center;

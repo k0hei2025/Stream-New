@@ -1,7 +1,7 @@
 import React, { Component} from 'react'
 import io from 'socket.io-client'
 import faker from "faker"
-import screenfull from 'screenfull'
+/* import screenfull from 'screenfull' */
 
 import { IconButton, Badge, Input, Button } from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam'
@@ -182,14 +182,14 @@ class Video extends Component {
 	}
 
 
-	fullScreenHandler = () => {
+	/* fullScreenHandler = () => {
 		let vid = document.querySelector('video');
 		console.log('click')
 		if (screenfull.isEnabled) {
 			screenfull.toggle(vid)
 		}
 
-	}
+	} */
 
 	getDislayMedia = () => {
 		if (this.state.screen) {

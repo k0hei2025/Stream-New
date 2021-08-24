@@ -25,7 +25,10 @@ function ScheduleCall() {
   const classes = useStyles();
   const [callScheduledCalls, setCallScheduledCalls] = useState(false);
 
-
+  const copier = () =>
+  {
+    
+  }
 
   const submitHandler = async (event) => {
 
@@ -38,7 +41,7 @@ function ScheduleCall() {
     const packet = {
       date: dateRef,
       time: timeRef,
-      description: descriptionRef,
+      description: descriptionRef, 
     }
 
     const datas = await fetch(`https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json`, {
@@ -74,15 +77,16 @@ function ScheduleCall() {
 
 
         <div className="csh">
-          <Button variant="contained">Copy</Button>
+          <Button variant="contained" onClick={copier}>Copy</Button>
           <Button variant="contained" onClick={submitHandler}>Schedule</Button>
           <Button variant="contained">Share</Button>
         </div>
       </form>
-      <ScheduledCalls
+      {/* <ScheduledCalls
         callScheduledCalls={callScheduledCalls}
         setCallScheduledCalls={setCallScheduledCalls}>
-      </ScheduledCalls>
+        
+      </ScheduledCalls> */}
     </div>
   );
 }

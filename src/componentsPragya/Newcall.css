@@ -20,7 +20,6 @@
   position: absolute;
   width: 100%;
   background-color: #f8f6f6;
-  outline-style: none;
   border-top: #f8f6f6;
   top: 50%;
 }
@@ -47,6 +46,7 @@
   flex-wrap: wrap;
   width: 20%;
   text-align: center;
+  align-items: center;
   justify-content: center;
   margin: 5px;
 }
@@ -55,6 +55,8 @@
   display: flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
+  text-align: center;
   flex-wrap: nowrap;
   flex-grow: 1;
   background-color: rgb(59, 57, 57);
@@ -66,7 +68,7 @@
 .sec {
   flex: 1 1 50px;
   width: 50%;
-  padding: 5px;
+  padding: 1px;
   text-align: center;
   justify-content: center;
   align-content: center;
@@ -80,7 +82,7 @@
 }
 
 .diff {
-  background-color: #0548ff;
+  background-color: #004362;
   position: relative;
   top: 300px;
   height: 100vh;
@@ -102,7 +104,7 @@
 }
 .callLinks {
   text-decoration: none;
-  color: #0548ff;
+  color: #004362;
   float: left;
   display: flex;
   flex-grow: 1;
@@ -122,7 +124,7 @@
   align-content: center;
 }
 .call-icons {
-  color: #0548ff;
+  color: #004362;
   font-size: 90px;
   padding: 10px;
 }
@@ -134,9 +136,8 @@
 }
 
 #sch {
-  margin-left: -100px;
   text-decoration: none;
-  background-color: #0548ff;
+  background-color: #004362;
   box-shadow: none;
   border: none;
   cursor: pointer;
