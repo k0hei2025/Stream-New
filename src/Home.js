@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Input, Button, IconButton } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import "./Home.css"
+import "./Home.css";
+import Navbar from './componentsPragya/Navbar';
 import { v4 as uuidV4 } from 'uuid';
 import { useHistory } from "react-router-dom"
 
@@ -27,6 +28,8 @@ export const Home = () => {
 
 
 	return (
+		<>
+			<Navbar />
 		<div className="container2">
 
 
@@ -43,7 +46,8 @@ export const Home = () => {
 				<Input placeholder="URL" />
 				<Button variant="contained" color="primary" onClick={() => join()} style={{ margin: "20px" }}>Go</Button>
 			</div>
-		</div>
+			</div>
+			</>
 	)
 
 

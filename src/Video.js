@@ -24,6 +24,8 @@ import { FiLink2 } from 'react-icons/fi';
 import { FaRecordVinyl } from 'react-icons/fa'
 import { BiFullscreen } from 'react-icons/bi'
 import { FaChalkboard } from 'react-icons/fa'
+import { CgMoreVertical } from 'react-icons/cg';
+
 
 import WhiteBoard from './screens/whiteboard/Board'
 
@@ -75,6 +77,7 @@ class Video extends Component {
 			theRecorder: null,
 			recordedChunks: [],
 			whiteBoard: false,
+			btnlist:false,
 
 		}
 		connections = {}
@@ -540,6 +543,7 @@ class Video extends Component {
 	}
 
 	showButton = () => this.setState({ button: !this.state.button, newmessages: 0 });
+	more = () => this.setState({ btnlist: !this.state.btnlist });
 
 
 
@@ -630,25 +634,27 @@ class Video extends Component {
 												</button>
 											</Badge>
 
-											<button className="call-btn" onClick={this.recordHandler} >
-												<FaRecordVinyl style={{ fontSize: '35px', fill: "#004362" }} />
-											</button>
-
-											<button className="call-btn" onClick={this.fullScreenHandler}  >
-												<BiFullscreen style={{ fontSize: '35px', fill: "#004362" }} />
-											</button>
-
-											<button className="call-btn" onClick={this.getWhiteBoard}>
-												<FaChalkboard style={{ fontSize: '35px', fill: "#004362" }} />
-											</button>
-
 											<button className="call-btn" onClick={this.handleEndCall}>
 												<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
 											</button>
 
+											<button className="call-btn" onClick={this.more} >
+												<CgMoreVertical style={{ fontSize: '35px', fill: "#004362" }} />
+											</button>
+											<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
 
+											<button onClick={this.fullScreenHandler}  >Full Screen
+												<BiFullscreen style={{ fontSize: '15px', fill: "#004362", float:"right" }} />
+											</button>
 
+											<button onClick={this.recordHandler} >Record
+												<FaRecordVinyl style={{ fontSize: '15px', fill: "#004362", float:"right" }} />
+											</button>
 
+											<button onClick={this.getWhiteBoard}>Whiteboard
+												<FaChalkboard style={{ fontSize: '15px', fill: "#004362", float:"right" }} />
+											</button>
+											</div>
 										</div>
 									</div>
 								</div>

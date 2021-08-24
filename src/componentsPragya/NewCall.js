@@ -4,6 +4,7 @@ import { RiVideoAddFill } from 'react-icons/ri';
 import { BiCalendarEvent } from 'react-icons/bi';
 import { MdScreenShare } from 'react-icons/md';
 import ScheduledCalls from './ScheduledCalls';
+import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import './Newcall.css';
 import Popup from './Popup';
@@ -46,6 +47,8 @@ function DisplayCurrentTime()
 const [openPopup, setOpenPopup] = useState(false);
 
     return (
+        <>
+            <Navbar />
         <div className="new-call">
             <div className="samay">
                 <div className="time" >
@@ -104,6 +107,8 @@ const [openPopup, setOpenPopup] = useState(false);
                   
                 </div>
         </div>
+        </>
+
     )
 }
 

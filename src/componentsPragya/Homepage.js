@@ -1,9 +1,11 @@
 import React from 'react';
 import './Homepage.css';
+import Navbar from './Navbar';
 
 function Homepage({lightBg, headline, desc1, desc2, desc3, img, alt, imgStart,heading,img1,cap1,img2,cap2,img3,cap3,img4,cap4,img5,cap5,img6,cap6}) {
     return (
         <>
+             <Navbar /> 
             <div className='home_section'>
                     <div className="row imgpos" style={{ display: 'flex', flexDirection: imgStart === 'start' ? 'row-reverse' : 'row' }}>
                         <div className="col">
