@@ -156,6 +156,7 @@ const Board = (props) => {
 
   const closeHandler = () => {
     if (props.close === true) {
+      props.close = false;
       console.log(props.close)
     }
   }
@@ -329,7 +330,7 @@ const Board = (props) => {
   };
 
   return (
-    <div className={props.close? "wboard": ""}>
+    <div className={props.close? "": "wboard"}>
       <div style={{ position: "fixed" }}>
         <input
           type="radio"
