@@ -16,6 +16,16 @@ import { Home } from './Home'
 function App() {
 
 
+  const [err, setErrRoute] = useState(false);
+
+  useEffect(() => {
+    console.log(window.location.href, 'window . get . location');
+
+    if (window.location.href === 'http://localhost:8000/join')
+      console.log(window.location.href, 'working fsdfsdfsdfsd');
+    setErrRoute(true);
+
+  }, [])
 
 
 
@@ -26,7 +36,7 @@ function App() {
 
 
 
-      <Navbar />
+      {err ? <Navbar /> : console.error(err)}
 
       <Route path="/" component={Homes} exact={true} strict></Route>
       <Route path="/newcall" component={Newcall} exact={true} strict></Route>

@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import io from 'socket.io-client'
 import faker from "faker"
 /* import screenfull from 'screenfull' */
@@ -15,7 +15,7 @@ import ChatIcon from '@material-ui/icons/Chat'
 
 import { IoVideocam } from 'react-icons/io5';
 import { MdDelete } from 'react-icons/md';
-import { FiCopy} from 'react-icons/fi';
+import { FiCopy } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { MdSave } from 'react-icons/md';
 import { MdSend } from 'react-icons/md';
@@ -23,6 +23,9 @@ import { IoClose } from 'react-icons/io5';
 import { FiLink2 } from 'react-icons/fi';
 import { FaRecordVinyl } from 'react-icons/fa'
 import { BiFullscreen } from 'react-icons/bi'
+import { FaChalkboard } from 'react-icons/fa'
+
+import WhiteBoard from './screens/whiteboard/Board'
 
 import { message } from 'antd'
 import 'antd/dist/antd.css'
@@ -70,7 +73,8 @@ class Video extends Component {
 			mediaState: "",
 			theStream: null,
 			theRecorder: null,
-			recordedChunks: []
+			recordedChunks: [],
+			whiteBoard: false,
 
 		}
 		connections = {}
@@ -115,6 +119,14 @@ class Video extends Component {
 			this.connectToSocketServer()
 		})
 	}
+
+	getWhiteBoard = () => {
+		this.setState({ whiteBoard: !this.state.whiteBoard })
+		console.log(this.state.whiteBoard);
+
+
+	}
+
 
 	getUserMedia = () => {
 		if ((this.state.video && this.videoAvailable) || (this.state.audio && this.audioAvailable)) {
@@ -527,14 +539,22 @@ class Video extends Component {
 		return matchChrome !== null
 	}
 
-	showButton = () => this.setState({ button: !this.state.button,newmessages: 0  });
+	showButton = () => this.setState({ button: !this.state.button, newmessages: 0 });
 
 
-	
-	render()
-	{
+
+	render() {
+
+		if (this.state.whiteBoard) {
+			return (
+				<WhiteBoard close={this.state.whiteBoard} />
+			)
+		}
+
+
 		if (this.isChrome() === false) {
 			return (
+
 				<div style={{
 					background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
 					textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"
@@ -544,108 +564,122 @@ class Video extends Component {
 			)
 		}
 		return (
-			<div>
-				{this.state.askForUsername === true ?
-					<div>
-						<div style={{
-							background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
-							textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"
-						}}>
-							<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Set your username</p>
-							<Input placeholder="Username" value={this.state.username} onChange={e => this.handleUsername(e)} />
-							<Button variant="contained" color="primary" onClick={this.connect} style={{ margin: "20px" }}>Connect</Button>
-						</div>
 
-						<div style={{ justifyContent: "center", textAlign: "center", paddingTop: "40px" }}>
-							<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
-								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", width: "60%", height: "30%"
-							}}></video>
-						</div>
-					</div>
-					:
-					<div className='dashboard_container background_main_color'>
-						<div className={this.state.button === true ? 'dashboard_left_section flexy' : 'dashboard_left_section flexya'}>
-							<div className="meet-name">
-          						<Link to="/" className=" stream-logo"><IoVideocam className="navbar-icon" />STREAM</Link>
-								<div className="meet-desc" >
-									<Input value={window.location.href} disable="true" style={{ display: "block", marginRight: "auto", marginLeft: "auto", marginTop: "20px", border: "none", textAlign: "center", textDecoration: "none", fontSize: "25px", justifyContent: "center", alignContent: "center", alignItems: "center", width: "70%" }}></Input>
-									
-									<div className="copy-share" style={{ height: "100%" }}>
-										<button className="copy-share-button" onClick={this.copyUrl}><FiCopy /></button>
-									</div>
-								</div>							
+
+
+
+			<div div >
+				{
+					this.state.askForUsername === true ?
+						<div>
+							<div style={{
+								background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
+								textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"
+							}}>
+								<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Set your username</p>
+								<Input placeholder="Username" value={this.state.username} onChange={e => this.handleUsername(e)} />
+								<Button variant="contained" color="primary" onClick={this.connect} style={{ margin: "20px" }}>Connect</Button>
 							</div>
-							<div className="video">
-								<div className='dashboard_content_container'>
-									<Row id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px" }}>
-										<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{
-									borderStyle: "solid",borderColor: "#bdbdbd",borderRadius:"20px",objectFit: "fill",
-									width: "100%",height: "510px"}}></video>
-									</Row>
 
-									<div className="btn-down" >
-										<button className="call-btn" onClick={this.handleVideo}>
-											{(this.state.video === true) ? <VideocamIcon style={{fontSize:'35px', fill: "#004362" }}/> : <VideocamOffIcon style={{fontSize:'35px', fill: "#004362" }}/>}
-										</button>
+							<div style={{ justifyContent: "center", textAlign: "center", paddingTop: "40px" }}>
+								<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
+									borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", width: "60%", height: "30%"
+								}}></video>
+							</div>
+						</div>
+						:
+						<div className='dashboard_container background_main_color'>
+							<div className={this.state.button === true ? 'dashboard_left_section flexy' : 'dashboard_left_section flexya'}>
+								<div className="meet-name">
+									<Link to="/" className=" stream-logo"><IoVideocam className="navbar-icon" />STREAM</Link>
+									<div className="meet-desc" >
+										<Input value={window.location.href} disable="true" style={{ display: "block", marginRight: "auto", marginLeft: "auto", marginTop: "20px", border: "none", textAlign: "center", textDecoration: "none", fontSize: "25px", justifyContent: "center", alignContent: "center", alignItems: "center", width: "70%" }}></Input>
 
-										<button className="call-btn" onClick={this.handleAudio}>
-											{this.state.audio === true ? <MicIcon style={{fontSize:'35px', fill: "#004362" }} /> : <MicOffIcon style={{fontSize:'35px', fill: "#004362" }} />}
-										</button>
+										<div className="copy-share" style={{ height: "100%" }}>
+											<button className="copy-share-button" onClick={this.copyUrl}><FiCopy /></button>
+										</div>
+									</div>
+								</div>
+								<div className="video">
+									<div className='dashboard_content_container'>
+										<Row id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px" }}>
+											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{
+												borderStyle: "solid", borderColor: "#bdbdbd", borderRadius: "20px", objectFit: "fill",
+												width: "100%", height: "510px"
+											}}></video>
+										</Row>
 
-										{this.state.screenAvailable === true ?
-										<button className="call-btn" onClick={this.handleScreen}>
-												{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <StopScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} />}
-										</button>
-										: null}
-
-										<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
-											<button className="call-btn" style={{marginBottom:"20px"}} onClick={this.openChat}>
-												<ChatIcon style={{fontSize:'35px', fill: "#004362" }} />
+										<div className="btn-down" >
+											<button className="call-btn" onClick={this.handleVideo}>
+												{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
 											</button>
-										</Badge>
 
-										<button className="call-btn" onClick={this.recordHandler} >
-											<FaRecordVinyl style={{fontSize:'35px', fill: "#004362" }} />
-										</button>
+											<button className="call-btn" onClick={this.handleAudio}>
+												{this.state.audio === true ? <MicIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <MicOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
+											</button>
 
-										<button className="call-btn" onClick={this.fullScreenHandler}  >
-											<BiFullscreen style={{ fontSize: '35px', fill: "#004362" }} />
-										</button>
+											{this.state.screenAvailable === true ?
+												<button className="call-btn" onClick={this.handleScreen}>
+													{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <StopScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} />}
+												</button>
+												: null}
 
-										<button className="call-btn" onClick={this.handleEndCall}>
-											<CallEndIcon style={{fontSize:'35px', fill: "red" }}/>
-										</button>
+											<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
+												<button className="call-btn" style={{ marginBottom: "20px" }} onClick={this.openChat}>
+													<ChatIcon style={{ fontSize: '35px', fill: "#004362" }} />
+												</button>
+											</Badge>
 
-									</div>									
-								</div>
-							</div>
-						</div>
+											<button className="call-btn" onClick={this.recordHandler} >
+												<FaRecordVinyl style={{ fontSize: '35px', fill: "#004362" }} />
+											</button>
 
-						<div className={this.state.button===true ? 'no-chatter ' : 'chatter'}   >
-							<div id="chat-options">
-								Chat
-								<div className="c-icons">
-									<MdSave />
-         							<MdDelete />
-									<IoClose onClick={this.showButton}/>
-								</div>
-							</div>
-								
-							<div style={{ height: "510px", textAlign: "left" }} >
-								{this.state.messages.length > 0 ? this.state.messages.map((item, index) => (
-									<div key={index} style={{ textAlign: "left" }}>
-										<p style={{ wordBreak: "break-all" }}><b>{item.sender}</b>: {item.data}</p>
+											<button className="call-btn" onClick={this.fullScreenHandler}  >
+												<BiFullscreen style={{ fontSize: '35px', fill: "#004362" }} />
+											</button>
+
+											<button className="call-btn" onClick={this.getWhiteBoard}>
+												<FaChalkboard style={{ fontSize: '35px', fill: "#004362" }} />
+											</button>
+
+											<button className="call-btn" onClick={this.handleEndCall}>
+												<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
+											</button>
+
+
+
+
+										</div>
 									</div>
-								)) : <p>No message yet</p>}
+								</div>
 							</div>
 
-							<div className="chat-msg">
-								<div className="c-icons leftpos"><FiLink2 /> </div>
-								<Input placeholder="Message" value={this.state.message} onChange={e => this.handleMessage(e)} />
-								<div className="c-icons rightpos" onClick={this.sendMessage}><MdSend /></div>
+							<div className={this.state.button === true ? 'no-chatter ' : 'chatter'}   >
+								<div id="chat-options">
+									Chat
+									<div className="c-icons">
+										<MdSave />
+										<MdDelete />
+										<IoClose onClick={this.showButton} />
+									</div>
+								</div>
+
+								<div style={{ height: "510px", textAlign: "left" }} >
+									{this.state.messages.length > 0 ? this.state.messages.map((item, index) => (
+										<div key={index} style={{ textAlign: "left" }}>
+											<p style={{ wordBreak: "break-all" }}><b>{item.sender}</b>: {item.data}</p>
+										</div>
+									)) : <p>No message yet</p>}
+								</div>
+
+								<div className="chat-msg">
+									<div className="c-icons leftpos"><FiLink2 /> </div>
+									<Input placeholder="Message" value={this.state.message} onChange={e => this.handleMessage(e)} />
+									<div className="c-icons rightpos" onClick={this.sendMessage}><MdSend /></div>
+								</div>
 							</div>
 						</div>
-					</div>					
+
 				}
 			</div>
 		)
