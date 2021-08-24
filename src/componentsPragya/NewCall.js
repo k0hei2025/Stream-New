@@ -4,6 +4,7 @@ import { RiVideoAddFill } from 'react-icons/ri';
 import { BiCalendarEvent } from 'react-icons/bi';
 import { MdScreenShare } from 'react-icons/md';
 import ScheduledCalls from './ScheduledCalls';
+import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import './Newcall.css';
 import Popup from './Popup';
@@ -46,6 +47,8 @@ function DisplayCurrentTime()
 const [openPopup, setOpenPopup] = useState(false);
 
     return (
+        <>
+            <Navbar />
         <div className="new-call">
             <div className="samay">
                 <div className="time" >
@@ -54,7 +57,8 @@ const [openPopup, setOpenPopup] = useState(false);
                     <h1 className="colon">:</h1>
                     <div className="hr-min"><hr class="line" />{time[2]}</div>
                     <div className="hr-min"><hr class="line" />{time[3]}</div>
-                    </div>
+                </div>
+                
                 <div className="sec_am-pm">
                     <div className="sec">{time[4]}</div>
                     <div className="sec">{time[5]}</div>
@@ -93,16 +97,18 @@ const [openPopup, setOpenPopup] = useState(false);
             </div>
             <Popup
           openPopup = {openPopup}
-          setOpenPopup={setOpenPopup}>
+          setOpenPopup={setOpenPopup}> 
 
           <ScheduleCall />
         </Popup>
             <div className="call-list">
                     <h1 id="sc-head">Up-coming Meetings</h1>
-                    <ScheduledCalls />
+                    {/* <ScheduledCalls /> */}
                   
                 </div>
         </div>
+        </>
+
     )
 }
 

@@ -1,4 +1,5 @@
-import { Button } from '@material-ui/core'
+import {  TextField } from '@material-ui/core'
+import { Button } from '../componentsPragya/Button';
 
 import React, { useState, useRef, Fragment } from 'react'
 import { useHistory } from 'react-router';
@@ -108,18 +109,18 @@ export default function Signup() {
 
 
                return (
-                              <Fragment>
-                                             {signup ? <h1> Signup </h1> : <h1> Signin </h1>}
+                              <Fragment style={{textAlign:"center"}}>
+                                             {signup ? <h2> Sign Up </h2> : <h2> Sign In </h2>}
                                              {err ? <p> {errName} </p> : <p></p>}
                                              <form>
 
-                                                            <input type="email" placeholder="email" ref={emailRef} />
-                                                            <input type="password" placeholder="password" ref={passRef} />
-                                                            <input type="submit" name="submit" onClick={submitHandler} />
+                                                            <TextField type="email" placeholder="email" ref={emailRef} /><br />
+                                                            <TextField type="password" placeholder="password" ref={passRef} /><br />
+                                                            <TextField type="submit" name="submit" onClick={submitHandler} /><br /><br />
 
 
                                              </form>
-                                             <Button variant="contained" color="primary" onClick={changeHandler}>Submit</Button>
+                                             <Button  buttonStyle='btn--primary' buttonColor='blue' style={{display:"block", marginRight:"auto", marginLeft: "auto" }} onClick={changeHandler}>{signup ? "Sign In"  : "Sign Up" }</Button>
                               </Fragment>
 
                )

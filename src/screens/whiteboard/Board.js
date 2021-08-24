@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { AiOutlineCloseSquare } from 'react-icons/ai'
+import './board.css';
 
 const generator = rough.generator();
 
@@ -155,7 +156,6 @@ const Board = (props) => {
 
   const closeHandler = () => {
     if (props.close === true) {
-      props.close = false;
       console.log(props.close)
     }
   }
@@ -329,7 +329,7 @@ const Board = (props) => {
   };
 
   return (
-    <>
+    <div className={props.close? "wboard": ""}>
       <div style={{ position: "fixed" }}>
         <input
           type="radio"
@@ -381,7 +381,7 @@ const Board = (props) => {
       >
         Canvas
       </canvas>
-    </>
+    </div>
   );
 };
 

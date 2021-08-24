@@ -1,5 +1,5 @@
 :root {
-  --primary: #fff;
+  --primary: #004362;
 }
 
 .btn {
@@ -18,7 +18,7 @@
 }
 
 .btn--outline {
-  background-color: transparent;
+  background-color: #004362;
   color: #fff;
   padding: 8px 20px;
   border: 1px solid var(--primary);
@@ -41,7 +41,7 @@
   width: 80%;
   text-decoration: none;
   font-size: 24px;
-  background-color: transparent;
+  background-color: #004362;
   color: #fff;
   padding: 14px 20px;
   border: 1px solid #fff;
@@ -68,7 +68,7 @@
 }
 
 .blue {
-  background-color: #0548ff;
+  background-color: #004362;
   color: #fff;
   border: none;
 }
@@ -78,14 +78,14 @@
   border: none;
 }
 .primary {
-  background-color: #242424;
+  background-color: #004362;
   color: #fff;
   border: none;
 }
 
 .blue:hover {
   background-color: rgb(223, 222, 222);
-  color: rgb(59, 129, 235);
+  color: #004362;
   border: none;
   opacity: 1;
 }
