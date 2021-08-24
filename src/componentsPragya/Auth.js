@@ -10,8 +10,7 @@ export default function Popup(props)
     return (
         <Dialog open={openPopup}>
             <DialogTitle >
-                <div style={{ flex: "1" }}>Schedule a Meeting</div>
-                <Button onClick={() => { setOpenPopup(false) }}>
+                <Button onClick={() => { setOpenPopup(false) }} style={{float:"right", margin:"2px"}}>
                 <CloseIcon fontSize="large" />
                 </Button>
 

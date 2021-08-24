@@ -1,4 +1,5 @@
-import { Button } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
+import { Button } from '../componentsPragya/Button';
 
 import React, { useState, useRef, Fragment } from 'react'
 import { useHistory } from 'react-router';
@@ -10,7 +11,7 @@ export default function Signup() {
                const emailRef = useRef();
                const passRef = useRef();
                const [err, setErr] = useState(false);
-               const [errName, setErrName] = useState('');
+               const [dataSaveName, setDataName] = useState(false);
                const url = 'AIzaSyBEPyDFaklwGS8C3zUVG1I_8-6WtJk6rFM'
                let history = useHistory();
 
@@ -20,7 +21,7 @@ export default function Signup() {
 
                               if (signup) {
 
-                                             if (passRef.current.value.length > 8) {
+                                             if (passRef.current.value.length > 8 && emailRef.current.value !== '') {
                                                             let email = emailRef.current.value;
                                                             let pass = passRef.current.value;
 
@@ -42,9 +43,12 @@ export default function Signup() {
 
                                                             const resData = await data.json();
                                                             console.log(resData);
+                                                            setDataName(true)
 
-
+                                             } else {
+                                                            setErr(true)
                                              }
+
 
                               }
 
@@ -72,12 +76,19 @@ export default function Signup() {
                                                             }
                                              })
 
-                                             history.push('/newcall')
+
+
+                                             ///history.push('/newcall')
 
                                              const resData = await data.json();
                                              console.log(resData, 'authenticated');
 
+                                             if (resData.idToken) {
+                                                            console.log(resData)
+                                                            console.log(resData.localId)
 
+                                                            window.location.replace('/newcall')
+                                             }
 
 
                                              // resData.error.message
@@ -108,19 +119,20 @@ export default function Signup() {
 
 
                return (
-                              <Fragment>
-                                             {signup ? <h1> Signup </h1> : <h1> Signin </h1>}
-                                             {err ? <p> {errName} </p> : <p></p>}
+                              <div style={{ textAlign: "center" }}>
+                                             {signup ? <h2> Sign Up </h2> : <h2> Sign In </h2>}
+                                             {err ? <p style={{ color: "red" }}> <b>Invalid credientials</b> </p> : <p></p>}
+                                             {dataSaveName ? <b style={{ color: "green" }}> Data saved successfully </b> : <p></p>}
                                              <form>
 
-                                                            <input type="email" placeholder="email" ref={emailRef} />
-                                                            <input type="password" placeholder="password" ref={passRef} />
-                                                            <input type="submit" name="submit" onClick={submitHandler} />
+                                                            <input type="email" placeholder="email" ref={emailRef} /><br />
+                                                            <input type="password" placeholder="password" ref={passRef} /><br />
+                                                            <TextField type="submit" name="submit" onClick={submitHandler} /><br /><br />
 
 
                                              </form>
-                                             <Button variant="contained" color="primary" onClick={changeHandler}>Submit</Button>
-                              </Fragment>
+                                             <Button buttonStyle='btn--primary' buttonColor='blue' style={{ display: "block", marginRight: "auto", marginLeft: "auto" }} onClick={changeHandler}>{signup ? "Sign In" : "Sign Up"}</Button>
+                              </div>
 
                )
 }
