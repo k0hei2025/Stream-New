@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
+import { AiOutlineCloseSquare } from 'react-icons/ai'
 
 const generator = rough.generator();
 
@@ -136,11 +137,29 @@ const useHistory = (initialState) => {
 
 const adjustmentRequired = (type) => ["line", "rectangle"].includes(type);
 
-const Board = () => {
+const Board = (props) => {
+
   const [elements, setElements, undo, redo] = useHistory([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("pencil");
   const [selectedElement, setSelectedElement] = useState(null);
+
+  const { close } = props
+
+  useEffect(() => {
+
+    console.log(props.close, close, 'props')
+
+  }, close)
+
+
+  const closeHandler = () => {
+    if (props.close === true) {
+      props.close = false;
+      console.log(props.close)
+    }
+  }
+
 
   const getSvgPathFromStroke = (stroke) => {
     if (!stroke.length) return "";
@@ -158,6 +177,8 @@ const Board = () => {
     return d.join(" ");
   };
 
+
+
   const drawElement = (roughCanvas, context, element) => {
     switch (element.type) {
       case "line":
@@ -168,7 +189,7 @@ const Board = () => {
         const stroke = getSvgPathFromStroke(
           getStroke(element.points, {
             size: 4,
-        
+
           }),
         );
 
@@ -324,6 +345,8 @@ const Board = () => {
           onChange={() => setTool("line")}
         />
         <label htmlFor="line">Line</label>
+
+
         <input
           type="radio"
           id="rectangle"
@@ -343,6 +366,7 @@ const Board = () => {
         <label htmlFor="pencil">pencil</label>
         <input type="color" name="" id="" />
       </div>
+      <button onClick={closeHandler}>  <AiOutlineCloseSquare /> </button>
       <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>

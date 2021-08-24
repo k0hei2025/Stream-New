@@ -79,16 +79,9 @@ function ScheduledCalls(props) {
 
 
     return (
-
-        packet.map((i) => {
-            <div id={i.id}>
-                <h1>{i.date} </h1>
-                <h1>{i.time}</h1>
-                <h1>{i.description}</h1>
-            </div>
-        })
-
+        returnDate
     )
+
 
 
 
