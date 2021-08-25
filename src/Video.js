@@ -77,7 +77,8 @@ class Video extends Component {
 			theRecorder: null,
 			recordedChunks: [],
 			whiteBoard: false,
-			btnlist:false,
+			btnlist: false,
+			btn:true,
 
 		}
 		connections = {}
@@ -544,14 +545,18 @@ class Video extends Component {
 
 	showButton = () => this.setState({ button: !this.state.button, newmessages: 0 });
 	more = () => this.setState({ btnlist: !this.state.btnlist });
+	close = () => this.setState({ close: this.state.btnlist });
+
+	
 
 
 
 	render() {
 
-		if (this.state.whiteBoard) {
+		while(this.state.whiteBoard) {
 			return (
 				<WhiteBoard close={this.state.whiteBoard} />
+		
 			)
 		}
 
@@ -567,11 +572,22 @@ class Video extends Component {
 				</div>
 			)
 		}
+		const showBtn = () =>
+		{
+			if (window.innerWidth <= 660) {
+				this.setState({ btn: false })
+				console.log(this.state.btn);
+			}
+			else {
+				this.setState({btn: true});
+			}
+		};
+		
+		window.addEventListener('resize', showBtn);
+
+
+		
 		return (
-
-
-
-
 			<div div >
 				{
 					this.state.askForUsername === true ?
@@ -613,49 +629,100 @@ class Video extends Component {
 											}}></video>
 										</Row>
 
-										<div className="btn-down" >
-											<button className="call-btn" onClick={this.handleVideo}>
-												{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
-											</button>
+										{this.state.btn === true ?
 
-											<button className="call-btn" onClick={this.handleAudio}>
-												{this.state.audio === true ? <MicIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <MicOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
-											</button>
-
-											{this.state.screenAvailable === true ?
-												<button className="call-btn" onClick={this.handleScreen}>
-													{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <StopScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} />}
+											<div className="btn-down" >
+												<button className="call-btn" onClick={this.handleVideo}>
+													{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
 												</button>
-												: null}
 
-											<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
-												<button className="call-btn" style={{ marginBottom: "20px" }} onClick={this.openChat}>
-													<ChatIcon style={{ fontSize: '35px', fill: "#004362" }} />
+												<button className="call-btn" onClick={this.handleAudio}>
+													{this.state.audio === true ? <MicIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <MicOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
+												</button>												
+											
+												{this.state.screenAvailable === true ?
+													<button className="call-btn" onClick={this.handleScreen}>
+														{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <StopScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} />}
+													</button>
+													: null}
+
+												<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
+													<button className="call-btn" style={{ marginBottom: "20px" }} onClick={this.openChat}>
+														<ChatIcon style={{ fontSize: '35px', fill: "#004362" }} />
+													</button>
+												</Badge>
+												
+												<button className="call-btn" onClick={this.handleEndCall}>
+													<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
+												</button>								
+											
+											
+												<button className="call-btn" onClick={this.more} >
+													<CgMoreVertical style={{ fontSize: '35px', fill: "#004362" }} />
 												</button>
-											</Badge>
 
-											<button className="call-btn" onClick={this.handleEndCall}>
-												<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
-											</button>
+												<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
 
-											<button className="call-btn" onClick={this.more} >
-												<CgMoreVertical style={{ fontSize: '35px', fill: "#004362" }} />
-											</button>
-											<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
+													<button onClick={this.fullScreenHandler}  >Full Screen
+														<BiFullscreen style={{ fontSize: '15px', fill: "#004362", float: "right" }} />
+													</button>
 
-											<button onClick={this.fullScreenHandler}  >Full Screen
-												<BiFullscreen style={{ fontSize: '15px', fill: "#004362", float:"right" }} />
-											</button>
+													<button onClick={this.recordHandler} >Record
+														<FaRecordVinyl style={{ fontSize: '15px', fill: "#004362", float: "right" }} />
+													</button>
 
-											<button onClick={this.recordHandler} >Record
-												<FaRecordVinyl style={{ fontSize: '15px', fill: "#004362", float:"right" }} />
-											</button>
+													<button onClick={this.getWhiteBoard}>Whiteboard
+														<FaChalkboard style={{ fontSize: '15px', fill: "#004362", float: "right" }} />
+													</button>
+												</div>
+												
 
-											<button onClick={this.getWhiteBoard}>Whiteboard
-												<FaChalkboard style={{ fontSize: '15px', fill: "#004362", float:"right" }} />
-											</button>
 											</div>
-										</div>
+
+											:
+											<div className="btn-down" >
+												<button className="call-btn" onClick={this.handleVideo}>
+													{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '25px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '25px', fill: "#004362" }} />}
+												</button>
+
+												<button className="call-btn" onClick={this.handleAudio}>
+													{this.state.audio === true ? <MicIcon style={{ fontSize: '25px', fill: "#004362" }} /> : <MicOffIcon style={{ fontSize: '25px', fill: "#004362" }} />}
+												</button>
+
+												<button className="call-btn" onClick={this.handleEndCall}>
+													<CallEndIcon style={{ fontSize: '25px', fill: "red" }} />
+												</button>
+											
+												<button className="call-btn" onClick={this.more} >
+													<CgMoreVertical style={{ fontSize: '25px', fill: "#004362" }} />
+												</button>
+
+												<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
+												<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
+													<button style={{width:"150px"}} onClick={this.openChat}>Chat
+														<ChatIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
+													</button>
+												</Badge>
+												{this.state.screenAvailable === true ?
+													<button  onClick={this.handleScreen}>ScreenShare
+														{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} /> : <StopScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />}
+													</button>
+													: null}
+													<button onClick={this.fullScreenHandler}  >Full Screen
+														<BiFullscreen style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
+													</button>
+
+													<button onClick={this.recordHandler} >Record
+														<FaRecordVinyl style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
+													</button>
+
+													<button onClick={this.getWhiteBoard}>Whiteboard
+														<FaChalkboard style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
+													</button>
+												</div>
+												
+
+											</div>}
 									</div>
 								</div>
 							</div>

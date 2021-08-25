@@ -7,11 +7,13 @@ import "./Navbar.css";
 import Auth from './Auth';
 import Signup from '../Authentication/signup';
 
-function Navbar()
+function Navbar(props)
 {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [openPopup, setOpenPopup] = useState(false);
+    const { sign } = props;
+    console.log(sign);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -39,6 +41,22 @@ function Navbar()
                     <div className="menu-icon" onClick={handleClick}>
                         {click ? <FaTimes/> : <FaBars />}
                     </div>
+                    {sign ? (
+                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                        <li className="nav-item">
+                            <div  className='nav-links' style={{textDecoration:"none"}} onClick={closeMobileMenu} >
+                                About
+                            </div> 
+                        </li>
+                        <li className="nav-item">
+                            <div className='nav-links' style={{textDecoration:"none"}} onClick={closeMobileMenu}>
+                                Contacts
+                            </div>
+                        </li>
+                        
+                    </ul>)
+                :
+                (
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className="nav-item">
                             <div  className='nav-links' style={{textDecoration:"none"}} onClick={()=>{closeMobileMenu(); setOpenPopup(true)}}>
@@ -61,7 +79,7 @@ function Navbar()
                             </Link>
                             )}
                         </li>
-                    </ul>
+                    </ul>)}
                 </div>
             </div>
             <Auth

@@ -212,25 +212,26 @@
 @media screen and (max-width: 960px) {
   .new-call {
     background-color: #f8f6f6;
-    min-width: 100%;
+    width: 100%;
     color: #fff;
     justify-content: center;
     align-items: center;
     align-content: center;
     text-align: center;
+    display: flex;
+    flex-direction: column;
   }
   .samay {
     position: absolute;
-    top: 150px;
-    left: 20px;
+    top: 100px;
     display: flex;
     flex-direction: row;
-    width: 80%;
-    height: 20vh;
-    margin-top: 30px;
-    margin-left: 100px;
-
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 90%;
+    height: 15vh;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
     align-items: center;
     align-content: center;
     text-align: center;
@@ -242,50 +243,43 @@
     top: -20px;
   }
   .time {
-    width: 50%;
-    height: 90px;
+    height: 14vh;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    flex-grow: 5;
+    flex-grow: 4;
     justify-content: center;
     align-content: center;
-    padding: 2px 10px 2px 10px;
+    padding: 2px 2px 2px 10px;
     font-weight: bold;
     color: #faf9f9;
-    margin: 5px;
   }
   .sec_am-pm {
+    flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
-    width: 40%;
-    height: 90px;
+    height: 14vh;
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin: 5px;
   }
 
   .hr-min {
-    display: flex;
-    height: 80px;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+    height: 105px;
     text-align: center;
     flex-wrap: nowrap;
     flex-grow: 1;
     padding: 2px 10px 2px 10px;
     background-color: rgb(59, 57, 57);
-    margin: 2px;
+    margin-left: 2px;
     font-family: "Roboto", sans-serif;
     font-size: 90px;
     border-radius: 5px;
   }
   .sec {
-    flex: 1 1 50px;
+    flex: 1 1 36px;
     width: 50%;
-    height: 40px;
+    height: 50px;
     padding: 1px;
     text-align: center;
     justify-content: center;
@@ -293,7 +287,7 @@
     font-family: "Roboto", sans-serif;
     background-color: rgb(59, 57, 57);
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 30px;
     margin: 1px;
     font-weight: bold;
     color: #f8f6f6;
@@ -302,47 +296,51 @@
   .diff {
     background-color: #004362;
     position: relative;
-    top: 300px;
-    height: 100vh;
+    top: 200px;
+    height: 60vh;
+    display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
-
-    padding-left: 100px;
-    padding-bottom: 50px;
+    text-align: center;
+    padding: 20px;
   }
 
   .call-options {
-    width: 42%;
-    float: left;
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     align-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 30px;
+    padding: 5px;
+    position: relative;
+    top: -50px;
   }
   .callLinks {
     text-decoration: none;
     color: #004362;
-    float: left;
+    cursor: default;
+    margin: 2px;
     display: flex;
-    flex-grow: 1;
+    flex: 1 1 150px;
     width: 50%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
 
   .fig-icon {
     background-color: #fff;
-    border-radius: 33px;
-    width: 130px;
-    height: 130px;
-    margin: 10px;
+    border-radius: 20px;
+    width: 120px;
+    height: 120px;
     text-align: center;
     box-shadow: 0px 1px 2px 0px #050505;
     justify-content: center;
     align-items: center;
     align-content: center;
+    cursor: pointer;
   }
   .call-icons {
     color: #004362;
@@ -351,9 +349,17 @@
   }
 
   .fig-cap {
-    font-size: 20px;
+    font-size: 18px;
+    font-style: normal;
+    text-decoration: none;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
+  }
+  .fig-cap:hover {
+    font-style: normal;
+    text-decoration: none;
+    border: none;
+    text-decoration-style: none;
   }
 
   #sch {
@@ -361,25 +367,23 @@
     background-color: #004362;
     box-shadow: none;
     border: none;
-    cursor: pointer;
+    cursor: default;
   }
 
   .call-list {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
     position: relative;
-    top: 10px;
-    right: 100px;
-    margin-bottom: 50px;
+    top: 100px;
+    left: 0px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
     background-color: #fff;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    float: right;
-    width: 95%;
+    width: 90%;
     font-family: "Roboto", sans-serif;
-    height: 620px;
+    height: 500px;
     border-radius: 20px 20px 20px 20px;
-    text-align: center;
-    padding: 30px;
     box-shadow: 0px 1px 2px 0px rgba(138, 138, 138, 0.88);
   }
 
@@ -389,8 +393,11 @@
     font-family: "Roboto", sans-serif;
   }
   .due-meet {
-    width: 441px;
-    height: 136px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 370px;
+    height: 120px;
     box-shadow: 0px 1px 2px 0px #000000;
     background-color: #ffffff;
     text-align: justify;

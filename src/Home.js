@@ -29,7 +29,7 @@ export const Home = () => {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar sign={true} />
 		<div className="container2">
 
 

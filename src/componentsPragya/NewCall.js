@@ -48,7 +48,7 @@ const [openPopup, setOpenPopup] = useState(false);
 
     return (
         <>
-            <Navbar />
+            <Navbar sign={true} />
         <div className="new-call">
             <div className="samay">
                 <div className="time" >
