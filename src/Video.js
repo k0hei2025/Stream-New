@@ -646,15 +646,17 @@ class Video extends Component {
 													</button>
 													: null}
 
+												
+												
+												<button className="call-btn" onClick={this.handleEndCall}>
+													<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
+												</button>
+												
 												<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
 													<button className="call-btn" style={{ marginBottom: "20px" }} onClick={this.openChat}>
 														<ChatIcon style={{ fontSize: '35px', fill: "#004362" }} />
 													</button>
-												</Badge>
-												
-												<button className="call-btn" onClick={this.handleEndCall}>
-													<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
-												</button>								
+												</Badge>							
 											
 											
 												<button className="call-btn" onClick={this.more} >
