@@ -13,7 +13,6 @@ function Navbar(props)
     const [button, setButton] = useState(true);
     const [openPopup, setOpenPopup] = useState(false);
     const { sign } = props;
-    console.log(sign);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);

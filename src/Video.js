@@ -629,7 +629,7 @@ class Video extends Component {
 											}}></video>
 										</Row>
 
-										{this.state.btn === true ?
+										
 
 											<div className="btn-down" >
 												<button className="call-btn" onClick={this.handleVideo}>
@@ -681,8 +681,8 @@ class Video extends Component {
 
 											</div>
 
-											:
-											<div className="btn-down" >
+											
+											<div className="btn-up" >
 												<button className="call-btn" onClick={this.handleVideo}>
 													{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '25px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '25px', fill: "#004362" }} />}
 												</button>
@@ -724,7 +724,7 @@ class Video extends Component {
 												</div>
 												
 
-											</div>}
+											</div>
 									</div>
 								</div>
 							</div>
