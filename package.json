@@ -15,6 +15,10 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^4.1.0",
+ 
+
+    "js-cookie": "^3.0.0",
+ 
     "nodemon": "^2.0.2",
     "perfect-freehand": "^0.5.1",
     "react": "^16.13.1",
@@ -42,7 +46,9 @@
     "xss": "^1.0.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+
+    "start": "node app",
+ 
     "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon app.js\" \"NODE_ENV=dev PORT=8000 react-scripts start\"",
     "server": "NODE_ENV=production nodemon app.js",
     "build": "react-scripts build",

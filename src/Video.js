@@ -77,8 +77,12 @@ class Video extends Component {
 			theRecorder: null,
 			recordedChunks: [],
 			whiteBoard: false,
+
 			btnlist: false,
-			btn:true,
+			btn: true,
+
+
+
 
 		}
 		connections = {}
@@ -545,18 +549,22 @@ class Video extends Component {
 
 	showButton = () => this.setState({ button: !this.state.button, newmessages: 0 });
 	more = () => this.setState({ btnlist: !this.state.btnlist });
+
 	close = () => this.setState({ close: this.state.btnlist });
 
-	
+
+
 
 
 
 	render() {
 
-		while(this.state.whiteBoard) {
+
+		while (this.state.whiteBoard) {
 			return (
 				<WhiteBoard close={this.state.whiteBoard} />
-		
+
+
 			)
 		}
 
@@ -572,23 +580,24 @@ class Video extends Component {
 				</div>
 			)
 		}
-		const showBtn = () =>
-		{
+
+		const showBtn = () => {
 			if (window.innerWidth <= 660) {
 				this.setState({ btn: false })
 				console.log(this.state.btn);
 			}
 			else {
-				this.setState({btn: true});
+				this.setState({ btn: true });
 			}
 		};
-		
+
 		window.addEventListener('resize', showBtn);
 
 
-		
+
 		return (
-			<div div >
+
+			<div>
 				{
 					this.state.askForUsername === true ?
 						<div>
@@ -629,6 +638,7 @@ class Video extends Component {
 											}}></video>
 										</Row>
 
+
 										{this.state.btn === true ?
 
 											<div className="btn-down" >
@@ -638,27 +648,27 @@ class Video extends Component {
 
 												<button className="call-btn" onClick={this.handleAudio}>
 													{this.state.audio === true ? <MicIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <MicOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
-												</button>												
-											
+												</button>
+
 												{this.state.screenAvailable === true ?
 													<button className="call-btn" onClick={this.handleScreen}>
 														{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <StopScreenShareIcon style={{ fontSize: '35px', fill: "#004362" }} />}
 													</button>
 													: null}
 
-												
-												
+
+
 												<button className="call-btn" onClick={this.handleEndCall}>
 													<CallEndIcon style={{ fontSize: '35px', fill: "red" }} />
 												</button>
-												
+
 												<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
 													<button className="call-btn" style={{ marginBottom: "20px" }} onClick={this.openChat}>
 														<ChatIcon style={{ fontSize: '35px', fill: "#004362" }} />
 													</button>
-												</Badge>							
-											
-											
+												</Badge>
+
+
 												<button className="call-btn" onClick={this.more} >
 													<CgMoreVertical style={{ fontSize: '35px', fill: "#004362" }} />
 												</button>
@@ -677,7 +687,7 @@ class Video extends Component {
 														<FaChalkboard style={{ fontSize: '15px', fill: "#004362", float: "right" }} />
 													</button>
 												</div>
-												
+
 
 											</div>
 
@@ -694,22 +704,22 @@ class Video extends Component {
 												<button className="call-btn" onClick={this.handleEndCall}>
 													<CallEndIcon style={{ fontSize: '25px', fill: "red" }} />
 												</button>
-											
+
 												<button className="call-btn" onClick={this.more} >
 													<CgMoreVertical style={{ fontSize: '25px', fill: "#004362" }} />
 												</button>
 
 												<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
-												<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
-													<button style={{width:"150px"}} onClick={this.openChat}>Chat
-														<ChatIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
-													</button>
-												</Badge>
-												{this.state.screenAvailable === true ?
-													<button  onClick={this.handleScreen}>ScreenShare
-														{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} /> : <StopScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />}
-													</button>
-													: null}
+													<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
+														<button style={{ width: "150px" }} onClick={this.openChat}>Chat
+															<ChatIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
+														</button>
+													</Badge>
+													{this.state.screenAvailable === true ?
+														<button onClick={this.handleScreen}>ScreenShare
+															{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} /> : <StopScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />}
+														</button>
+														: null}
 													<button onClick={this.fullScreenHandler}  >Full Screen
 														<BiFullscreen style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
 													</button>
@@ -722,7 +732,7 @@ class Video extends Component {
 														<FaChalkboard style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
 													</button>
 												</div>
-												
+
 
 											</div>}
 									</div>

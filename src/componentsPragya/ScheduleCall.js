@@ -25,9 +25,10 @@ function ScheduleCall() {
   const classes = useStyles();
   const [callScheduledCalls, setCallScheduledCalls] = useState(false);
 
-  const copier = () =>
-  {
-    
+
+  const copier = () => {
+
+
   }
 
   const submitHandler = async (event) => {
@@ -41,6 +42,7 @@ function ScheduleCall() {
     const packet = {
       date: dateRef,
       time: timeRef,
+
       description: descriptionRef,
 
     }
@@ -83,11 +85,13 @@ function ScheduleCall() {
           <Button variant="contained">Share</Button>
         </div>
       </form>
-      {/* <ScheduledCalls
+
+      <ScheduledCalls
         callScheduledCalls={callScheduledCalls}
         setCallScheduledCalls={setCallScheduledCalls}>
-        
-      </ScheduledCalls> */}
+
+      </ScheduledCalls>
+
     </div>
   );
 }
