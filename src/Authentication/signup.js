@@ -3,8 +3,13 @@ import { TextField } from '@material-ui/core'
 
 import { Button } from '../componentsPragya/Button';
 
-import React, { useState, useRef, Fragment } from 'react'
+import { Redirect, Link } from 'react-router-dom'
+
+import React, { useState, useRef, Fragment, useEffect } from 'react'
 import { useHistory } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux'
+
+import { majorStoreAction } from '../store/majorStore'
 
 import Cookies from 'js-cookie'
 
@@ -20,6 +25,17 @@ export default function Signup() {
                const [dataSaveName, setDataName] = useState(false);
                const url = 'AIzaSyBEPyDFaklwGS8C3zUVG1I_8-6WtJk6rFM'
                let history = useHistory();
+
+               let tokenIdState = useSelector((state) => state.majorStore.tokenId)
+               let userIdState = useSelector((state) => state.majorStore.userId)
+
+
+               console.log('idToken', tokenIdState, 'userId', userIdState)
+
+
+               const dispatch = useDispatch();
+
+
 
 
                const requestLogin = async e => { }
@@ -61,8 +77,9 @@ export default function Signup() {
 
                const checkAuthTimeOut = (expiresIn) => {
                               setTimeout(() => {
+
                                              console.log("time up")
-                              }, expiresIn)
+                              }, expiresIn * 1000)
                }
 
 
@@ -98,14 +115,23 @@ export default function Signup() {
                                                             console.log(resData);
 
                                                             const { idToken, refreshToken } = resData
-                                                            console.log(` refresh token ${refreshToken}  access token ${idToken}`);
+                                                            //   console.log(` refresh token ${refreshToken}  access token ${idToken}`);
                                                             Cookies.set("access", idToken);
                                                             Cookies.set("refresh", refreshToken);
 
 
                                                             const { localId } = resData
 
-                                                            console.log('userID ', localId, " idToken ", idToken);
+                                                            //console.log('userID ', localId, " idToken ", idToken);
+
+                                                            dispatch(majorStoreAction.storeToken({
+                                                                           tokenId: idToken,
+                                                                           userId: localId
+                                                            }))
+
+
+
+
 
                                                             await requestLogin
 
@@ -150,7 +176,7 @@ export default function Signup() {
 
 
 
-                                             history.push('/newcall')
+                                             //     history.push('/newcall')
 
 
                                              const resData = await data.json();
@@ -162,13 +188,19 @@ export default function Signup() {
 
                                              console.log('userID ', localId, " idToken ", idToken, 'expiresIn ', +expiresIn);
 
+                                             dispatch(majorStoreAction.storeToken({
+                                                            tokenId: idToken,
+                                                            userId: localId
+                                             }))
+
+
                                              checkAuthTimeOut(+expiresIn)
 
                                              if (resData.idToken) {
                                                             console.log(resData)
                                                             console.log(resData.localId)
 
-                                                            window.location.replace('/newcall')
+                                                            history.push('/newcall')
                                              }
 
 

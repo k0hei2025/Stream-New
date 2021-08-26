@@ -13,7 +13,7 @@ function Navbar(props) {
     const [openPopup, setOpenPopup] = useState(false);
 
     const { sign } = props;
-    console.log(sign);
+
 
 
     const handleClick = () => setClick(!click);

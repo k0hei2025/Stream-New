@@ -3,35 +3,49 @@ import './Newcall.css'
 import { FiCopy, FiShare } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Button } from './Button';
+import { useSelector } from 'react-redux'
 
 function ScheduledCalls(props) {
 
     const { children, callScheduledCalls, setCallScheduledCalls } = props;
 
     const [packet, setPacket] = useState([]);
+    const [returnDate, setReturnDate] = useState([]);
+    const token = useSelector((state) => state.majorStore.tokenId);
+
 
     useEffect(() => {
+
+
+
+        console.log("token of state ", token)
 
         const fireData = async () => {
 
             let dataToArray = [];
 
-            const data = await fetch(`https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json`);
+            const data = await fetch('https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json?auth=' + token);
             const resData = await data.json();
 
 
-            for (let key in resData) {
-                dataToArray.push({
-                    id: key,
-                    date: resData[key].data.date,
-                    time: resData[key].data.time,
-                    description: resData[key].data.description
-                })
-                console.log(dataToArray)
+            if (token) {
+
+                for (let key in resData) {
+                    dataToArray.push({
+                        id: key,
+                        date: resData[key].data.date,
+                        time: resData[key].data.time,
+                        description: resData[key].data.description
+                    })
+                    console.log(dataToArray)
+
+                }
+                setPacket(dataToArray);
             }
 
 
-            setPacket(dataToArray);
+
+
 
 
             return resData;
@@ -40,10 +54,73 @@ function ScheduledCalls(props) {
 
     }, [])
 
+    useEffect(() => {
+
+        console.log('packet Length', packet.length)
+
+        if (!token) {
+
+            setReturnDate(<h1> No schedule meetings Yet</h1>)
+            console.log('if conidition called', packet)
 
 
 
-    let returnDate = (
+        }
+
+
+
+        if (token) {
+
+            console.log('else condition called', packet)
+
+            setReturnDate(
+
+
+                packet.map((i) => {
+
+                    return (
+                        <div open={callScheduledCalls} >
+                            <div className="due-meet" id={i.id} >
+                                <div className="descr">
+                                    <h3>Subject :{i.description}</h3>
+                                    <h3>Date :{i.date}</h3>
+                                    <h3>Time :{i.time}</h3>
+                                </div>
+                                <div className="start-button">
+                                    <Button buttonColor="blue" buttonStyle="outline" >Start</Button>
+                                </div>
+                                <div className="func-icons">
+                                    <FiCopy style={{ marginRight: "10px" }} />
+                                    <FiShare style={{ marginRight: "10px" }} />
+                                    <AiOutlineDelete style={{ marginRight: "10px" }} />
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    )
+
+                })
+            )
+
+            console.log("returnDate", returnDate)
+
+        }
+
+
+
+
+
+    }, [])
+
+
+
+
+
+
+
+    return (
 
         packet.map((i) => {
 
@@ -71,16 +148,7 @@ function ScheduledCalls(props) {
             )
 
         })
-    )
 
-
-
-
-
-
-
-    return (
-        returnDate
     )
 
 

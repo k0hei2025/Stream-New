@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core';
 import ScheduledCalls from "./ScheduledCalls";
 import { linkUrl } from '../Home'
+import { useSelector } from "react-redux";
 
 
 const useStyles = makeStyles({
@@ -20,6 +21,8 @@ function ScheduleCall() {
   const date = useRef();
   const time = useRef();
   const description = useRef();
+
+  const token = useSelector((state) => state.majorStore.tokenId);
 
 
   const classes = useStyles();
@@ -47,7 +50,7 @@ function ScheduleCall() {
 
     }
 
-    const datas = await fetch(`https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json`, {
+    const datas = await fetch('https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json?auth=' + token, {
       method: 'POST',
       body: JSON.stringify({
         data: packet,
