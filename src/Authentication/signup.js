@@ -158,7 +158,7 @@ export default function Signup() {
                                                             console.log(resData)
                                                             console.log(resData.localId)
 
-                                                            //   window.location.replace('/newcall')
+                                                            window.location.replace('/newcall')
                                              }
 
 
