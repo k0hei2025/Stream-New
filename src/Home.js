@@ -5,14 +5,23 @@ import "./Home.css";
 import Navbar from './componentsPragya/Navbar';
 import { v4 as uuidV4 } from 'uuid';
 import { useHistory } from "react-router-dom"
-
+import { useSelector, useDispatch } from 'react-redux'
+import { majorStoreAction } from './store/majorStore'
 
 let globalVar = '';
+
+
 
 
 export const Home = () => {
 	const history = useHistory()
 	const [idLink, setId] = useState('')
+
+	const urlState = useSelector((state) => state.majorStore.url)
+
+	const dispatch = useDispatch();
+
+	console.log(urlState)
 
 	const join = () => {
 
@@ -20,7 +29,13 @@ export const Home = () => {
 		history.push('/join/' + id)
 
 		setId(`/join/${id}`);
-		globalVar = idLink;
+
+
+		const urlExact = window.location.href = ("https://streeam-new.herokuapp.com/" + idLink)
+
+		dispatch(majorStoreAction.storeUrl({
+			url: urlExact
+		}))
 
 
 
@@ -31,8 +46,6 @@ export const Home = () => {
 		<>
 
 			<Navbar sign={true} />
-
-
 			<div className="container2">
 
 
@@ -51,6 +64,7 @@ export const Home = () => {
 				</div>
 			</div>
 		</>
+
 	)
 
 

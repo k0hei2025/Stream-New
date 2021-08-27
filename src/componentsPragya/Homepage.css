@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Abril+Fatface&family=Days+One&display=swap");
 
 .home_section {
-  color: #fff;
+
+
   padding: 160px 0px 0px 80px;
-  background-color: #f8f6f6;
-  min-width: 100%;
+  width: 100%;
 }
 .imgpos {
+  justify-content: center;
+  align-content: center;
+
   align-items: center;
 }
 
@@ -130,32 +133,63 @@ figcaption {
     background-color: #004362;
     align-items: center;
     text-align: center;
-    margin-top: -100px;
+
+    margin-top: 10px;
+
     padding: 0;
     min-width: 100%;
   }
 }
 
 @media screen and (max-width: 768px) {
+
+  .main {
+    background-color: #f8f6f6;
+    width: 100%;
+  }
   .home__hero-text-wrapper {
     padding-bottom: 65px;
   }
+  .row {
+    display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    align-content: stretch;
+  }
   .h-wrapper {
-    max-width: 100%;
-    padding-top: 0;
+    min-width: 95%;
+    background-color: #f8f6f6;
+    padding: 2px;
+
     padding-bottom: 60px;
     justify-content: center;
     align-content: center;
     align-items: center;
   }
+
+  .heading {
+    font-size: 55px;
+    max-width: 100%;
+  }
   .home_section {
     color: #fff;
-    padding: 160px 10px;
+    padding: 10px;
     background-color: #f8f6f6;
-    min-width: 100%;
+    width: 100%;
   }
   .col {
-    max-width: 100%;
+    min-width: 100%;
     flex-basis: 100%;
+    background-color: #f8f6f6;
+  }
+  .home_hero-subtitle {
+    min-width: 100%;
+  }
+  #home-img {
+    display: block;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+
   }
 }

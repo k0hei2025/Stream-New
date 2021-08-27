@@ -1,5 +1,7 @@
 
+
 import React, { useState, useEffect } from 'react';
+
 
 
 import { IoVideocamSharp } from 'react-icons/io5';
@@ -48,10 +50,10 @@ function NewCall() {
 
     const [openPopup, setOpenPopup] = useState(false);
 
+
     return (
         <>
             <Navbar sign={true} />
-
 
             <div className="new-call">
                 <div className="samay">
@@ -62,8 +64,6 @@ function NewCall() {
                         <div className="hr-min"><hr class="line" />{time[2]}</div>
                         <div className="hr-min"><hr class="line" />{time[3]}</div>
                     </div>
-
-
 
                     <div className="sec_am-pm">
                         <div className="sec">{time[4]}</div>
@@ -92,16 +92,13 @@ function NewCall() {
                                 <figcaption className="fig-cap">Share Screen</figcaption>
                             </figure>
                         </Link>
-
                         <button className="callLinks" id="sch" onClick={() => setOpenPopup(true)}>
                             <figure className="fig-icon">
                                 <BiCalendarEvent className="call-icons " />
-
                                 <figcaption className="fig-cap">Schedule</figcaption>
                             </figure>
                         </button>
                     </div>
-
 
                 </div>
                 <Popup
@@ -111,12 +108,11 @@ function NewCall() {
                     <ScheduleCall />
                 </Popup>
                 <div className="call-list">
-
-                    <ScheduledCalls />
+                    {<ScheduledCalls />}
 
                 </div>
-
             </div>
+
         </>
 
     )

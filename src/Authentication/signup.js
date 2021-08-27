@@ -1,4 +1,5 @@
 
+
 import { TextField } from '@material-ui/core'
 
 import { Button } from '../componentsPragya/Button';
@@ -15,12 +16,14 @@ import Cookies from 'js-cookie'
 
 
 
+
 export default function Signup() {
 
                const [signup, setSign] = useState(false)
                const emailRef = useRef();
                const passRef = useRef();
                const [err, setErr] = useState(false);
+
 
                const [dataSaveName, setDataName] = useState(false);
                const url = 'AIzaSyBEPyDFaklwGS8C3zUVG1I_8-6WtJk6rFM'
@@ -83,6 +86,7 @@ export default function Signup() {
                }
 
 
+
                const submitHandler = async (event) => {
 
                               event.preventDefault();
@@ -90,7 +94,9 @@ export default function Signup() {
                               if (signup) {
 
 
+
                                              if (passRef.current.value.length > 8 && emailRef.current.value !== '') {
+
 
                                                             let email = emailRef.current.value;
                                                             let pass = passRef.current.value;
@@ -146,6 +152,7 @@ export default function Signup() {
                                              }
 
 
+
                               }
 
                               if (!signup) {
@@ -172,11 +179,13 @@ export default function Signup() {
                                                             }
 
 
+
                                              })
 
 
 
                                              //     history.push('/newcall')
+
 
 
                                              const resData = await data.json();
@@ -202,6 +211,7 @@ export default function Signup() {
 
                                                             history.push('/newcall')
                                              }
+
 
 
                                              // resData.error.message
@@ -233,6 +243,7 @@ export default function Signup() {
 
                return (
 
+
                               <div style={{ textAlign: "center" }}>
                                              {signup ? <h2> Sign Up </h2> : <h2> Sign In </h2>}
                                              {err ? <p style={{ color: "red" }}> <b>Invalid credientials</b> </p> : <p></p>}
@@ -242,13 +253,16 @@ export default function Signup() {
                                                             <input type="email" placeholder="email" ref={emailRef} /><br />
                                                             <input type="password" placeholder="password" ref={passRef} /><br />
 
+
                                                             <TextField type="submit" name="submit" onClick={submitHandler} /><br /><br />
 
 
                                              </form>
 
+
                                              <Button buttonStyle='btn--primary' buttonColor='blue' style={{ display: "block", marginRight: "auto", marginLeft: "auto" }} onClick={changeHandler}>{signup ? "Sign In" : "Sign Up"}</Button>
                               </div>
+
 
 
                )

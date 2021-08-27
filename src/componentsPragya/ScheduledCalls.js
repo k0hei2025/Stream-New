@@ -3,13 +3,16 @@ import './Newcall.css'
 import { FiCopy, FiShare } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Button } from './Button';
+
 import { useSelector } from 'react-redux'
+
 
 function ScheduledCalls(props) {
 
     const { children, callScheduledCalls, setCallScheduledCalls } = props;
 
     const [packet, setPacket] = useState([]);
+
     const [returnDate, setReturnDate] = useState([]);
     const token = useSelector((state) => state.majorStore.tokenId);
 
@@ -20,9 +23,11 @@ function ScheduledCalls(props) {
 
         console.log("token of state ", token)
 
+
         const fireData = async () => {
 
             let dataToArray = [];
+
 
             const data = await fetch('https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json?auth=' + token);
             const resData = await data.json();
@@ -33,6 +38,7 @@ function ScheduledCalls(props) {
                 for (let key in resData) {
                     dataToArray.push({
                         id: key,
+                        link: resData[key].data.link,
                         date: resData[key].data.date,
                         time: resData[key].data.time,
                         description: resData[key].data.description
@@ -48,11 +54,13 @@ function ScheduledCalls(props) {
 
 
 
+
             return resData;
         }
         fireData();
 
     }, [])
+
 
     useEffect(() => {
 
@@ -85,6 +93,7 @@ function ScheduledCalls(props) {
                                     <h3>Subject :{i.description}</h3>
                                     <h3>Date :{i.date}</h3>
                                     <h3>Time :{i.time}</h3>
+                                    <h3>URL : {i.link}</h3>
                                 </div>
                                 <div className="start-button">
                                     <Button buttonColor="blue" buttonStyle="outline" >Start</Button>
@@ -122,6 +131,7 @@ function ScheduledCalls(props) {
 
     return (
 
+
         packet.map((i) => {
 
             return (
@@ -131,9 +141,12 @@ function ScheduledCalls(props) {
                             <h3>Subject :{i.description}</h3>
                             <h3>Date :{i.date}</h3>
                             <h3>Time :{i.time}</h3>
+                            <h3>Link : {i.link}</h3>
                         </div>
                         <div className="start-button">
-                            <Button buttonColor="blue" buttonStyle="outline" >Start</Button>
+                            <Button buttonColor="blue" buttonStyle="outline" onClick={() => {
+                                window.location.href = i.link;
+                            }} >Start</Button>
                         </div>
                         <div className="func-icons">
                             <FiCopy style={{ marginRight: "10px" }} />
@@ -156,7 +169,12 @@ function ScheduledCalls(props) {
 
 
 
+
+
+
 }
+
+
 
 
 

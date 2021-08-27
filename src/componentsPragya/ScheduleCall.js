@@ -4,7 +4,10 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core';
 import ScheduledCalls from "./ScheduledCalls";
 import { linkUrl } from '../Home'
+
 import { useSelector } from "react-redux";
+import { v4 as uuidV4 } from 'uuid';
+
 
 
 const useStyles = makeStyles({
@@ -22,12 +25,12 @@ function ScheduleCall() {
   const time = useRef();
   const description = useRef();
 
+
   const token = useSelector((state) => state.majorStore.tokenId);
 
 
   const classes = useStyles();
   const [callScheduledCalls, setCallScheduledCalls] = useState(false);
-
 
   const copier = () => {
 
@@ -42,15 +45,25 @@ function ScheduleCall() {
     const timeRef = time.current.value;
     const descriptionRef = description.current.value;
 
+    const id = uuidV4();
+
+    const preparedLink = "https://streeam-new.herokuapp.com/join/" + id;
+
+    console.log(preparedLink);
+
+
     const packet = {
       date: dateRef,
       time: timeRef,
 
       description: descriptionRef,
+      link: preparedLink
 
     }
 
+
     const datas = await fetch('https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json?auth=' + token, {
+
       method: 'POST',
       body: JSON.stringify({
         data: packet,
@@ -89,11 +102,13 @@ function ScheduleCall() {
         </div>
       </form>
 
+
       <ScheduledCalls
         callScheduledCalls={callScheduledCalls}
         setCallScheduledCalls={setCallScheduledCalls}>
 
       </ScheduledCalls>
+
 
     </div>
   );
