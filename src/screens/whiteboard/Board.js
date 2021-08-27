@@ -146,12 +146,12 @@ const Board = (props) => {
   const [tool, setTool] = useState("pencil");
   const [selectedElement, setSelectedElement] = useState(null);
 
-  const { close } = props
+  const { closing } = props
 
   const closeHandler = () => {
-    close(false);
-    console.log(close);
+    closing(false)
 
+    console.log(closing, 'closing')
   }
 
 
@@ -324,7 +324,7 @@ const Board = (props) => {
 
 
   return (
-    <div className={close === true ? "whboard" : "wboard"}>
+    <div className={"whboard"}>
       <div style={{ position: "absolute" }}>
         <input
           type="radio"
@@ -361,7 +361,7 @@ const Board = (props) => {
         <label htmlFor="pencil">pencil</label>
         <input type="color" name="" id="" />
       </div>
-      <button onClick={closeHandler} style={{ cursor: "pointer" }} >  <AiOutlineCloseSquare /> </button>
+      <AiOutlineCloseSquare onClick={closeHandler} />
       <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>

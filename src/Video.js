@@ -550,9 +550,9 @@ class Video extends Component {
 	render() {
 
 
-		while (this.state.whiteBoard) {
+		if (this.state.whiteBoard) {
 			return (
-				<WhiteBoard close={this.state.whiteBoard} />
+				<WhiteBoard closing={this.state.whiteBoard} />
 
 			)
 		}

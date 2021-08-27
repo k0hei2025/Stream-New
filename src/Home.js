@@ -31,7 +31,7 @@ export const Home = () => {
 		setId(`/join/${id}`);
 
 
-		const urlExact = window.location.href = ("https://streeam-new.herokuapp.com/" + idLink)
+		const urlExact = "https://streeam-new.herokuapp.com/" + idLink
 
 		dispatch(majorStoreAction.storeUrl({
 			url: urlExact
