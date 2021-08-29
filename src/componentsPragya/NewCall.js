@@ -108,9 +108,11 @@ function NewCall() {
                     <ScheduleCall />
                 </Popup>
                 <div className="call-list">
+                <h2 id="sc-head">Up-Coming Meetings</h2>
                     {<ScheduledCalls />}
 
                 </div>
+                <div style={{height:"20px"}}></div>
             </div>
 
         </>

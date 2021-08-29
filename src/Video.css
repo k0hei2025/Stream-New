@@ -2,8 +2,6 @@ body {
   margin: 0;
 }
 
-
-
 .dashboard_container {
   width: 100vw;
   height: 100vh;
@@ -27,6 +25,10 @@ body {
 .flexya {
   flex: 70%;
   width: 70%;
+}
+#scroll {
+  position: absolute;
+  top: 100vh;
 }
 
 .meet-name {
@@ -87,12 +89,8 @@ body {
   align-content: center;
   align-items: center;
   border-radius: 20px;
-
-
-  overflow: hidden;
 }
-.video::-webkit-scrollbar {
-
+/* .video::-webkit-scrollbar {
   width: 5px;
 }
 .video::-webkit-scrollbar-track {
@@ -103,10 +101,8 @@ body {
 }
 .video::-webkit-scrollbar-thumb:hover {
   background: #555;
-
 }
-
-
+ */
 .dashboard_content_container {
   width: 100%;
   height: 100%;
@@ -120,13 +116,28 @@ body {
   border-radius: 20px;
 }
 .flex-container {
-  height: calc(100% - 150px);
   width: 100%;
+  margin-top: 10px;
   /* margin: 0 auto; */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+}
+video:first-child {
+  border-style: solid;
+  border-color: #bdbdbd;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+}
+video:nth-child(n + 2):nth-child(-n + 5) {
+  position: absolute;
+  top: calc(n * 120px);
+  left: 85%;
+  border-radius: 15px;
+  width: 110px;
+  height: 110px;
+}
+video:nth-child(n + 6) {
+  display: none;
 }
 
 .btn-down {
@@ -134,7 +145,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   position: relative;
-  top: 50px;
+  top: 10px;
   width: 98%;
   height: 100px;
   padding-top: 15px;
@@ -263,7 +274,6 @@ input {
   flex-direction: column;
   width: 150px;
 
- 
   position: relative;
   top: -190px;
   left: 70%;
@@ -272,7 +282,6 @@ input {
 .btn-up {
   display: none;
 }
- 
 
 @media screen and (max-width: 660px) {
   .dashboard_left_section {
@@ -289,7 +298,7 @@ input {
     font-size: 15px;
     font-family: "Days One", serif;
   }
- 
+
   .flexy {
     flex: 100%;
     width: 100%;
@@ -297,8 +306,25 @@ input {
   .flexya {
     display: none;
   }
+  video:first-child {
+    border-style: solid;
+    border-color: #bdbdbd;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+  }
+  video:nth-child(n + 2):nth-child(-n + 4) {
+    position: absolute;
+    top: calc(n * 90px);
+    left: 70%;
+    border-radius: 15px;
+    width: 90px;
+    height: 90px;
+  }
+  video:nth-child(n + 5) {
+    display: none;
+  }
   .btn-down {
-
     display: none;
   }
   .btn-up {
@@ -309,7 +335,7 @@ input {
     height: 70px;
     padding: 10px;
     position: relative;
-    top: 70px;
+    top: 10px;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -332,7 +358,6 @@ input {
 
     top: -195px;
     left: 58%;
-
   }
   .chatter {
     width: 100%;
@@ -389,5 +414,4 @@ input {
     border: none;
     text-decoration: none;
   }
-
 }

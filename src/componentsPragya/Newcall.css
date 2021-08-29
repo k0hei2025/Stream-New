@@ -66,12 +66,14 @@
   border-radius: 5px;
 }
 .sec {
-  flex: 1 1 50px;
-  width: 50%;
+  flex: 1 1 40%;
+  width: 45%;
+  height: 49%;
   padding: 1px;
   text-align: center;
   justify-content: center;
   align-content: center;
+  vertical-align: middle;
   font-family: "Roboto", sans-serif;
   background-color: rgb(59, 57, 57);
   border-radius: 5px;
@@ -85,7 +87,7 @@
   background-color: #004362;
   position: relative;
   top: 300px;
-  height: 100vh;
+  height: 450px;
 
   padding-left: 100px;
   padding-bottom: 50px;
@@ -154,6 +156,7 @@
   align-content: center;
   float: right;
   width: 35%;
+  overflow: auto;
   font-family: "Roboto", sans-serif;
   height: 620px;
   border-radius: 100px 0px 0px 100px;
@@ -161,15 +164,26 @@
   padding: 30px;
   box-shadow: 0px 1px 2px 0px rgba(138, 138, 138, 0.88);
 }
-
+.call-list::-webkit-scrollbar {
+  width: 5px;
+}
+.call-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.call-list::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.call-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 #sc-head {
   font-size: 20px;
   color: #111316;
   font-family: "Roboto", sans-serif;
 }
 .due-meet {
-  width: 441px;
-  height: 136px;
+  width: 95%;
+  height: 100px;
   box-shadow: 0px 1px 2px 0px #000000;
   background-color: #ffffff;
   text-align: justify;
@@ -188,12 +202,23 @@
   flex-direction: column;
   flex-grow: 1;
   font-family: "Roboto", sans-serif;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .start-button {
-  display: block;
-  margin-left: 300px;
-  margin-top: -70px;
+  position: relative;
+  top: -85px;
+  float: right;
+  margin-right: 20px;
+}
+#strt {
+  color: #fff;
+  background-color: #004362;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+#strt:hover {
+  color: #004362;
+  background-color: #f6f6f6;
 }
 
 .func-icons {
@@ -203,7 +228,7 @@
   justify-content: flex-end;
   align-content: flex-end;
   position: relative;
-  bottom: -40px;
+  top: -75px;
   right: 10px;
   color: #111316;
   margin: 10px;
@@ -225,7 +250,6 @@
     flex-direction: column;
   }
   .samay {
-
     vertical-align: middle;
     display: flex;
     flex-direction: row;
@@ -259,7 +283,7 @@
     align-content: center;
 
     padding: 2px;
- 
+
     font-weight: bold;
     color: #faf9f9;
   }
@@ -273,7 +297,6 @@
     justify-content: center;
 
     vertical-align: middle;
-
   }
 
   .hr-min {
@@ -291,7 +314,7 @@
     border-radius: 5px;
   }
   .sec {
-    flex: 1 1 20px;
+    flex: 1 1 40%;
     width: 50%;
     height: 50px;
 
@@ -335,7 +358,6 @@
     padding: 5px;
     position: relative;
     top: -50px;
-
   }
   .callLinks {
     text-decoration: none;
@@ -350,7 +372,6 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-
   }
 
   .fig-icon {
@@ -367,7 +388,6 @@
     align-content: center;
 
     cursor: pointer;
-
   }
   .call-icons {
     color: #004362;
@@ -395,7 +415,6 @@
     box-shadow: none;
     border: none;
 
-
     cursor: default;
   }
 
@@ -419,21 +438,21 @@
     box-shadow: 0px 1px 2px 0px rgba(138, 138, 138, 0.88);
   }
 
+  .call-list::-webkit-scrollbar {
+    width: 2px;
+    border-radius: 2px;
+  }
   #sc-head {
     font-size: 20px;
     color: #111316;
     font-family: "Roboto", sans-serif;
   }
   .due-meet {
-
     display: block;
     margin-right: auto;
     margin-left: auto;
-    width: 370px;
-    height: 120px;
-
-
-
+    height: 150px;
+    width: 100%;
     box-shadow: 0px 1px 2px 0px #000000;
     background-color: #ffffff;
     text-align: justify;
@@ -452,24 +471,37 @@
     flex-direction: column;
     flex-grow: 1;
     font-family: "Roboto", sans-serif;
-    margin-top: 20px;
   }
   .start-button {
-    display: block;
-    margin-left: 300px;
-    margin-top: -70px;
+    position: relative;
+    top: 10px;
+    float: none;
+    margin-right: 20px;
+  }
+  #strt {
+    color: #fff;
+    background-color: #004362;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  #strt:hover {
+    color: #004362;
+    background-color: #f6f6f6;
   }
 
   .func-icons {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 50%;
     justify-content: flex-end;
     align-content: flex-end;
     position: relative;
-    bottom: -40px;
+    top: 0px;
+    bottom: -25px;
+    float: right;
     right: 10px;
     color: #111316;
     margin: 10px;
+    margin-top: -20px;
   }
 }

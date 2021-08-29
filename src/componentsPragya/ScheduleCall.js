@@ -32,8 +32,38 @@ function ScheduleCall() {
   const classes = useStyles();
   const [callScheduledCalls, setCallScheduledCalls] = useState(false);
 
-  const copier = () => {
+  const copier = async (event) =>
+  {
+    event.preventDefault();
 
+    const dateRef = date.current.value;
+    const timeRef = time.current.value;
+    const descriptionRef = description.current.value;
+    let text = `Date: ${dateRef} 
+    Time: ${timeRef}
+    Topic: ${descriptionRef}`
+
+   /*  if (!navigator.clipboard) {
+			let textArea = document.createElement("textarea")
+			textArea.value = text
+			document.body.appendChild(textArea)
+			textArea.focus()
+			textArea.select()
+			try {
+				document.execCommand('copy')
+				message.success("Link copied to clipboard!")
+			} catch (err) {
+				message.error("Failed to copy")
+			}
+			document.body.removeChild(textArea)
+			return
+		}
+		navigator.clipboard.writeText(text).then(function () {
+			message.success("Link copied to clipboard!")
+		}, () => {
+			message.error("Failed to copy")
+		})
+ */
 
   }
 
@@ -101,15 +131,6 @@ function ScheduleCall() {
           <Button variant="contained">Share</Button>
         </div>
       </form>
-
-
-      <ScheduledCalls
-        callScheduledCalls={callScheduledCalls}
-        setCallScheduledCalls={setCallScheduledCalls}>
-
-      </ScheduledCalls>
-
-
     </div>
   );
 }

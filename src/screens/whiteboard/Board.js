@@ -139,20 +139,14 @@ const useHistory = (initialState) => {
 
 const adjustmentRequired = (type) => ["line", "rectangle"].includes(type);
 
-const Board = (props) => {
+const Board = ({getWhiteBoard}) => {
 
   const [elements, setElements, undo, redo] = useHistory([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("pencil");
   const [selectedElement, setSelectedElement] = useState(null);
 
-  const { closing } = props
-
-  const closeHandler = () => {
-    closing(false)
-
-    console.log(closing, 'closing')
-  }
+  
 
 
   const getSvgPathFromStroke = (stroke) => {
@@ -361,7 +355,7 @@ const Board = (props) => {
         <label htmlFor="pencil">pencil</label>
         <input type="color" name="" id="" />
       </div>
-      <AiOutlineCloseSquare onClick={closeHandler} />
+      <AiOutlineCloseSquare onClick={getWhiteBoard} />
       <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
@@ -369,7 +363,7 @@ const Board = (props) => {
       <canvas
         id="canvas"
         width={window.innerWidth}
-        height={window.innerHeight}
+        height="700px"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

@@ -90,10 +90,10 @@ function ScheduledCalls(props) {
                         <div open={callScheduledCalls} >
                             <div className="due-meet" id={i.id} >
                                 <div className="descr">
-                                    <h3>Subject :{i.description}</h3>
-                                    <h3>Date :{i.date}</h3>
-                                    <h3>Time :{i.time}</h3>
-                                    <h3>URL : {i.link}</h3>
+                                    <h6>Subject :{i.description}</h6>
+                                    <h6>Date :{i.date}</h6>
+                                    <h6>Time :{i.time}</h6>
+                                    <h6>URL : {i.link}</h6>
                                 </div>
                                 <div className="start-button">
                                     <Button buttonColor="blue" buttonStyle="outline" >Start</Button>
@@ -133,20 +133,22 @@ function ScheduledCalls(props) {
 
 
         packet.map((i) => {
-
+ 
             return (
-                <div open={callScheduledCalls} >
+                <div  open={callScheduledCalls} >
+                    
+                    
                     <div className="due-meet" id={i.id} >
                         <div className="descr">
-                            <h3>Subject :{i.description}</h3>
-                            <h3>Date :{i.date}</h3>
-                            <h3>Time :{i.time}</h3>
-                            <h3>Link : {i.link}</h3>
+                            <h6>Subject :{i.description}</h6>
+                            <h6>Date :{i.date}</h6>
+                            <h6>Time :{i.time}</h6>
                         </div>
+                        
                         <div className="start-button">
-                            <Button buttonColor="blue" buttonStyle="outline" onClick={() => {
+                            <button id="strt" onClick={() => {
                                 window.location.href = i.link;
-                            }} >Start</Button>
+                            }} >Start</button>
                         </div>
                         <div className="func-icons">
                             <FiCopy style={{ marginRight: "10px" }} />

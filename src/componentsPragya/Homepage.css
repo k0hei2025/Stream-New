@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Abril+Fatface&family=Days+One&display=swap");
 
 .home_section {
-
-
+  background-color: #f8f6f6;
   padding: 160px 0px 0px 80px;
   width: 100%;
 }
@@ -58,6 +57,7 @@
 }
 
 .diffBg {
+  height: calc(100% - 300px);
   color: #fff;
   background-color: #004362;
   align-items: center;
@@ -133,7 +133,7 @@ figcaption {
     background-color: #004362;
     align-items: center;
     text-align: center;
-
+    height: auto;
     margin-top: 10px;
 
     padding: 0;
@@ -142,7 +142,6 @@ figcaption {
 }
 
 @media screen and (max-width: 768px) {
-
   .main {
     background-color: #f8f6f6;
     width: 100%;
@@ -190,6 +189,5 @@ figcaption {
     width: 80%;
     margin-right: auto;
     margin-left: auto;
-
   }
 }
