@@ -78,6 +78,20 @@
   font-size: medium;
   cursor: pointer;
 }
+button#join-button{
+  background-color:#004362;
+   color:#fff;
+  padding:8px 20px;
+   border-radius:6px;
+    border:none
+   }
+button#join-button:hover{
+  background-color: rgb(223, 222, 222);
+  color: #004362;
+  border: none;
+  opacity: 1;
+
+}
 
 .nav-links:hover {
   border-bottom: none;

@@ -3,6 +3,8 @@ import './Newcall.css'
 import { FiCopy, FiShare } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Button } from './Button';
+import { message } from 'antd'
+
 
 import { useSelector } from 'react-redux'
 
@@ -31,6 +33,7 @@ function ScheduledCalls(props) {
 
             const data = await fetch('https://stream-new-2142d-default-rtdb.firebaseio.com/schedule.json?auth=' + token);
             const resData = await data.json();
+            console.log(resData)
 
 
             if (token) {
@@ -122,22 +125,59 @@ function ScheduledCalls(props) {
 
 
     }, [])
+    let text
+    const copier = async (index) =>
+    {
+        text =`
+        Topic: ${packet[index].description}
+        Date: ${packet[index].date} 
+        Time: ${packet[index].time}
+        Link: ${packet[index].link}
+       `      
+      navigator.clipboard.writeText(text).then(function () {
+              message.success("Successfully copied!")
+          }, () => {
+              message.error("Failed to copy")
+          })
+  
+    }
+
+    const share = (index) => {
+        console.log('sharing process')
+     if (navigator.share) {
+       navigator.share({
+         title: ` Subject: ${packet[index].description}` ,
+         text:` Date: ${packet[index].date} 
+         Time: ${packet[index].time} `,
+         url: `${packet[index].link}`
+       }).then(() => {
+         console.log('Thanks for sharing!');
+       })
+       .catch(console.error);
+     } else {
+       // fallback
+     }
+   };
+
+   const deletes = (id) => {
+       const meetinfo=document.getElementById(id);
+       meetinfo.parentNode.removeChild(meetinfo);
+
+   }
+   const deletedb = (index) => {
+    packet.splice(index,1);       
+    setPacket(packet);
+    console.log(packet) }
 
 
 
 
-
-
-
-    return (
-
-
-        packet.map((i) => {
+   
  
             return (
-                <div  open={callScheduledCalls} >
+                <div className="listedcalls"  open={callScheduledCalls} >
                     
-                    
+                    {packet.map((i)=>
                     <div className="due-meet" id={i.id} >
                         <div className="descr">
                             <h6>Subject :{i.description}</h6>
@@ -151,20 +191,17 @@ function ScheduledCalls(props) {
                             }} >Start</button>
                         </div>
                         <div className="func-icons">
-                            <FiCopy style={{ marginRight: "10px" }} />
-                            <FiShare style={{ marginRight: "10px" }} />
-                            <AiOutlineDelete style={{ marginRight: "10px" }} />
+                            <FiCopy onClick={()=>{copier(packet.indexOf(i))}} style={{ marginRight: "10px", cursor:"pointer"}} />
+                            <FiShare onClick={()=>{share(packet.indexOf(i))}} style={{ marginRight: "10px", cursor:"pointer" }} />
+                            <AiOutlineDelete className="delete-button" onClick={()=>{deletedb(packet.indexOf(i)); deletes(i.id)}} style={{ marginRight: "10px", cursor:"pointer" }} />
                         </div>
 
 
                     </div>
+                    )}
 
                 </div>
             )
-
-        })
-
-    )
 
 
 

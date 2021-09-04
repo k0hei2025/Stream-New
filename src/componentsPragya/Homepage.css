@@ -33,6 +33,7 @@
 .h-wrapper {
   max-width: 540px;
   padding-top: 0;
+  text-align: left;
   padding-bottom: 60px;
 }
 

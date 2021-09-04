@@ -84,8 +84,9 @@ function Navbar(props) {
                                 <li className="nav-btn">
                                     {button ? (
 
-                                        <Button buttonStyle='btn--outline' buttonColor='blue' onClick={popupHandler}>JOIN</Button>
-
+/*                                         <Button buttonStyle='btn--outline'  buttonSize='btn--medium' buttonColor='blue' onClick={popupHandler}>JOIN</Button>
+ */
+                                        <button id="join-button" onClick={popupHandler} >JOIN</button>
                                     ) : (
 
                                         <Button onClick={popupHandler} buttonStyle='btn--outline' buttonSize='btn--mobile'>JOIN</Button>
