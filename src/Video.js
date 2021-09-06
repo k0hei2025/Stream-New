@@ -27,6 +27,8 @@ import { BiFullscreen } from 'react-icons/bi'
 import { FaChalkboard } from 'react-icons/fa'
 import { CgMoreVertical } from 'react-icons/cg';
 
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 
 import WhiteBoard from './screens/whiteboard/Board'
 
@@ -70,6 +72,7 @@ class Video extends Component {
 			messages: [],
 			message: "",
 			newmessages: 0,
+
 			askForUsername: true,
 			username: faker.internet.userName(),
 			button: true,
@@ -84,15 +87,24 @@ class Video extends Component {
 			btn: true,
 
 
+
 		}
 		connections = {}
 
 		this.getPermissions()
 	}
 
+
+
+
+
 	getPermissions = async () => {
 		try {
-			await navigator.mediaDevices.getUserMedia({ video: true })
+
+			console.log(this.props.conditionForVideo)
+
+
+			await navigator.mediaDevices.getUserMedia({ video: this.props.conditionForVideo })
 				.then(() => this.videoAvailable = true)
 				.catch(() => this.videoAvailable = false)
 
@@ -601,7 +613,10 @@ class Video extends Component {
 
 
 		return (
-			<div div >
+
+			<div  >
+
+				<h1> {console.log('inside return ', this.state.conditionTrial)} </h1>
 
 				{
 					this.state.askForUsername === true ?
@@ -789,4 +804,13 @@ class Video extends Component {
 	}
 }
 
-export default Video
+const mapStateToProps = (state) => ({
+	userIdState: state.majorStore.userId,
+	tokenState: state.majorStore.tokenId,
+	conditionForVideo: state.majorStore.conditionTrial
+});
+
+
+
+
+export default connect(mapStateToProps)(Video)

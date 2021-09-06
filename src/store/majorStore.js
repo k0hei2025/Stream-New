@@ -6,7 +6,7 @@ let initialState = {
                tokenId: '',
                userId: '',
                url: '',
-
+               conditionTrial: false,
 }
 
 
@@ -20,6 +20,7 @@ const Majorstore = createSlice({
 
                                              state.tokenId = action.payload.tokenId;
                                              state.userId = action.payload.userId
+                                             state.conditionTrial = true;
 
                                              console.log('action payload value', action.payload)
 
@@ -29,7 +30,8 @@ const Majorstore = createSlice({
                               },
                               storeUrl(state, action) {
                                              state.url = action.payload.url;
-                              }
+
+                              },
 
                }
 })
