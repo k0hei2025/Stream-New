@@ -56,6 +56,10 @@ io.on('connection', (socket) => {
 		io.to(toId).emit('signal', socket.id, message)
 	})
 
+	socket.on('users', (usernames)=>{
+		io.emit('users',(usernames))
+	})
+
 	socket.on('chat-message', (data, sender) => {
 		data = sanitizeString(data)
 		sender = sanitizeString(sender)

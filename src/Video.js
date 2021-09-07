@@ -72,7 +72,7 @@ class Video extends Component {
 			messages: [],
 			message: "",
 			newmessages: 0,
-			initialsList: [],
+			initialsList: ['PM'],
 			askForUsername: true,
 			username: faker.internet.userName(),
 			button: false,
@@ -364,7 +364,7 @@ class Video extends Component {
 		if (window.innerWidth > 660) {
 			for (let a = 0; a < videos.length; ++a) {
 				if (a === 0) {
-					videos[a].style.setProperty("width", "95%")
+					videos[a].style.setProperty("width", "100%")
 					videos[a].style.setProperty("height", "470px")
 				}
 				else {
@@ -377,21 +377,13 @@ class Video extends Component {
 		else {
 			for (let a = 0; a < videos.length; ++a) {
 				if (a === 0) {
-					videos[a].style.setProperty("width", "95%")
-					videos[a].style.setProperty("height", "470px")
+					videos[a].style.setProperty("width", "100%")
+					videos[a].style.setProperty("height", "62vh")
 				}
 				else {
-					let top = String(90 * (a)) + "px"
-					videos[a].style.top = top
-					videos[a].style.left = "70%"
-					videos[a].style.margin = "3px"
-					videos[a].style.setProperty("width", "90px")
-					videos[a].style.setProperty("height", "90px")
-				}
-
-				if (a > 3) {
 					videos[a].style.setProperty("display", "none")
 				}
+
 
 			}
 		}
@@ -401,6 +393,7 @@ class Video extends Component {
 
 	connectToSocketServer = () => {
 		socket = io.connect(server_url, { secure: true })
+		
 
 		socket.on('signal', this.gotMessageFromServer)
 
@@ -409,7 +402,7 @@ class Video extends Component {
 			socketId = socket.id
 
 			socket.on('chat-message', this.addMessage)
-			socket.on('users', this.displayParticipants)
+			socket.on('users',  this.displayParticipants)
 
 			socket.on('user-left', (id) => {
 				let video = document.querySelector(`[data-socket="${id}"]`)
@@ -423,6 +416,7 @@ class Video extends Component {
 			})
 
 			socket.on('user-joined', (id, clients) => {
+				console.log(clients)
 				clients.forEach((socketListId) => {
 					connections[socketListId] = new RTCPeerConnection(peerConnectionConfig)
 					// Wait for their ice candidate       
@@ -431,7 +425,7 @@ class Video extends Component {
 							socket.emit('signal', socketListId, JSON.stringify({ 'ice': event.candidate }))
 						}
 					}
-
+					socket.emit('users',  this.state.username) 
 					// Wait for their video stream
 					connections[socketListId].onaddstream = (event) => {
 						// TODO mute button, full screen button
@@ -533,10 +527,9 @@ class Video extends Component {
 		}
 	}
 
-	handleUsername = (e) =>{ this.setState({ username: e.target.value });
-	socket.emit('users',  this.state.username)
-}
- displayParticipants=(newJoinee)=>{
+	handleUsername = (e) =>{ this.setState({ username: e.target.value });	}
+
+ 	displayParticipants=(newJoinee)=>{
 	var parts = newJoinee.split(' ')
 	var initials = ''
 	for (var i = 0; i < parts.length; i++) {
@@ -544,12 +537,16 @@ class Video extends Component {
 		initials += parts[i][0]
 	  }
 	}
-	this.setState(prevState => ({initialsList: [...prevState.initialsList],initials}))
-	console.log(this.state.initialsList)
+	this.setState(({initialsList: [...this.state.initialsList,initials]}))
+	
 }
 	sendMessage = () => {
 		socket.emit('chat-message', this.state.message, this.state.username)
 		this.setState({ message: "", sender: this.state.username })
+	}
+	usericons=()=>{
+		
+		
 	}
 
 	copyUrl = () => {
@@ -600,7 +597,6 @@ class Video extends Component {
 
 			if (window.innerWidth <= 660) {
 				this.setState({ btn: false })
-				console.log(this.state.btn);
 			}
 			else {
 				this.setState({ btn: true });
@@ -661,15 +657,15 @@ class Video extends Component {
 
 
 									<div id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px", height: "470px" }}>
-											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{ objectFit: "fill", borderRadius: "20px", width: "95%", height: "470px" }} ></video>
-											<button onClick={this.fullScreenHandler} style={{border:"none", backgroundColor:"transparent", boxShadow:"none", borderStyle:"none", position:"absolute", top:"15px", left:"94%",zIndex:"2"}} >
-													<BiFullscreen style={{ fontSize: '25px', fill: "#004362", float: "right" }} />
+											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted  ></video>
+											<button onClick={this.fullScreenHandler} style={{border:"none", backgroundColor:"transparent", boxShadow:"none", borderStyle:"none", position:"absolute", top:"15px", left:"92%",zIndex:"2"}} >
+													<BiFullscreen style={{ fontSize: '25px', fill: "#004362",float:"right"}} />
 												</button>
 										</div>
 
 										<div className={this.props.conditionForVideo===true?"participants":"pos-parti"}>
 										{this.state.initialsList.map((item) => (
-										<div  style={{display:"flex", textAlign: "center", height:"70px", width:"70px", borderRadius:"50%", fontSize:"20px", backgroundColor:"#004362", color:"#fff" }}>
+										<div  style={{display:"flex",flexShrink:"0", textAlign: "center",margin:"2px",verticalAlign:"middle",justifyContent:"center",alignItems:"center",alignContent:"center", height:"65px", width:"65px", borderRadius:"50%", fontSize:"20px", backgroundColor:"#004362", color:"#fff" }}>
 											{item}
 										</div>
 									)) }
@@ -725,7 +721,7 @@ class Video extends Component {
 										</div>
 
 
-										<div className="btn-up" >
+										<div className={this.props.conditionForVideo===true?"btn-up":"no-chatter"} >
 
 											<button className="call-btn" onClick={this.handleVideo}>
 												{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '25px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '25px', fill: "#004362" }} />}
@@ -745,6 +741,12 @@ class Video extends Component {
 											</button>
 
 											<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
+
+											<Badge badgeContent={this.state.newmessages} max={999} color="secondary" onClick={this.showButton}>
+													<button style={{ width: "150px" }} onClick={this.openChat}>Chat
+														<ChatIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />
+													</button>
+												</Badge>
 
 												
 												{this.state.screenAvailable === true ?
@@ -774,12 +776,13 @@ class Video extends Component {
 								</div>
 							</div>
 
-							<div className='chatter'  >
+							<div className={this.state.button===false ?'chatter':'no-chatter'}  >
 								<div id="chat-options">
 									Chat
 									<div className="c-icons">
 										<MdSave />
 										<MdDelete />
+										<IoClose className={window.innerWidth <= 660? "ok":"no-chatter"} onClick={this.showButton} />
 									</div>
 								</div>
 
@@ -792,7 +795,7 @@ class Video extends Component {
 								</div>
 
 								<div className="chat-msg">
-									<div className="c-icons leftpos"><FiLink2 /> </div>
+									<div className="c-icons leftpos" onClick={this.usericons}><FiLink2 /> </div>
 									<Input placeholder="Message" value={this.state.message} onChange={e => this.handleMessage(e)} />
 									<div className="c-icons rightpos" onClick={this.sendMessage}><MdSend /></div>
 								</div>
