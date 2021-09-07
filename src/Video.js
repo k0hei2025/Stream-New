@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import io from 'socket.io-client'
 import faker from "faker"
 
@@ -13,7 +14,7 @@ import ScreenShareIcon from '@material-ui/icons/ScreenShare'
 import StopScreenShareIcon from '@material-ui/icons/StopScreenShare'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import ChatIcon from '@material-ui/icons/Chat'
-
+import { FaHandPaper, FaHandRock } from 'react-icons/fa'
 import { IoVideocam } from 'react-icons/io5';
 import { MdDelete } from 'react-icons/md';
 import { FiCopy } from 'react-icons/fi';
@@ -21,6 +22,7 @@ import { Link } from 'react-router-dom';
 import { MdSave } from 'react-icons/md';
 import { MdSend } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
+
 import { FiLink2 } from 'react-icons/fi';
 import { FaRecordVinyl } from 'react-icons/fa'
 import { BiFullscreen } from 'react-icons/bi'
@@ -38,15 +40,16 @@ import 'antd/dist/antd.css'
 import { Row } from 'reactstrap'
 import Modal from 'react-bootstrap/Modal'
 
+
 import 'bootstrap/dist/css/bootstrap.css'
 import "./Video.css"
+
 
 const server_url = process.env.NODE_ENV === 'production' ? 'https://video.sebastienbiollo.com' : "http://localhost:4001"
 
 var connections = {}
 const peerConnectionConfig = {
-	'iceServers': [
-		// { 'urls': 'stun:stun.services.mozilla.com' },
+	'iceServers': [// { 'urls': 'stun:stun.services.mozilla.com' },
 		{ 'urls': 'stun:stun.l.google.com:19302' },
 	]
 }
@@ -82,9 +85,11 @@ class Video extends Component {
 			theRecorder: null,
 			recordedChunks: [],
 			whiteBoard: false,
+			authenticateId: '',
 
 			btnlist: false,
 			btn: true,
+			raise: false,
 
 
 
@@ -92,6 +97,22 @@ class Video extends Component {
 		connections = {}
 
 		this.getPermissions()
+
+	}
+
+
+	componentDidMount() {
+
+
+		if (!this.props.tokenState) {
+			this.setState({ audio: false })
+			console.log(' mounted audio', this.state.audio)
+		}
+
+		if (this.props.tokenState) {
+			console.log('mounted audio of auth', this.state.audio)
+		}
+
 	}
 
 
@@ -308,7 +329,7 @@ class Video extends Component {
 			connections[id].addStream(window.localStream)
 
 			connections[id].createOffer().then((description) => {
-				connections[id].setLocalDescription(description)
+				connections[id].setLocalDescriptionwwwwwww(description)
 					.then(() => {
 						socket.emit('signal', id, JSON.stringify({ 'sdp': connections[id].localDescription }))
 					})
@@ -368,7 +389,7 @@ class Video extends Component {
 					videos[a].style.setProperty("height", "470px")
 				}
 				else {
-					
+
 					videos[a].style.setProperty("display", "none")
 				}
 
@@ -404,7 +425,40 @@ class Video extends Component {
 
 		socket.on('signal', this.gotMessageFromServer)
 
+		if (this.props.tokenState) {
+			this.setState({ authenticateId: socket.id })
+		}
+
+
+		console.log('authenticated Id', this.state.authenticateId)
+
+		socket.on('popup', (handRaise, id) => {
+			console.log('id ', id, 'handRaise', handRaise)
+		})
+
+		socket.on('saveToken', (token) => {
+
+			console.log(".lp[;.............----__>", token)
+		})
+
+		socket.on('popup', (handRaise, id) => {
+			console.log('id ', id, 'handRaise', handRaise)
+		})
+
+
 		socket.on('connect', () => {
+
+
+
+			socket.emit('popup', this.state.raise, this.state.authenticateId)
+
+
+
+
+			console.log('---------------------->', this.props.tokenState)
+			socket.emit('saveToken', this.props.tokenState, this.state.authenticateId)
+			console.log(this.props.tokenState)
+
 			socket.emit('join-call', window.location.href)
 			socketId = socket.id
 
@@ -444,15 +498,15 @@ class Video extends Component {
 							let cssMesure = this.changeCssVideos(main)
 
 							let video = document.createElement('video')
-/* 
-							let css = {
-								maxHeight: "100%", marginRight: "10px", marginTop: "1px",
-								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", borderRadius: "12px", position: "absolute"
-							}
-							for (let i in css) video.style[i] = css[i]
-
-							video.style.setProperty("width", "110px")
-							video.style.setProperty("height", "110px") */
+							/* 
+														let css = {
+															maxHeight: "100%", marginRight: "10px", marginTop: "1px",
+															borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", borderRadius: "12px", position: "absolute"
+														}
+														for (let i in css) video.style[i] = css[i]
+							
+														video.style.setProperty("width", "110px")
+														video.style.setProperty("height", "110px") */
 							video.setAttribute('data-socket', socketListId)
 							video.srcObject = event.stream
 							video.autoplay = true
@@ -533,23 +587,32 @@ class Video extends Component {
 		}
 	}
 
-	handleUsername = (e) =>{ this.setState({ username: e.target.value });
-	socket.emit('users',  this.state.username)
-}
- displayParticipants=(newJoinee)=>{
-	var parts = newJoinee.split(' ')
-	var initials = ''
-	for (var i = 0; i < parts.length; i++) {
-	  if (parts[i].length > 0 && parts[i] !== '') {
-		initials += parts[i][0]
-	  }
+	handleUsername = (e) => {
+		this.setState({ username: e.target.value });
+		socket.emit('users', this.state.username)
 	}
-	this.setState(prevState => ({initialsList: [...prevState.initialsList],initials}))
-	console.log(this.state.initialsList)
-}
+	displayParticipants = (newJoinee) => {
+		var parts = newJoinee.split(' ')
+		var initials = ''
+		for (var i = 0; i < parts.length; i++) {
+			if (parts[i].length > 0 && parts[i] !== '') {
+				initials += parts[i][0]
+			}
+		}
+		this.setState(prevState => ({ initialsList: [...prevState.initialsList], initials }))
+		console.log(this.state.initialsList)
+	}
 	sendMessage = () => {
 		socket.emit('chat-message', this.state.message, this.state.username)
 		this.setState({ message: "", sender: this.state.username })
+	}
+
+	raiseHand = () => {
+		this.setState({ raise: !this.state.raise })
+
+		let alertOk = alert(` raise hand ${this.state.raise}`);
+		console.log(alertOk);
+
 	}
 
 	copyUrl = () => {
@@ -592,15 +655,12 @@ class Video extends Component {
 	render() {
 
 
-		
-
 
 
 		const showBtn = () => {
 
 			if (window.innerWidth <= 660) {
 				this.setState({ btn: false })
-				console.log(this.state.btn);
 			}
 			else {
 				this.setState({ btn: true });
@@ -615,7 +675,6 @@ class Video extends Component {
 
 			<div  >
 
-				<h1> {console.log('inside return ', this.state.conditionTrial)} </h1>
 
 				{
 					this.state.askForUsername === true ?
@@ -646,40 +705,48 @@ class Video extends Component {
 									<div className="meet-desc" >
 										<Input value={window.location.href} disable="true" style={{ display: "block", marginRight: "auto", marginLeft: "auto", marginTop: "20px", border: "none", textAlign: "center", textDecoration: "none", fontSize: "25px", justifyContent: "center", alignContent: "center", alignItems: "center", width: "70%" }}></Input>
 
-										<div className={this.props.conditionForVideo===true?"copy-share":"no-chatter" }>
+										<div className={this.props.conditionForVideo === true ? "copy-share" : "no-chatter"}>
 											<button className="copy-share-button" onClick={this.copyUrl}><FiCopy /></button>
 										</div>
-										<div className={this.props.conditionForVideo===false?"copy-share":"no-chatter" }>
-										<button className="copy-share-button" onClick={this.handleEndCall}>
+										<div className={this.props.conditionForVideo === false ? "copy-share" : "no-chatter"}>
+											<button className="copy-share-button" onClick={this.raiseHand}>
+												{this.state.raise ? <FaHandPaper /> : <FaHandRock />}						</button>
+
+											<button className="copy-share-button" onClick={this.handleEndCall}>
+
+
 												<CallEndIcon style={{ fill: "red" }} />
+
+
+
 											</button>
-											</div>
+										</div>
 									</div>
 								</div>
 								<div className="video">
 									<div className='dashboard_content_container'>
 
 
-									<div id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px", height: "470px" }}>
+										<div id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px", height: "470px" }}>
 											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{ objectFit: "fill", borderRadius: "20px", width: "95%", height: "470px" }} ></video>
-											<button onClick={this.fullScreenHandler} style={{border:"none", backgroundColor:"transparent", boxShadow:"none", borderStyle:"none", position:"absolute", top:"15px", left:"94%",zIndex:"2"}} >
-													<BiFullscreen style={{ fontSize: '25px', fill: "#004362", float: "right" }} />
-												</button>
+											<button onClick={this.fullScreenHandler} style={{ border: "none", backgroundColor: "transparent", boxShadow: "none", borderStyle: "none", position: "absolute", top: "15px", left: "94%", zIndex: "2" }} >
+												<BiFullscreen style={{ fontSize: '25px', fill: "#004362", float: "right" }} />
+											</button>
 										</div>
 
-										<div className={this.props.conditionForVideo===true?"participants":"pos-parti"}>
-										{this.state.initialsList.map((item) => (
-										<div  style={{display:"flex", textAlign: "center", height:"70px", width:"70px", borderRadius:"50%", fontSize:"20px", backgroundColor:"#004362", color:"#fff" }}>
-											{item}
-										</div>
-									)) }
+										<div className={this.props.conditionForVideo === true ? "participants" : "pos-parti"}>
+											{this.state.initialsList.map((item) => (
+												<div style={{ display: "flex", textAlign: "center", height: "70px", width: "70px", borderRadius: "50%", fontSize: "20px", backgroundColor: "#004362", color: "#fff" }}>
+													{item}
+												</div>
+											))}
 
 										</div>
 
 
 
 
-										<div className={this.props.conditionForVideo===true?"btn-down":"no-chatter"} >
+										<div className={this.props.conditionForVideo === true ? "btn-down" : "no-chatter"} >
 											<button className="call-btn" onClick={this.handleVideo}>
 												{(this.state.video === true) ? <VideocamIcon style={{ fontSize: '35px', fill: "#004362" }} /> : <VideocamOffIcon style={{ fontSize: '35px', fill: "#004362" }} />}
 											</button>
@@ -710,7 +777,7 @@ class Video extends Component {
 
 											<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
 
-												
+
 
 												<button onClick={this.recordHandler} >Record
 													<FaRecordVinyl style={{ fontSize: '15px', fill: "#004362", float: "right" }} />
@@ -746,7 +813,7 @@ class Video extends Component {
 
 											<div className={this.state.btnlist === true ? "btn-group" : 'no-chatter '}  >
 
-												
+
 												{this.state.screenAvailable === true ?
 													<button onClick={this.handleScreen}>ScreenShare
 														{this.state.screen === true ? <ScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} /> : <StopScreenShareIcon style={{ fontSize: '10px', fill: "#004362", float: "right" }} />}
