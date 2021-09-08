@@ -72,7 +72,7 @@ class Video extends Component {
 			messages: [],
 			message: "",
 			newmessages: 0,
-			initialsList: ['PM'],
+			initialsList: [],
 			askForUsername: true,
 			username: faker.internet.userName(),
 			button: false,
@@ -100,9 +100,6 @@ class Video extends Component {
 
 	getPermissions = async () => {
 		try {
-
-			console.log(this.props.conditionForVideo)
-
 
 			await navigator.mediaDevices.getUserMedia({ video: this.props.conditionForVideo })
 				.then(() => this.videoAvailable = true)
@@ -142,7 +139,6 @@ class Video extends Component {
 
 	getWhiteBoard = () => {
 		this.setState({ whiteBoard: !this.state.whiteBoard })
-		console.log(this.state.whiteBoard);
 
 
 	}
@@ -184,8 +180,6 @@ class Video extends Component {
 					.catch(e => console.log(e))
 			})
 
-
-			console.log(connections[id], 'connection videos');
 		}
 
 		stream.getTracks().forEach(track => track.onended = () => {
@@ -220,7 +214,6 @@ class Video extends Component {
 
 	fullScreenHandler = () => {
 		let vid = document.querySelector('video');
-		console.log('click')
 		if (screenfull.isEnabled) {
 			screenfull.toggle(vid)
 		}
@@ -244,7 +237,6 @@ class Video extends Component {
 	recordHandler = () => {
 
 		this.setState({ recordings: !this.state.recordings })
-		console.log(this.state.recordings)
 
 
 		let parts = [];
@@ -266,7 +258,6 @@ class Video extends Component {
 
 					mediaRecord.start(1000);
 					this.setState({ mediaState: mediaRecord })
-					console.log(mediaRecord);
 					mediaRecord.ondataavailable = (e) => {
 						parts.push(e.data);
 					}
@@ -279,7 +270,6 @@ class Video extends Component {
 						type: "video/webm"
 					})
 					const url = URL.createObjectURL(blob);
-					console.log(url);
 					const a = document.createElement("a");
 					document.body.appendChild(a);
 					a.style = "display: none";
@@ -311,6 +301,7 @@ class Video extends Component {
 				connections[id].setLocalDescription(description)
 					.then(() => {
 						socket.emit('signal', id, JSON.stringify({ 'sdp': connections[id].localDescription }))
+						
 					})
 					.catch(e => console.log(e))
 			})
@@ -399,6 +390,7 @@ class Video extends Component {
 
 		socket.on('connect', () => {
 			socket.emit('join-call', window.location.href)
+			socket.emit('users',  this.state.username) 
 			socketId = socket.id
 
 			socket.on('chat-message', this.addMessage)
@@ -416,7 +408,6 @@ class Video extends Component {
 			})
 
 			socket.on('user-joined', (id, clients) => {
-				console.log(clients)
 				clients.forEach((socketListId) => {
 					connections[socketListId] = new RTCPeerConnection(peerConnectionConfig)
 					// Wait for their ice candidate       
@@ -425,7 +416,7 @@ class Video extends Component {
 							socket.emit('signal', socketListId, JSON.stringify({ 'ice': event.candidate }))
 						}
 					}
-					socket.emit('users',  this.state.username) 
+					
 					// Wait for their video stream
 					connections[socketListId].onaddstream = (event) => {
 						// TODO mute button, full screen button
@@ -508,6 +499,7 @@ class Video extends Component {
 
 	handleEndCall = () => {
 		try {
+			
 			let tracks = this.localVideoref.current.srcObject.getTracks()
 			tracks.forEach(track => track.stop())
 		} catch (e) { }
@@ -529,16 +521,18 @@ class Video extends Component {
 
 	handleUsername = (e) =>{ this.setState({ username: e.target.value });	}
 
- 	displayParticipants=(newJoinee)=>{
-	var parts = newJoinee.split(' ')
+ 	displayParticipants=(joinees)=>{
+		 this.setState({initialsList: []})
+		 joinees.forEach((user)=>{
+	var parts = user.split(' ')
 	var initials = ''
 	for (var i = 0; i < parts.length; i++) {
 	  if (parts[i].length > 0 && parts[i] !== '') {
 		initials += parts[i][0]
-	  }
-	}
-	this.setState(({initialsList: [...this.state.initialsList,initials]}))
-	
+	  }}
+	  this.setState(({initialsList: [...this.state.initialsList,initials]}))
+	  
+	})
 }
 	sendMessage = () => {
 		socket.emit('chat-message', this.state.message, this.state.username)

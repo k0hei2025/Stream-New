@@ -27,6 +27,7 @@ const sanitizeString = (str) => {
 const connections = {}
 const messages = {}
 const timeOnline = {}
+const nicknames = [];
 
 io.on('connection', (socket) => {
 
@@ -57,9 +58,15 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('users', (usernames)=>{
-		io.emit('users',(usernames))
+		if(nicknames.indexOf(usernames)===-1){
+		socket.nickname=usernames;
+		nicknames.push(socket.nickname);
+		updateNick();
+		}
 	})
-
+	const updateNick=()=>{
+		io.emit('users',nicknames)
+	}
 	socket.on('chat-message', (data, sender) => {
 		data = sanitizeString(data)
 		sender = sanitizeString(sender)
@@ -91,6 +98,8 @@ io.on('connection', (socket) => {
 	socket.on('disconnect', () => {
 		var diffTime = Math.abs(timeOnline[socket.id] - new Date())
 		var key
+		nicknames.splice(nicknames.indexOf(socket.username),1)
+		updateNick();
 		for (const [k, v] of JSON.parse(JSON.stringify(Object.entries(connections)))) {
 			for(let a = 0; a < v.length; ++a){
 				if(v[a] === socket.id){
@@ -99,7 +108,7 @@ io.on('connection', (socket) => {
 					for(let a = 0; a < connections[key].length; ++a){
 						io.to(connections[key][a]).emit("user-left", socket.id)
 					}
-			
+					
 					var index = connections[key].indexOf(socket.id)
 					connections[key].splice(index, 1)
 

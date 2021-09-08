@@ -142,6 +142,7 @@ body {
   align-items: center;
   border-radius: 20px;
   background-color: #f5f5f5;
+  overflow-x: scroll;
 
 }
 .participants::-webkit-scrollbar {
@@ -171,6 +172,7 @@ body {
   text-align: left;
   border-radius: 20px;
   background-color: #f5f5f5;
+  overflow-x: scroll;
 }
 .pos-parti::-webkit-scrollbar {
   height: 2px;
