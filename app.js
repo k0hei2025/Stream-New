@@ -89,10 +89,11 @@ io.on('connection', (socket) => {
 		}
 	})
 
-	socket.on('popup', (handRaise, id) => {
-		io.to(id).emit('popup', handRaise)
-		console.log('id', id, 'handRaise', handRaise);
-	})
+	// socket.on('popup', (handRaise, id) => {
+	// 	//io.to(id).emit('popup', handRaise)
+
+	// 	console.log('id ------------------------>', id, 'handRaise', handRaise);
+	// })
 
 
 	socket.on('disconnect', () => {

@@ -104,12 +104,13 @@ class Video extends Component {
 	componentDidMount() {
 
 
-		if (!this.props.tokenState) {
+		if (this.props.tokenState === '') {
 			this.setState({ audio: false })
 			console.log(' mounted audio', this.state.audio)
 		}
 
 		if (this.props.tokenState) {
+
 			console.log('mounted audio of auth', this.state.audio)
 		}
 
@@ -425,38 +426,60 @@ class Video extends Component {
 
 		socket.on('signal', this.gotMessageFromServer)
 
-		if (this.props.tokenState) {
-			this.setState({ authenticateId: socket.id })
-		}
+
+
 
 
 		console.log('authenticated Id', this.state.authenticateId)
 
-		socket.on('popup', (handRaise, id) => {
-			console.log('id ', id, 'handRaise', handRaise)
-		})
+
+
 
 		socket.on('saveToken', (token) => {
 
 			console.log(".lp[;.............----__>", token)
 		})
 
+
+
+
+
+
+		if (this.props.tokenState) {
+
+
+
+			this.setState({ authenticateId: socket.id })
+
+
+		}
+
 		socket.on('popup', (handRaise, id) => {
 			console.log('id ', id, 'handRaise', handRaise)
 		})
+
+
+		socket.emit('popup', (this.state.raise, this.state.authenticateId))
+
+
+
 
 
 		socket.on('connect', () => {
 
 
 
-			socket.emit('popup', this.state.raise, this.state.authenticateId)
+
+
 
 
 
 
 			console.log('---------------------->', this.props.tokenState)
-			socket.emit('saveToken', this.props.tokenState, this.state.authenticateId)
+			if (this.props.tokenState !== '') {
+				socket.emit('saveToken', this.props.tokenState)
+			}
+
 			console.log(this.props.tokenState)
 
 			socket.emit('join-call', window.location.href)
@@ -610,8 +633,8 @@ class Video extends Component {
 	raiseHand = () => {
 		this.setState({ raise: !this.state.raise })
 
-		let alertOk = alert(` raise hand ${this.state.raise}`);
-		console.log(alertOk);
+		alert(` raise hand ${this.state.raise}`);
+
 
 	}
 
