@@ -72,7 +72,9 @@ body {
   font-size: 30px;
   box-shadow: none;
   border: none;
-  margin: -100px -35px;
+  position: relative;
+  top: -38px;
+  right: 10px;
 }
 
 .background_main_color {
@@ -90,32 +92,8 @@ body {
   align-content: center;
   align-items: center;
   border-radius: 20px;
-
-
-  overflow: hidden;
-}
-.video::-webkit-scrollbar {
-
-}
-/* .video::-webkit-scrollbar {
-
-  width: 5px;
-}
-.video::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-.video::-webkit-scrollbar-thumb {
-  background: #888;
-}
-.video::-webkit-scrollbar-thumb:hover {
-  background: #555;
-<<<<<<< HEAD
-
 }
 
-
-}
- */
 
 .dashboard_content_container {
   width: 100%;
@@ -130,29 +108,32 @@ body {
   border-radius: 20px;
 }
 .flex-container {
-  height: calc(100% - 150px);
+  height: calc(100% - 230px);
   width: 100%;
-  /* margin: 0 auto; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
-  width: 100%;
   margin-top: 10px;
-  /* margin: 0 auto; */
   position: relative;
 }
-video:first-child {
-  border-style: solid;
+#my-video{
+  object-fit: fill;
+   border-radius: 20px;
+    width: 100%;
+     height:100% ;
+     border-style: solid;
   border-color: #bdbdbd;
+}
+/* video:first-child {
+  
   border-radius: 20px;
   width: 100%;
   height: 100%;
-}
+} */
 video:nth-child(n + 2):nth-child(-n + 5) {
   position: absolute;
-  top: calc(n * 120px);
+  top: 5px;
   left: 85%;
   border-radius: 15px;
   width: 110px;
@@ -163,7 +144,7 @@ video:nth-child(n + 6) {
 
 }
 
-.btn-down {
+.btn-down { 
   display: block;
   margin-right: auto;
   margin-left: auto;
@@ -308,21 +289,67 @@ input {
 }
 
 @media screen and (max-width: 660px) {
+  .dashboard_container {
+    padding: 5px 0;
+  }
   .dashboard_left_section {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-right: 23px;
+    padding: 05px;
+    justify-content: center;
+  align-content: center;
   }
   .stream-logo {
     color: #242424;
     justify-self: start;
     cursor: pointer;
+    margin-left: 15px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 10px;
     font-family: "Days One", serif;
   }
 
+  .navbar-icon {
+    color: #004362;
+    font-size: 40px;
+  }
+  .meet-desc {
+    width: 100%;
+    box-sizing: border-box;
+    height: 50px;
+    border-radius: 10px;
+    text-align: left;
+    justify-content: center;
+    padding-top: 30;
+    align-items: center;
+    align-content: center;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #f5f5f5;
+  }
+  .flex-container {
+    height: 68vh;
+    padding: 0%;
+    border-radius: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    position: relative;
+  }
+  #my-video{
+    position: absolute;
+    top: 0%;
+    object-fit: fill;
+     border-radius: 20px;
+      width: 100%;
+      border-color: #bdbdbd;
+       height:100%; 
+
+  }
   .flexy {
     flex: 100%;
     width: 100%;
@@ -331,24 +358,39 @@ input {
     display: none;
   }
 
-  video:first-child {
+  /* video:first-child {
     border-style: solid;
     border-color: #bdbdbd;
     border-radius: 20px;
     width: 100%;
     height: 100%;
-  }
-  video:nth-child(n + 2):nth-child(-n + 4) {
+  } */
+  video:not(:first-child){
     position: absolute;
-    top: calc(n * 90px);
-    left: 70%;
+    top:80%;
+    left:5px;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
     border-radius: 15px;
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
   }
-  video:nth-child(n + 5) {
-    display: none;
-  }
+  /* .other-videos{
+    position: relative;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    overflow-x: scroll;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    vertical-align: middle;
+  } */
   .btn-down {
 
     display: none;

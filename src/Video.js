@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 import faker from "faker"
-
 import screenfull from 'screenfull'
 
-import { Badge, Input, Button } from '@material-ui/core'
+import {  Badge, Input, Button } from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import VideocamOffIcon from '@material-ui/icons/VideocamOff'
 import MicIcon from '@material-ui/icons/Mic'
@@ -34,7 +33,6 @@ import { message } from 'antd'
 import 'antd/dist/antd.css'
 
 import { Row } from 'reactstrap'
-import Modal from 'react-bootstrap/Modal'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import "./Video.css"
@@ -161,8 +159,7 @@ class Video extends Component {
 		for (let id in connections) {
 			if (id === socketId) continue
 
-			connections[id].addStream(window.localStream)           // alll new video of new id will be adding 
-
+			connections[id].addStream(window.localStream)
 
 			connections[id].createOffer().then((description) => {
 				connections[id].setLocalDescription(description)
@@ -171,9 +168,6 @@ class Video extends Component {
 					})
 					.catch(e => console.log(e))
 			})
-
-
-			console.log(connections[id], 'connection videos');
 		}
 
 		stream.getTracks().forEach(track => track.onended = () => {
@@ -212,8 +206,6 @@ class Video extends Component {
 		if (screenfull.isEnabled) {
 			screenfull.toggle(vid)
 		}
-
-
 
 	}
 
@@ -345,28 +337,26 @@ class Video extends Component {
 	}
 
 	changeCssVideos = (main) => {
-		let widthMain = main.offsetWidth
-
-
 		let videos = main.querySelectorAll("video")
+		let v=videos.length;
 		if (window.innerWidth > 660) {
-			for (let a = 0; a < videos.length; ++a) {
+			for (let a = 0; a < v; ++a) {
 				if (a === 0) {
 					videos[a].style.setProperty("width", "100%")
-					videos[a].style.setProperty("height", "510px")
+					videos[a].style.setProperty("height", "100%")
 				}
 				else {
-					let top = String(120 * (a)) + "px"
+					let top = String(120 * a) + "px"
 					videos[a].style.top = top
 					videos[a].style.left = "85%"
 					videos[a].style.margin = "3px"
-					videos[a].style.left = "85%"
 					videos[a].style.setProperty("width", "110px")
 					videos[a].style.setProperty("height", "110px")
-				}
-
+				}				
+			
 				if (a > 4) {
-					videos[a].style.setProperty("display", "none")
+					videos[a].style.setProperty("display", "none");
+					videos[a].style.left = "5%"
 				}
 
 			}
@@ -375,19 +365,20 @@ class Video extends Component {
 			for (let a = 0; a < videos.length; ++a) {
 				if (a === 0) {
 					videos[a].style.setProperty("width", "100%")
-					videos[a].style.setProperty("height", "60vh")
+					videos[a].style.setProperty("height", "80%")
 				}
 				else {
-					let top = String(90 * (a)) + "px"
-					videos[a].style.top = top
-					videos[a].style.left = "70%"
+					let left = String(88 * a) + "px"					
+					videos[a].style.left = left
+					videos[a].style.top= "80%"
 					videos[a].style.margin = "3px"
-					videos[a].style.setProperty("width", "90px")
-					videos[a].style.setProperty("height", "90px")
+					videos[a].style.setProperty("width", "85px")
+					videos[a].style.setProperty("height", "85px")
 				}
-
-				if (a > 3) {
+			
+				if (a > 4) {
 					videos[a].style.setProperty("display", "none")
+					videos[a].style.top= "0%"
 				}
 
 			}
@@ -442,19 +433,17 @@ class Video extends Component {
 							let video = document.createElement('video')
 
 							let css = {
-								maxHeight: "100%", marginRight: "10px", marginTop: "1px",
-								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", borderRadius: "12px", position: "absolute"
+								 maxHeight: "100%",
+								borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", borderRadius:"12px", position:"absolute"
 							}
 							for (let i in css) video.style[i] = css[i]
-
-							video.style.setProperty("width", "110px")
-							video.style.setProperty("height", "110px")
 							video.setAttribute('data-socket', socketListId)
 							video.srcObject = event.stream
 							video.autoplay = true
 							video.playsinline = true
 
 							main.appendChild(video)
+							
 						}
 					}
 
@@ -576,14 +565,6 @@ class Video extends Component {
 	render() {
 
 
-		if (this.state.whiteBoard) {
-			return (
-				<WhiteBoard closing={this.state.whiteBoard} />
-
-			)
-		}
-
-
 
 		const showBtn = () => {
 
@@ -617,16 +598,15 @@ class Video extends Component {
 
 							<div style={{ justifyContent: "center", textAlign: "center", paddingTop: "40px" }}>
 								<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
-									borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", width: "60%", height: "30%"
+									borderStyle: "solid", borderColor: "#bdbdbd", objectFit: "fill", width: "60%", height: "30%",position: "relative"
 								}}></video>
 							</div>
 						</div>
 						:
 						<div className='dashboard_container background_main_color'>
-
-							{this.state.WhiteBoard === true ?
-								<WhiteBoard getWhiteBoard={this.getWhiteBoard} /> : null}
-							<div className={this.state.button === true ? 'dashboard_left_section flexy' : 'dashboard_left_section flexya'} id={this.state.whiteBoard === true ? "scroll" : "no-scroll"}>
+							{this.state.WhiteBoard===true?
+							<WhiteBoard getWhiteBoard={this.getWhiteBoard} />:null}
+							<div className={this.state.button === true ? 'dashboard_left_section flexy' : 'dashboard_left_section flexya'} id={this.state.whiteBoard===true?"scroll":"no-scroll"}>
 								<div className="meet-name">
 									<Link to="/" className=" stream-logo"><IoVideocam className="navbar-icon" />STREAM</Link>
 									<div className="meet-desc" >
@@ -641,8 +621,9 @@ class Video extends Component {
 									<div className='dashboard_content_container'>
 
 
-										<div id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px", height: "520px" }}>
-											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted style={{ objectFit: "fill", borderRadius: "20px", width: "100%", height: "520px" }} ></video>
+										<div id="main" className="flex-container" >
+											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted  ></video>
+											{/* <div className='other-videos'></div> */}
 										</div>
 
 
