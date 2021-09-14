@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Abril+Fatface&family=Days+One&display=swap");
+
+.home_section {
+
+  background-color: #f8f6f6;
+  padding: 160px 0px 0px 80px;
+  width: 100%;
+}
+.imgpos {
+  justify-content: center;
+  align-content: center;
+
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  margin-right: -15px;
+  margin-top: -165px;
+  margin-left: -15px;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+
+.col {
+  margin-bottom: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 1;
+  max-width: 50%;
+  flex-basis: 50%;
+}
+
+.h-wrapper {
+  max-width: 540px;
+  padding-top: 0;
+  padding-bottom: 60px;
+}
+
+.heading {
+  margin-bottom: 24px;
+  font-size: 69px;
+  letter-spacing: 0px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Abril Fatface", serif;
+  color: #004362;
+}
+.headingy {
+  margin-bottom: 24px;
+  letter-spacing: 0px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Abril Fatface", serif;
+  color: #004362;
+}
+
+.diffBg {
+  height: calc(100% - 300px);
+  color: #fff;
+  background-color: #004362;
+  align-items: center;
+  text-align: center;
+  margin: -100px 0px 0px 0px;
+  margin-top: -100px;
+  min-width: 100%;
+}
+
+.home_hero-subtitle {
+  min-width: 440px;
+  margin-bottom: 35px;
+  width: 100%;
+  font-weight: 600;
+  font-style: normal;
+  font-family: "Abhaya Libre", serif;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0px;
+  line-height: 1.2;
+}
+
+.home-img-wrapper {
+  max-width: 764px;
+}
+
+#home-img {
+  min-width: 80%;
+  margin-top: -100px;
+  margin-right: 0;
+  margin-left: 10px;
+  padding-right: 0;
+  border: 0;
+  max-width: 744px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.key-features {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 100%;
+}
+
+#img-cap {
+  flex-grow: 1;
+  width: 33%;
+  padding: 5px;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+}
+figcaption {
+  margin-top: 5px;
+  padding-bottom: 20px;
+  margin-bottom: 5px;
+  font-family: "Abhaya Libre", serif;
+}
+#imag {
+  width: 65px;
+  height: 65px;
+}
+
+@media screen and (max-width: 991px) {
+  .container {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  .diffBg {
+    color: #fff;
+    background-color: #004362;
+    align-items: center;
+    text-align: center;
+
+    height: auto;
+    margin-top: 10px;
+
+    padding: 0;
+    min-width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    background-color: #f8f6f6;
+    width: 100%;
+  }
+  .home__hero-text-wrapper {
+    padding-bottom: 65px;
+  }
+  .row {
+    display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    align-content: stretch;
+  }
+  .h-wrapper {
+    min-width: 95%;
+    background-color: #f8f6f6;
+    padding: 2px;
+
+    padding-bottom: 60px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .heading {
+    font-size: 55px;
+    max-width: 100%;
+  }
+  .home_section {
+    color: #fff;
+    padding: 10px;
+    background-color: #f8f6f6;
+    width: 100%;
+  }
+  .col {
+    min-width: 100%;
+    flex-basis: 100%;
+    background-color: #f8f6f6;
+  }
+  .home_hero-subtitle {
+    min-width: 100%;
+  }
+  #home-img {
+    display: block;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
