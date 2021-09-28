@@ -227,6 +227,7 @@
   background-color: #004362;
   border-radius: 5px;
   padding: 5px 10px;
+  margin-top: "20%";
 }
 #strt:hover {
   color: #004362;
@@ -245,6 +246,11 @@
   color: #111316;
   margin: 10px;
 }
+
+.new-call {
+  margin-bottom: 25%;
+}
+
 
 @media screen and (max-width: 960px) {
   .new-call {

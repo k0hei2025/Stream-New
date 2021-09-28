@@ -40,7 +40,14 @@
 }
 
 .navbar-icon {
-  margin-right: 0.5rem;
+
+}
+
+@media (max-width: 767px) {
+  .navbar-icon{
+  font-size: 10px;
+  }
+
 }
 
 .nav-menu {
@@ -139,11 +146,10 @@
     width: 100%;
   }
 
-  .navbar-logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 50%);
+  @media (max-width: 767px) {
+   .navbar-logo {
+     font-size: 20px;
+  } 
   }
 
   .menu-icon {

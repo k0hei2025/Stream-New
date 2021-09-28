@@ -1,5 +1,6 @@
 body {
   margin: 0;
+ 
 }
 
 
@@ -122,10 +123,12 @@ body {
   position: relative;
 }
 #my-video{
-  object-fit: fill;
-   border-radius: 20px;
-    width: 95%;
-     height: 470px 
+  position: absolute;
+   bottom : '1%';
+
+    width: 130vh;
+/* font-size:100vh; */
+    /* // height: 120vh;  */
 }
 .participants{
   display: flex;

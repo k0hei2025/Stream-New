@@ -1,3 +1,4 @@
+import { Grid } from '@material-ui/core';
 import React from 'react'
 import Homepage from '../../Homepage'
 import { homeObjOne } from './Data'
@@ -7,7 +8,6 @@ function Home() {
     return (
         <>
             <Homepage {...homeObjOne} />
-
         </>
     )
 }

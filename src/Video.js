@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import io from 'socket.io-client'
 import faker from "faker"
 
-import screenfull from 'screenfull'
+
 
 import { Badge, Input, Button } from '@material-ui/core'
 import VideocamIcon from '@material-ui/icons/Videocam'
@@ -235,9 +235,9 @@ class Video extends Component {
 
 
 	fullScreenHandler = () => {
-		let vid = document.querySelector('video');
-		if (screenfull.isEnabled) {
-			screenfull.toggle(vid)
+		let fullS = document.getElementById('my-video');
+		if (fullS.requestFullscreen) {
+			fullS.requestFullscreen();
 		}
 
 
@@ -720,9 +720,7 @@ class Video extends Component {
 									<div className="meet-desc" >
 										<Input value={window.location.href} disable="true" style={{ display: "block", marginRight: "auto", marginLeft: "auto", marginTop: "20px", border: "none", textAlign: "center", textDecoration: "none", fontSize: "25px", justifyContent: "center", alignContent: "center", alignItems: "center", width: "70%" }}></Input>
 
-										<div className={this.props.conditionForVideo === true ? "copy-share" : "no-chatter"}>
-											<button className="copy-share-button" onClick={this.copyUrl}><FiCopy /></button>
-										</div>
+
 										<div className={this.props.conditionForVideo === false ? "copy-share" : "no-chatter"}>
 											<button className="copy-share-button" onClick={this.raiseHand}>
 												{this.state.raise ? <FaHandPaper /> : <FaHandRock />}						</button>
@@ -745,8 +743,14 @@ class Video extends Component {
 										<div id="main" className="flex-container" style={{ margin: 0, padding: 0, borderRadius: "20px", height: "470px" }}>
 											<video id="my-video" ref={this.localVideoref} autoPlay onClick={this.fullScreenHandler} muted  ></video>
 											<button onClick={this.fullScreenHandler} style={{ border: "none", backgroundColor: "transparent", boxShadow: "none", borderStyle: "none", position: "absolute", top: "15px", left: "92%", zIndex: "2" }} >
+
 												<BiFullscreen style={{ fontSize: '25px', fill: "#004362", float: "right" }} />
 											</button>
+
+
+
+											<button style={{ border: "none", backgroundColor: "transparent", boxShadow: "none", borderStyle: "none", position: "absolute", top: "15px", left: "89%", zIndex: "2" }} onClick={this.copyUrl}><FiCopy style={{ fontSize: '25px', fill: "#004362", float: "right" }} /></button>
+
 										</div>
 										<div className={this.props.conditionForVideo === true ? "participants" : "pos-parti"}>
 											{this.state.initialsList.map((item) => (
@@ -867,7 +871,7 @@ class Video extends Component {
 
 							<div className={this.state.button === false ? 'chatter' : 'no-chatter'}  >
 								<div id="chat-options">
-									Chat
+									Messages
 									<div className="c-icons">
 										<MdSave />
 										<MdDelete />
@@ -883,9 +887,10 @@ class Video extends Component {
 									)) : <p>No message yet</p>}
 								</div>
 
-								<div className="chat-msg">
+								<div
+									style={{ marginTop: "50%" }} className="chat-msg">
 									<div className="c-icons leftpos" onClick={this.usericons}><FiLink2 /> </div>
-									<Input placeholder="Message" value={this.state.message} onChange={e => this.handleMessage(e)} />
+									<Input style={{ marginTop: "8%", paddingRight: "8%" }} placeholder="Message" value={this.state.message} onChange={e => this.handleMessage(e)} />
 									<div className="c-icons rightpos" onClick={this.sendMessage}><MdSend /></div>
 								</div>
 							</div>

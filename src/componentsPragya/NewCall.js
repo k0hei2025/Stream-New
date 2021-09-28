@@ -67,7 +67,7 @@ function NewCall() {
 
             <Navbar sign={true} />
 
-            <div className="new-call">
+            <div className="new-call" style={{ overflowY: 'hidden' }}>
                 <div className="samay">
                     <div className="time" >
                         <div className="hr-min"><hr class="line" />{time[0]}</div>
@@ -84,8 +84,12 @@ function NewCall() {
                         <div className="sec">{time[7]}</div>
                     </div>
                 </div>
-                <div className=" new-call diff ">
-                    <div className="call-options">
+
+
+
+
+                <div style={{ marginTop: "20vh" }} className=" new-call diff ">
+                    <div className="call-options" >
                         <Link to="/join" className="callLinks">
                             <figure className="fig-icon">
                                 <IoVideocamSharp className="call-icons" />

@@ -48,7 +48,7 @@ function Navbar(props) {
                 <div className="navbar-container containerr">
                     <Link to="/" className="navbar-logo" onClick={closeMobileMenu} >
                         <IoVideocam className="navbar-icon" />
-                        STREAM
+                        STREAM-LITE
                     </Link>
                     <div className="menu-icon" onClick={handleClick}>
 
@@ -71,20 +71,16 @@ function Navbar(props) {
                         :
                         (
                             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                                <li className="nav-item">
-                                    <div className='nav-links' style={{ textDecoration: "none" }} onClick={() => { closeMobileMenu(); setOpenPopup(true) }}>
+                                <li className="nav-btn">
+                                    <Button style={{ marginTop: "15px", textDecoration: "none", backgroundColor: "#316B83" }} onClick={() => { closeMobileMenu(); setOpenPopup(true) }}>
                                         SIGN IN
-                                    </div>
+                                    </Button>
                                 </li>
-                                <li className="nav-item">
-                                    <div className='nav-links' style={{ textDecoration: "none" }} onClick={() => { closeMobileMenu(); setOpenPopup(true) }}>
-                                        SIGN UP
-                                    </div>
-                                </li>
+
                                 <li className="nav-btn">
                                     {button ? (
 
-                                        <Button buttonStyle='btn--outline' buttonColor='blue' onClick={popupHandler}>JOIN</Button>
+                                        <Button style={{ backgroundColor: "#316B83" }} buttonStyle='btn--outline' buttonColor='blue' onClick={popupHandler}>JOIN</Button>
 
                                     ) : (
 
